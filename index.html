@@ -19,7 +19,7 @@
       "@type": "Organization",
       "@id": "#aimani",
       "name": "あいまに",
-      "description": "デジタルの困りごと相談・医療介護のAI導入支援・Instagram代行運用を行う屋号。現役看護師が匿名で運営。",
+      "description": "デジタルの困りごと相談・医療介護のAI導入支援・Instagram代行運用を行う屋号。現役看護師が運営。",
       "knowsAbout": ["パソコン相談", "AI活用", "業務効率化", "訪問看護", "介護事業所", "生成AI導入", "Instagram運用代行"]
     },
     {
@@ -75,8 +75,8 @@
         },
         {
           "@type": "Question",
-          "name": "実名や顔写真は出していないのですか？",
-          "acceptedAnswer": { "@type": "Answer", "text": "はい。現役看護師として本業があるため、屋号「あいまに」で匿名運用しています。実名・顔写真は公開していませんが、ご相談・ご依頼の内容には誠実にお応えします。" }
+          "name": "どんな人が運営しているのですか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "現役の看護師が、屋号「あいまに」で運営しています。運営者の氏名は「運営者について」と特定商取引法に基づく表記に記載しています。お申し込みは相談フォームから直接でも、ココナラ（本人確認済みプラットフォーム）経由でも受け付けています。" }
         },
         {
           "@type": "Question",
@@ -404,7 +404,7 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
     <details><summary>料金はいくらですか？</summary><div class="a">デジタル何でも相談とInstagram代行運用は、内容に合わせたお見積もり制です（お見積もりは無料）。AI導入支援（医療・介護向け）は料金の目安を公開しています。詳しくは専用ページをご覧ください。</div></details>
     <details><summary>パソコンやAIが苦手でも大丈夫ですか？</summary><div class="a">大丈夫です。専門用語を使わず、分かる言葉で一つずつ説明します。</div></details>
     <details><summary>お店や会社ではなく、個人の困りごとでも相談できますか？</summary><div class="a">はい。ご自宅のパソコン・スマホの設定、離れて住むご家族とビデオ通話できるようにする準備、AIを暮らしに使ってみたい、といった個人のご相談も歓迎です。</div></details>
-    <details><summary>実名や顔写真は出していないのですか？</summary><div class="a">はい。現役看護師として本業があるため、屋号「あいまに」で匿名運用しています。実名・顔写真は公開していませんが、ご相談・ご依頼の内容には誠実にお応えします。</div></details>
+    <details><summary>どんな人が運営しているのですか？</summary><div class="a">現役の看護師が、屋号「あいまに」で運営しています。運営者の氏名は<a href="#about">運営者について</a>と<a href="./tokushoho.html">特定商取引法に基づく表記</a>に記載しています。お申し込みは相談フォームから直接でも、ココナラ（本人確認済みプラットフォーム）経由でも受け付けています。</div></details>
     <details><summary>複数のサービスをまとめて頼めますか？</summary><div class="a">はい。例えば「Instagram運用をお願いしつつ、パソコンの相談もしたい」といった組み合わせのご相談も可能です。フォームに両方書いていただければ大丈夫です。</div></details>
     <details><summary>遠方でも相談できますか？</summary><div class="a">オンラインでのご相談は全国対応です。訪問をご希望の場合は地域によりますので、ご相談時にお申し付けください。</div></details>
   </div>
@@ -415,8 +415,11 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
   <div class="wrap">
     <h2>運営者について</h2>
     <div class="about-box">
-      <h3>【あいまに】</h3>
-      <p>現役の看護師です。本業を続けながら、副業として「あいまに」の屋号で活動しています。勤務先の守秘のため、実名・顔写真は公開していません。</p>
+      <!-- 氏名は対面用名刺（Claudeコード\名刺\あいまに名刺.html）と同表記（2026-07-17 実名・顔出しOKに方針転換）。
+           顔写真を使う場合は photo.jpg をリポジトリ直下に置き、下のimgコメントを外す -->
+      <!-- <img src="./photo.jpg" alt="運営者の顔写真" style="width:110px;height:110px;border-radius:50%;object-fit:cover;float:right;margin:0 0 10px 16px"> -->
+      <h3>【あいまに】<span style="font-size:.8rem;font-weight:normal;color:#777">運営者: 佐藤 三奈子</span></h3>
+      <p>現役の看護師です。本業を続けながら、副業として「あいまに」の屋号で活動しています。</p>
       <p>デジタルの困りごと相談、医療・介護のAI導入支援、Instagram代行運用の3つを、現場で人手や時間が足りない感覚を知っているからこそのペースで、お手伝いしています。</p>
       <p>「あいまに」＝AIが、あなたに“あいま（合間）”をつくる。手のかかる作業をAIに任せて、生まれた時間を本当に大事なことに使ってほしい。そんな思いで名づけました。</p>
     </div>
@@ -447,6 +450,7 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
       <a href="#faq">よくある質問</a>
       <a href="#about">運営者について</a>
       <!-- noteは未開設のためリンクを削除（2026-07-17）。開設したら <a href="（noteのURL）" target="_blank" rel="noopener">note</a> を戻す -->
+      <a href="./tokushoho.html">特定商取引法に基づく表記</a>
     </div>
     <p>© 2026 あいまに</p>
   </div>
