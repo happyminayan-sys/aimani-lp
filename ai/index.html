@@ -61,7 +61,7 @@
         {
           "@type": "Question",
           "name": "訪問とオンライン、どちらで受けられますか？",
-          "acceptedAnswer": { "@type": "Answer", "text": "どちらでも受けられます。オンラインは全国対応で、ココナラからお申し込みいただけます（画面を一緒に見ながら設定するので、離れていても同じことができます）。訪問をご希望の場合は地域によりますので、無料診断フォームからご相談ください。" }
+          "acceptedAnswer": { "@type": "Answer", "text": "どちらでも受けられます。オンラインは全国対応で、無料診断フォームから直接でも、ココナラ経由でもお申し込みいただけます（画面を一緒に見ながら設定するので、離れていても同じことができます）。訪問をご希望の場合は地域によりますので、無料診断フォームからご相談ください。" }
         },
         {
           "@type": "Question",
@@ -364,7 +364,8 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
           <li>その場で1つ設定して、当日から時短スタート</li>
         </ul>
         <p class="way">オンラインで受ける<small>画面を一緒に見ながら・全国対応</small></p>
-        <a class="btn btn-primary" href="https://coconala.com/services/4316019" target="_blank" rel="noopener">ココナラで申し込む</a>
+        <a class="btn btn-primary" href="#shindan">フォームから直接申し込む</a>
+        <a class="btn btn-sub" href="https://coconala.com/services/4316019" target="_blank" rel="noopener">ココナラ経由で申し込む</a>
         <p class="way">訪問で受ける<small>お伺いします・地域によります</small></p>
         <a class="btn btn-sub" href="#shindan">無料診断からご相談</a>
       </div>
@@ -410,7 +411,7 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
   <div class="wrap flow">
     <h2>ご利用の流れ</h2>
     <p class="lead">お申し込みから当日まで、ぜんぶで4ステップです</p>
-    <div class="step"><h3>お申し込み</h3><p>無料診断フォーム、またはココナラからお申し込みください。</p></div>
+    <div class="step"><h3>お申し込み</h3><p>無料診断フォームから直接、またはココナラからお申し込みください。料金はどちらも同じです。</p></div>
     <div class="step"><h3>事前ヒアリング</h3><p>メッセージで、事業所の形態と「時間を取られていること」を簡単に伺います。</p></div>
     <div class="step"><h3>当日（60〜90分）</h3><p>業務3つを伺い、AI時短診断シートを作成。その場で1つ、実際に設定します。</p></div>
     <div class="step"><h3>お渡しして終了</h3><p>診断シート（PDF）と、設定したAI活用のメモをお渡しします。残り2つの導入見積もりも含まれるので、その後の判断にそのまま使えます。</p></div>
@@ -426,7 +427,7 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
     <details><summary>小さな事業所でもAIを入れる意味はありますか？</summary><div class="a">人数が少ないほど、1人あたりの書類仕事の負担は重くなります。お知らせ文・研修資料・記録の下書きなど、毎週発生する定型作業ほどAIの時短効果が大きく、小規模事業所こそ向いています。</div></details>
     <details><summary>患者や利用者の個人情報をAIに入れるのが心配です。</summary><div class="a">患者さま・利用者さまの個人情報はAIに一切入力しない設計でお手伝いします。実名や病状はAIに渡さず、仕組みだけAIで組み、最後は人の手で仕上げます。これは看護師だからこそ分かる線引きです。</div></details>
     <details><summary>何を準備すればいいですか？</summary><div class="a">普段お使いのパソコンかスマホがあれば十分です。AIツールは無料で始められるものから使うので、事前の契約や購入は不要です。</div></details>
-    <details><summary>訪問とオンライン、どちらで受けられますか？</summary><div class="a">どちらでも受けられます。<b>オンラインは全国対応</b>で、ココナラからお申し込みいただけます（画面を一緒に見ながら設定するので、離れていても同じことができます）。<b>訪問</b>をご希望の場合は地域によりますので、無料診断フォームからご相談ください。</div></details>
+    <details><summary>訪問とオンライン、どちらで受けられますか？</summary><div class="a">どちらでも受けられます。<b>オンラインは全国対応</b>で、無料診断フォームから直接でも、ココナラ経由でもお申し込みいただけます（画面を一緒に見ながら設定するので、離れていても同じことができます）。<b>訪問</b>をご希望の場合は地域によりますので、無料診断フォームからご相談ください。</div></details>
     <details><summary>診断料金のほかに費用はかかりますか？</summary><div class="a">診断で導入するAIツールは無料プランから始めるため、追加費用は原則かかりません。有料ツールが必要な場合は、金額と理由を説明したうえでご判断いただきます。</div></details>
   </div>
 </section>
@@ -450,9 +451,12 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
   <div class="wrap">
     <h2>運営者について</h2>
     <div class="about-box">
-      <h3>【あいまに】</h3>
+      <!-- 氏名は対面用名刺（Claudeコード\名刺\あいまに名刺.html）と同表記（2026-07-17 実名・顔出しOKに方針転換）。
+           顔写真を使う場合は photo.jpg をリポジトリ直下に置き、下のimgコメントを外す -->
+      <!-- <img src="../photo.jpg" alt="運営者の顔写真" style="width:110px;height:110px;border-radius:50%;object-fit:cover;float:right;margin:0 0 10px 16px"> -->
+      <h3>【あいまに】<span style="font-size:.8rem;font-weight:normal;color:#777">運営者: 佐藤 三奈子</span></h3>
       <p>現役の看護師です。病棟・施設での勤務を続けながら、副業として医療・介護の小さな事業所さんのAI活用をお手伝いしています。</p>
-      <p>勤務先の守秘のため、屋号「あいまに」で活動しており、実名・顔写真は公開していません。お取引はココナラ（本人確認済みプラットフォーム）を通じて行いますので、安心してご利用いただけます。</p>
+      <p>お申し込みは、このページの無料診断フォームから直接でも、ココナラ（本人確認済みプラットフォーム）経由でも受け付けています。事業者情報は<a href="../tokushoho.html">特定商取引法に基づく表記</a>をご覧ください。</p>
       <p>「あいまに」＝AIが、あなたに“あいま（合間）”をつくる。事務仕事をAIに任せて生まれた時間を、患者さま・利用者さま、そして自分自身に向けられるように。そんな思いで名づけました。</p>
     </div>
   </div>
@@ -489,10 +493,9 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
       <a href="#blog">ブログ</a>
       <!-- noteは未開設のためリンクを削除（2026-07-17）。開設したら <a href="（noteのURL）" target="_blank" rel="noopener">note</a> を戻す -->
     </div>
-    <!-- このページから直接お申し込み（訪問）を受ける場合、あいまに が直接の販売事業者になるため特定商取引法の表示対象になり得る。
-         氏名・住所・電話番号は「請求があれば遅滞なく開示する旨」を表示する省略の特例を採用（2026-07-17）。
-         ※法務判断は未確認。心配なら専門家に相談すること。オンライン申込はココナラが表示主体なのでこの限りではない -->
-    <p style="font-size:.8rem;color:#9aa5ab;margin-bottom:10px">特定商取引法に基づく表記: 販売事業者の氏名・住所・電話番号は、ご請求があれば遅滞なく開示いたします。</p>
+    <!-- 2026-07-17: 実名公開OK・LPからの直接申込を解禁したため、特商法表記は独立ページ（リポジトリ直下 tokushoho.html）へ移行。
+         氏名は表示し、住所・電話番号は「請求があれば遅滞なく開示する旨」の省略特例を採用。※法務判断は未確認。心配なら専門家に相談すること -->
+    <p style="font-size:.8rem;margin-bottom:10px"><a href="../tokushoho.html" style="color:#9aa5ab">特定商取引法に基づく表記</a></p>
     <p>© 2026 あいまに — 医療・介護の小さな事業所のAI導入伴走</p>
   </div>
 </footer>
@@ -511,4 +514,3 @@ try {
 
 </body>
 </html>
-
