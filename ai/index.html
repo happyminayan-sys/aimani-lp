@@ -1,1 +1,514 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>医療・介護の小さな事業所のAI導入伴走｜現役看護師の【あいまに】</title>
+<meta name="description" content="訪問看護・デイサービス・クリニック・整体院のAI活用を現役看護師が伴走支援。申し送り・記録・お知らせ文の残業をAIで時短。患者さま・利用者さまの個人情報はAIに入れない設計。無料AI時短診断から。">
+<meta property="og:title" content="医療・介護の小さな事業所のAI導入伴走【あいまに】">
+<meta property="og:description" content="申し送り・記録・お知らせ文、その残業AIで消せます。現役看護師が専門用語なしで伴走します。">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<!-- 1リポジトリ合同方式: 総合LPがルート、このAI導入版が /ai/ 配下（あいまに総合LP\README.md 参照） -->
+<meta property="og:url" content="https://happyminayan-sys.github.io/aimani-lp/ai/">
+<link rel="canonical" href="https://happyminayan-sys.github.io/aimani-lp/ai/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "#aimani",
+      "name": "あいまに",
+      "description": "医療・介護の小規模事業所向けAI導入伴走サービス。現役看護師が運営。",
+      "knowsAbout": ["AI活用", "業務効率化", "訪問看護", "介護事業所", "生成AI導入"]
+    },
+    {
+      "@type": "Service",
+      "name": "AI時短診断",
+      "serviceType": "AI導入コンサルティング",
+      "provider": { "@id": "#aimani" },
+      "areaServed": "JP",
+      "description": "60〜90分で時間を取られている業務を診断し、AIでの時短方法をシートにまとめ、その場で1つ設定するサービス。",
+      "offers": [
+        { "@type": "Offer", "name": "AI時短診断（単発）", "price": "15000", "priceCurrency": "JPY" },
+        { "@type": "Offer", "name": "月イチ伴走プラン", "price": "12000", "priceCurrency": "JPY" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "パソコンやAIが苦手でも大丈夫ですか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "大丈夫です。専門用語を使わずに説明し、その場で一緒に手を動かして設定まで終わらせます。「隣に座って一緒にやる人」がいることがこのサービスの中身です。" }
+        },
+        {
+          "@type": "Question",
+          "name": "小さな事業所でもAIを入れる意味はありますか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "人数が少ないほど、1人あたりの書類仕事の負担は重くなります。お知らせ文・研修資料・記録の下書きなど、毎週発生する定型作業ほどAIの時短効果が大きく、小規模事業所こそ向いています。" }
+        },
+        {
+          "@type": "Question",
+          "name": "患者や利用者の個人情報をAIに入れるのが心配です。",
+          "acceptedAnswer": { "@type": "Answer", "text": "患者さま・利用者さまの個人情報はAIに一切入力しない設計でお手伝いします。実名や病状はAIに渡さず、仕組みだけAIで組み、最後は人の手で仕上げます。これは看護師だからこそ分かる線引きです。" }
+        },
+        {
+          "@type": "Question",
+          "name": "何を準備すればいいですか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "普段お使いのパソコンかスマホがあれば十分です。AIツールは無料で始められるものから使うので、事前の契約や購入は不要です。" }
+        },
+        {
+          "@type": "Question",
+          "name": "訪問とオンライン、どちらで受けられますか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "どちらでも受けられます。オンラインは全国対応で、ココナラからお申し込みいただけます（画面を一緒に見ながら設定するので、離れていても同じことができます）。訪問をご希望の場合は地域によりますので、無料診断フォームからご相談ください。" }
+        },
+        {
+          "@type": "Question",
+          "name": "診断料金のほかに費用はかかりますか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "診断で導入するAIツールは無料プランから始めるため、追加費用は原則かかりません。有料ツールが必要な場合は、金額と理由を説明したうえでご判断いただきます。" }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+:root{
+  --teal:#20706a; --teal-dark:#164f4b; --accent:#20706a; --accent-dark:#164f4b; --warm:#d08a4e; --warm-dark:#b0662f; --soft:#4a9184; --soft-dark:#3c7c70;
+  --ink:#28333a; --ink-soft:#55636c; --cream:#faf6ef; --white:#fff; --line:#e6ded1;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;color:var(--ink);background:var(--cream);line-height:1.9;font-size:16px}
+img,svg{max-width:100%}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+section{padding:64px 0}
+h2{font-size:1.7rem;text-align:center;color:var(--teal-dark);margin-bottom:8px;line-height:1.5}
+.lead{text-align:center;color:var(--ink-soft);margin-bottom:40px}
+.btn{display:inline-block;padding:16px 36px;border-radius:999px;font-weight:bold;text-decoration:none;text-align:center;transition:.2s;font-size:1.05rem}
+.btn-primary{background:var(--soft);color:#fff;box-shadow:0 4px 14px rgba(74,145,132,.3)}
+.btn-primary:hover{background:var(--soft-dark);transform:translateY(-2px)}
+.btn-sub{background:#fff;color:var(--teal);border:2px solid var(--teal)}
+.btn-sub:hover{background:var(--soft);color:#fff}
+.badge{display:inline-block;background:var(--soft);color:#fff;font-size:.8rem;padding:2px 12px;border-radius:999px;margin-bottom:12px}
+
+/* header */
+header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+.nav{max-width:860px;margin:0 auto;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.logo{font-weight:bold;color:var(--teal-dark);font-size:1.1rem;text-decoration:none;white-space:nowrap}
+.logo small{font-weight:normal;color:var(--ink-soft);font-size:.75rem;margin-left:8px}
+.nav a.btn{padding:8px 20px;font-size:.9rem}
+
+/* セクションへ飛ぶリンク（長いページなので必須） */
+.nav-links{display:flex;gap:20px;align-items:center;margin-left:auto;margin-right:4px}
+.nav-links a{color:var(--ink-soft);text-decoration:none;font-size:.88rem;font-weight:bold;white-space:nowrap;padding:3px 0;border-bottom:2px solid transparent;transition:.15s}
+.nav-links a:hover{color:var(--teal);border-bottom-color:var(--warm)}
+
+/* 固定ヘッダーに見出しが隠れないようにする（これが無いとジャンプ先が頭切れになる） */
+[id]{scroll-margin-top:78px}
+
+/* 先頭に戻るボタン */
+.totop{position:fixed;right:22px;bottom:22px;width:52px;height:52px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.4rem;line-height:1;box-shadow:0 4px 14px rgba(0,0,0,.22);opacity:0;pointer-events:none;transition:opacity .25s,background .2s,transform .2s;z-index:60}
+.totop.show{opacity:1;pointer-events:auto}
+.totop:hover{background:var(--teal-dark);transform:translateY(-3px)}
+
+/* hero */
+.hero{background:linear-gradient(160deg,#eef6f4 0%,var(--cream) 70%);padding:72px 0 64px;text-align:center}
+.hero .target{color:var(--teal);font-weight:bold;letter-spacing:.05em;margin-bottom:16px;font-size:.95rem}
+.hero h1{font-size:2rem;line-height:1.6;color:var(--ink);margin-bottom:20px}
+.hero h1 .em{color:var(--accent);border-bottom:4px solid var(--warm)}
+.hero p.sub{color:var(--ink-soft);margin-bottom:36px}
+.hero .cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.hero .note{font-size:.85rem;color:var(--ink-soft);margin-top:14px}
+
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px 22px;text-align:center}
+.card .icon{font-size:2.2rem;margin-bottom:10px}
+.card h3{color:var(--teal-dark);font-size:1.05rem;margin-bottom:10px}
+.card p{font-size:.92rem;color:var(--ink-soft);text-align:left}
+
+/* before/after */
+.ba{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.ba .item{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
+.ba .item h3{color:var(--teal-dark);font-size:1rem;margin-bottom:14px;text-align:center}
+.ba .row{font-size:.9rem;margin:0}
+.ba .before{color:var(--ink-soft)}
+.ba .after{color:var(--ink)}
+.ba .row b{display:inline-block;font-size:.72rem;padding:1px 9px;border-radius:6px;margin-right:7px;vertical-align:middle}
+.ba .before b{background:#efe7d9;color:var(--ink-soft)}
+.ba .after b{background:var(--soft);color:#fff}
+.ba .arrow{text-align:center;color:var(--warm);font-weight:bold;margin:6px 0;font-size:1.1rem}
+
+/* reasons */
+.reasons .card{text-align:left}
+.reasons .num{display:inline-flex;width:34px;height:34px;border-radius:50%;background:var(--warm);color:#fff;font-weight:bold;align-items:center;justify-content:center;margin-bottom:12px}
+.privacy-box{background:#fff;border:2px solid var(--teal);border-radius:14px;padding:28px;margin-top:28px}
+.privacy-box h3{color:var(--teal-dark);margin-bottom:10px;font-size:1.15rem}
+.privacy-box p{font-size:.95rem}
+
+/* shindan */
+.shindan{background:var(--soft);color:#fff;text-align:center}
+.shindan h2{color:#fff}
+.shindan .lead{color:#d8ebe8}
+.shindan .box{background:#fff;color:var(--ink);border-radius:16px;padding:36px 28px;max-width:640px;margin:0 auto}
+.shindan .box h3{color:var(--teal-dark);font-size:1.2rem;margin-bottom:14px}
+.shindan .box ul{list-style:none;text-align:left;max-width:420px;margin:0 auto 24px}
+.shindan .box li{padding:6px 0 6px 30px;position:relative;font-size:.95rem}
+.shindan .box li::before{content:"✓";position:absolute;left:4px;color:var(--warm-dark);font-weight:bold}
+.shindan .free{color:#ffe3c4;font-weight:bold;font-size:1.1rem;margin-bottom:16px}
+
+/* plans */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+.plan{background:#fff;border:1px solid var(--line);border-radius:14px;padding:30px 22px;display:flex;flex-direction:column;position:relative}
+.plan.main{border:2px solid var(--warm)}
+.plan .tag{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--warm);color:#fff;font-size:.78rem;padding:3px 16px;border-radius:999px;white-space:nowrap}
+.plan h3{color:var(--teal-dark);text-align:center;font-size:1.05rem;margin-bottom:6px}
+.plan .price{text-align:center;font-size:1.6rem;font-weight:bold;color:var(--ink);margin:8px 0 2px}
+.plan .price small{font-size:.85rem;font-weight:normal;color:var(--ink-soft)}
+.plan .monitor{text-align:center;font-size:.82rem;color:var(--warm-dark);margin-bottom:12px}
+.plan ul{list-style:none;margin:12px 0 20px;flex:1}
+.plan li{font-size:.9rem;padding:5px 0 5px 24px;position:relative;color:var(--ink-soft)}
+.plan li::before{content:"・";position:absolute;left:6px;color:var(--teal)}
+.plan .soon{text-align:center;font-size:.85rem;color:var(--ink-soft);background:var(--cream);border-radius:8px;padding:8px}
+.plan .btn{padding:14px 12px;font-size:.95rem;white-space:nowrap}
+/* 受け方の見出し（オンライン=ココナラ / 訪問=直接。ココナラは規約で訪問を扱えないため導線を分ける） */
+.plan .way{font-size:.82rem;font-weight:bold;color:var(--teal-dark);text-align:center;margin:14px 0 6px;padding-top:12px;border-top:1px dashed var(--line)}
+.plan .way:first-of-type{border-top:none;padding-top:0}
+.plan .way small{display:block;font-weight:normal;color:var(--ink-soft);font-size:.76rem}
+
+/* subsidy */
+.subsidy{background:#fff8ef;border:1px dashed var(--warm);border-radius:14px;padding:24px 28px;font-size:.95rem}
+.subsidy strong{color:var(--warm-dark)}
+
+/* flow */
+.flow{counter-reset:step}
+.step{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px 22px 74px;margin-bottom:16px;position:relative;counter-increment:step}
+.step::before{content:counter(step);position:absolute;left:22px;top:22px;width:36px;height:36px;border-radius:50%;background:var(--soft);color:#fff;font-weight:bold;display:flex;align-items:center;justify-content:center}
+.step h3{color:var(--teal-dark);font-size:1.02rem;margin-bottom:4px}
+.step p{font-size:.92rem;color:var(--ink-soft)}
+
+/* faq */
+.faq details{background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:12px;overflow:hidden}
+.faq summary{padding:18px 22px;font-weight:bold;cursor:pointer;color:var(--ink);list-style:none;position:relative;padding-right:44px}
+.faq summary::before{content:"Q";color:var(--warm-dark);font-weight:bold;margin-right:10px}
+.faq summary::after{content:"＋";position:absolute;right:20px;color:var(--teal);font-weight:bold}
+.faq details[open] summary::after{content:"－"}
+.faq .a{padding:0 22px 18px 46px;font-size:.94rem;color:var(--ink-soft)}
+
+/* blog */
+.blog-list{display:grid;gap:14px}
+.blog-list a{display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 22px;text-decoration:none;color:var(--ink);transition:.2s}
+.blog-list a:hover{border-color:var(--teal)}
+.blog-list .date{font-size:.8rem;color:var(--ink-soft)}
+.blog-list .prep{text-align:center;color:var(--ink-soft);font-size:.9rem}
+
+/* about */
+.about-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:32px;max-width:640px;margin:0 auto}
+.about-box h3{color:var(--teal-dark);margin-bottom:12px}
+.about-box p{font-size:.95rem;color:var(--ink-soft);margin-bottom:10px}
+
+/* bottom cta */
+.bottom-cta{background:linear-gradient(160deg,var(--teal) 0%,var(--teal-dark) 100%);text-align:center;color:#fff}
+.bottom-cta h2{color:#fff}
+.bottom-cta p{color:#d8ebe8;margin-bottom:30px}
+.bottom-cta .cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+footer{background:var(--ink);color:#cfd8dc;padding:36px 0;text-align:center;font-size:.85rem}
+footer a{color:#cfd8dc}
+footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+
+@media (max-width:720px){
+  section{padding:48px 0}
+  .hero h1{font-size:1.5rem}
+  .cards,.plans,.ba{grid-template-columns:1fr}
+  .plan .tag{top:-12px}
+  .btn{width:100%;max-width:340px}
+  .nav a.btn{width:auto}
+  .logo small{display:none}
+  /* スマホではリンクを2段目に回し、横スクロールで全部触れるようにする */
+  .nav{flex-wrap:wrap;gap:8px;padding:10px 20px}
+  .nav-links{order:3;width:100%;margin:0;gap:16px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+  .nav-links::-webkit-scrollbar{display:none}
+  .nav-links a{font-size:.82rem}
+  [id]{scroll-margin-top:104px}
+  .totop{right:14px;bottom:14px;width:46px;height:46px;font-size:1.2rem}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="#top">【あいまに】<small>医療・介護のAI導入伴走</small></a>
+    <!-- リンクは4つまで。スマホ(375px)で5つ並べると「よくある質問」がはみ出す。
+         「こんな時間」(#nayami)はヒーロー直下でスクロールすれば目に入るため、ナビからは外しフッターにだけ残す -->
+    <nav class="nav-links">
+      <a href="#henka">変わること</a>
+      <a href="#reasons">選ばれる理由</a>
+      <a href="#plans">料金</a>
+      <a href="#faq">よくある質問</a>
+    </nav>
+    <!-- ここはフォームへ直リンクしない。#shindan（ページ内の診断セクション）に送り、無料・匿名OK・営業電話なしを読ませてからフォームへ渡す -->
+    <a class="btn btn-primary" href="#shindan">無料診断</a>
+  </div>
+</header>
+
+<!-- 1. ファーストビュー -->
+<div class="hero" id="top">
+  <div class="wrap">
+    <p class="target">訪問看護・デイサービス・クリニック・整体院の方へ</p>
+    <span class="badge">あなたの事業所に “AI社員” をひとり</span>
+    <h1>申し送り・記録・お知らせ文。<br>その残業を、AIが<span class="em">“あいま（合間）”に変えます</span></h1>
+    <p class="sub">事務仕事はAI社員が下ごしらえ。生まれた合間は、患者さま・利用者さま、そして自分のために。<br>導入は現役看護師が専門用語なしで隣で一緒に。</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#shindan">無料AI時短かんたん診断</a>
+      <a class="btn btn-sub" href="#plans">サービスと料金を見る</a>
+    </div>
+    <p class="note">患者さま・利用者さまの個人情報はAIに入力しない設計です</p>
+  </div>
+</div>
+
+<!-- 2. あるある共感 -->
+<section id="nayami">
+  <div class="wrap">
+    <h2>こんな時間、毎週ありませんか？</h2>
+    <p class="lead">現場が終わってから始まる「書きもの」の時間です</p>
+    <div class="cards">
+      <div class="card"><div class="icon">📝</div><h3>記録・申し送りの下書き</h3><p>1日の終わりにまとめて書く記録。思い出しながら書くので、気づけば30分、1時間。</p></div>
+      <div class="card"><div class="icon">📢</div><h3>お知らせ文・案内文</h3><p>ご家族向けのお知らせ、行事の案内、料金改定の説明文。毎回ゼロから文章を考えている。</p></div>
+      <div class="card"><div class="icon">📚</div><h3>研修資料・マニュアル</h3><p>委員会の資料、新人さん向けの手順書。作らなきゃと思いながら後回しになっている。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2.5 Before / After（AI社員が入るとどう変わるか） -->
+<section id="henka" style="background:#eef6f4">
+  <div class="wrap">
+    <h2>“AI社員”が入ると、1日がこう変わる</h2>
+    <p class="lead">むずかしい設定はいりません。看護師が隣で一緒に入れます</p>
+    <div class="ba">
+      <div class="item">
+        <h3>📝 記録・申し送り</h3>
+        <p class="row before"><b>Before</b>思い出しながらゼロから入力。30分〜1時間。</p>
+        <p class="arrow">↓</p>
+        <p class="row after"><b>After</b>要点を渡すとAI社員が下書き。あなたは直して確定するだけ。</p>
+      </div>
+      <div class="item">
+        <h3>📢 お知らせ・案内文</h3>
+        <p class="row before"><b>Before</b>ご家族向け・行事・料金改定…毎回ゼロから文章を考える。</p>
+        <p class="arrow">↓</p>
+        <p class="row after"><b>After</b>AI社員が数パターン用意。選んで整えるだけ。</p>
+      </div>
+      <div class="item">
+        <h3>📚 研修資料・マニュアル</h3>
+        <p class="row before"><b>Before</b>「作らなきゃ」と思いながら後回し。</p>
+        <p class="arrow">↓</p>
+        <p class="row after"><b>After</b>AI社員が骨子を作成。中身の確認に集中できる。</p>
+      </div>
+    </div>
+    <p class="lead" style="margin:32px 0 0;font-size:.98rem">あなたに残るのは、<b style="color:var(--teal-dark)">最後の確認と判断</b>だけ。患者さま・利用者さまの個人情報はAIに入れずに組みます。</p>
+  </div>
+</section>
+
+<!-- 3. 選ばれる理由 -->
+<section id="reasons" style="background:#fff">
+  <div class="wrap reasons">
+    <h2>【あいまに】が選ばれる3つの理由</h2>
+    <p class="lead">IT業者さんとは、スタート地点が違います</p>
+    <div class="cards">
+      <div class="card"><span class="num">1</span><h3>現役看護師だから現場の話が通じる</h3><p>申し送り・記録・監査資料・シフトの「あるある」を自分自身が知っています。状況説明に時間がかからず、ヒアリングが10分で核心に届きます。</p></div>
+      <div class="card"><span class="num">2</span><h3>専門用語を使いません</h3><p>「プロンプト」「API」といった言葉は出てきません。普段お使いのパソコンかスマホで、その場で一緒に手を動かして設定まで終わらせます。</p></div>
+      <div class="card"><span class="num">3</span><h3>当日から時短が始まる</h3><p>診断して提案書を置いて帰る、では終わりません。その場で1つ実際に設定し、「今日から変わった」を持ち帰っていただきます。</p></div>
+    </div>
+    <div class="privacy-box">
+      <h3>🔒 いちばん大切にしていること — 個人情報はAIに入れません</h3>
+      <p>患者さま・利用者さまのお名前や病状は、AIに一切入力しない設計でお手伝いします。仕組みだけAIで組み、実名は最後に人の手で差し込む。この線引きは、守秘義務とともに働いてきた看護師だからこそ引けるものだと考えています。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. 無料診断 -->
+<section class="shindan" id="shindan">
+  <div class="wrap">
+    <h2>無料AI時短かんたん診断</h2>
+    <p class="lead">まずは「うちの場合、何が時短できるのか」を知るところから</p>
+    <div class="box">
+      <h3>5つの質問に答えるだけ（約3分）</h3>
+      <ul>
+        <li>あなたの事業所で「AIで消せる作業」の目安が分かります</li>
+        <li>詳しい診断結果はメールでお送りします</li>
+        <li>営業の電話は一切しません</li>
+      </ul>
+      <p class="free">無料・匿名OK</p>
+      <a class="btn btn-primary" href="https://forms.gle/usLTvy1p5Vj9iQgm9" target="_blank" rel="noopener">診断をはじめる</a>
+    </div>
+  </div>
+</section>
+
+<!-- 5. サービスと料金 -->
+<section id="plans">
+  <div class="wrap">
+    <h2>サービスと料金</h2>
+    <p class="lead">小さく始めて、必要なぶんだけ続けられる3段階です</p>
+    <div class="plans">
+      <div class="plan">
+        <h3>① AI時短診断</h3>
+        <p class="price">15,000円<small>（単発）</small></p>
+        <p class="monitor">最初の3件はモニター価格 10,000円</p>
+        <ul>
+          <li>60〜90分</li>
+          <li>時間を取られている業務3つをヒアリング</li>
+          <li>「AIでこう時短できる」診断シートをお渡し</li>
+          <li>その場で1つ設定して、当日から時短スタート</li>
+        </ul>
+        <p class="way">オンラインで受ける<small>画面を一緒に見ながら・全国対応</small></p>
+        <a class="btn btn-primary" href="https://coconala.com/services/4316019" target="_blank" rel="noopener">ココナラで申し込む</a>
+        <p class="way">訪問で受ける<small>お伺いします・地域によります</small></p>
+        <a class="btn btn-sub" href="#shindan">無料診断からご相談</a>
+      </div>
+      <div class="plan main">
+        <span class="tag">続けたい方の主力プラン</span>
+        <h3>② 月イチ伴走プラン</h3>
+        <p class="price">月12,000円<small>（解約自由）</small></p>
+        <p class="monitor">&nbsp;</p>
+        <ul>
+          <li>月1回60分（訪問 or オンライン）</li>
+          <li>質問し放題（2営業日以内に返信）</li>
+          <li>毎月1つ、新しい時短を導入</li>
+          <li>顧問契約のような縛りはありません</li>
+        </ul>
+        <a class="btn btn-sub" href="#shindan">まず無料診断から</a>
+      </div>
+      <div class="plan">
+        <h3>③ まるごと代行</h3>
+        <p class="price">月30,000円〜</p>
+        <p class="monitor">&nbsp;</p>
+        <ul>
+          <li>AIの設定・文書テンプレ・お知らせ文・研修資料を、こちらで作って納品</li>
+          <li>「教えない、やってあげる」プラン</li>
+        </ul>
+        <p class="soon">現在は伴走プランのお客さま向けに準備中です</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. 補助金 -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="subsidy">
+      <strong>💡 補助金が使える場合があります。</strong>
+      介護分野では「介護テクノロジー導入支援事業」などの補助制度が各都道府県で実施されており、要件によっては導入費用の一部が補助されます。制度のご紹介はしますが、<strong>申請の代行は行いません</strong>（申請はご自身または専門家にご依頼ください）。
+    </div>
+  </div>
+</section>
+
+<!-- 7. ご利用の流れ -->
+<section id="flow" style="background:#fff">
+  <div class="wrap flow">
+    <h2>ご利用の流れ</h2>
+    <p class="lead">お申し込みから当日まで、ぜんぶで4ステップです</p>
+    <div class="step"><h3>お申し込み</h3><p>無料診断フォーム、またはココナラからお申し込みください。</p></div>
+    <div class="step"><h3>事前ヒアリング</h3><p>メッセージで、事業所の形態と「時間を取られていること」を簡単に伺います。</p></div>
+    <div class="step"><h3>当日（60〜90分）</h3><p>業務3つを伺い、AI時短診断シートを作成。その場で1つ、実際に設定します。</p></div>
+    <div class="step"><h3>お渡しして終了</h3><p>診断シート（PDF）と、設定したAI活用のメモをお渡しします。残り2つの導入見積もりも含まれるので、その後の判断にそのまま使えます。</p></div>
+  </div>
+</section>
+
+<!-- 8. FAQ -->
+<section id="faq">
+  <div class="wrap faq">
+    <h2>よくあるご質問</h2>
+    <p class="lead">「AIは怖い」と感じている方ほど、読んでいただきたい内容です</p>
+    <details><summary>パソコンやAIが苦手でも大丈夫ですか？</summary><div class="a">大丈夫です。専門用語を使わずに説明し、その場で一緒に手を動かして設定まで終わらせます。「隣に座って一緒にやる人」がいることが、このサービスの中身です。</div></details>
+    <details><summary>小さな事業所でもAIを入れる意味はありますか？</summary><div class="a">人数が少ないほど、1人あたりの書類仕事の負担は重くなります。お知らせ文・研修資料・記録の下書きなど、毎週発生する定型作業ほどAIの時短効果が大きく、小規模事業所こそ向いています。</div></details>
+    <details><summary>患者や利用者の個人情報をAIに入れるのが心配です。</summary><div class="a">患者さま・利用者さまの個人情報はAIに一切入力しない設計でお手伝いします。実名や病状はAIに渡さず、仕組みだけAIで組み、最後は人の手で仕上げます。これは看護師だからこそ分かる線引きです。</div></details>
+    <details><summary>何を準備すればいいですか？</summary><div class="a">普段お使いのパソコンかスマホがあれば十分です。AIツールは無料で始められるものから使うので、事前の契約や購入は不要です。</div></details>
+    <details><summary>訪問とオンライン、どちらで受けられますか？</summary><div class="a">どちらでも受けられます。<b>オンラインは全国対応</b>で、ココナラからお申し込みいただけます（画面を一緒に見ながら設定するので、離れていても同じことができます）。<b>訪問</b>をご希望の場合は地域によりますので、無料診断フォームからご相談ください。</div></details>
+    <details><summary>診断料金のほかに費用はかかりますか？</summary><div class="a">診断で導入するAIツールは無料プランから始めるため、追加費用は原則かかりません。有料ツールが必要な場合は、金額と理由を説明したうえでご判断いただきます。</div></details>
+  </div>
+</section>
+
+<!-- 9. ブログ -->
+<section style="background:#fff" id="blog">
+  <div class="wrap">
+    <h2>現場のAI時短メモ</h2>
+    <p class="lead">医療・介護の現場で今日から使えるAI活用を、看護師目線で書いています</p>
+    <div class="blog-list">
+      <!-- TODO(記事公開時): ここに記事リンクを追加していく。例:
+      <a href="blog/moushiokuri-ai.html"><span class="date">2026-07-20</span><br>申し送りの下書きをAIに任せたら、退勤が30分早くなった話</a>
+      -->
+      <p class="prep">記事は準備中です。公開までしばらくお待ちください。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 10. 運営者情報 -->
+<section>
+  <div class="wrap">
+    <h2>運営者について</h2>
+    <div class="about-box">
+      <h3>【あいまに】</h3>
+      <p>現役の看護師です。病棟・施設での勤務を続けながら、副業として医療・介護の小さな事業所さんのAI活用をお手伝いしています。</p>
+      <p>勤務先の守秘のため、屋号「あいまに」で活動しており、実名・顔写真は公開していません。お取引はココナラ（本人確認済みプラットフォーム）を通じて行いますので、安心してご利用いただけます。</p>
+      <p>「あいまに」＝AIが、あなたに“あいま（合間）”をつくる。事務仕事をAIに任せて生まれた時間を、患者さま・利用者さま、そして自分自身に向けられるように。そんな思いで名づけました。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 11. 最後のCTA -->
+<section class="bottom-cta">
+  <div class="wrap">
+    <h2>「うちの事業所でもできますか？」<br>だけでも、お気軽にどうぞ</h2>
+    <p>無料診断に答えていただければ、あなたの事業所の「AIで消せる作業」の目安をお返しします。</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#shindan">無料AI時短かんたん診断</a>
+      <a class="btn btn-sub" style="background:transparent;color:#fff;border-color:#fff" href="https://coconala.com/services/4316019" target="_blank" rel="noopener">ココナラで相談する</a>
+    </div>
+  </div>
+</section>
+
+<!-- 総合LPへの戻り導線。1リポジトリ合同方式で総合LPがルートにあるので相対パス（../）でよい＝URL差し替え不要 -->
+<div style="background:var(--ink);text-align:center;padding:14px 0;font-size:.8rem">
+  <a href="../" style="color:#cfd8dc">← 【あいまに】の他のサービス一覧（デジタル何でも相談・Instagram代行）はこちら</a>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="links">
+      <a href="#top">先頭へ</a>
+      <a href="#nayami">こんな時間</a>
+      <a href="#henka">変わること</a>
+      <a href="#reasons">選ばれる理由</a>
+      <a href="#shindan">無料診断</a>
+      <a href="#plans">サービスと料金</a>
+      <a href="#flow">ご利用の流れ</a>
+      <a href="#faq">よくある質問</a>
+      <a href="#blog">ブログ</a>
+      <!-- noteは未開設のためリンクを削除（2026-07-17）。開設したら <a href="（noteのURL）" target="_blank" rel="noopener">note</a> を戻す -->
+    </div>
+    <!-- このページから直接お申し込み（訪問）を受ける場合、あいまに が直接の販売事業者になるため特定商取引法の表示対象になり得る。
+         氏名・住所・電話番号は「請求があれば遅滞なく開示する旨」を表示する省略の特例を採用（2026-07-17）。
+         ※法務判断は未確認。心配なら専門家に相談すること。オンライン申込はココナラが表示主体なのでこの限りではない -->
+    <p style="font-size:.8rem;color:#9aa5ab;margin-bottom:10px">特定商取引法に基づく表記: 販売事業者の氏名・住所・電話番号は、ご請求があれば遅滞なく開示いたします。</p>
+    <p>© 2026 あいまに — 医療・介護の小さな事業所のAI導入伴走</p>
+  </div>
+</footer>
+
+<!-- 先頭に戻るボタン。長いページなので、途中から戻れないと迷子になる -->
+<a class="totop" id="totop" href="#top" aria-label="ページの先頭に戻る" title="先頭に戻る">↑</a>
+<script>
+// 500px以上スクロールしたら表示。JSが動かない環境でも本文には影響しないよう try/catch で隔離する
+try {
+  var _t = document.getElementById('totop');
+  var _s = function () { if (window.pageYOffset > 500) { _t.classList.add('show'); } else { _t.classList.remove('show'); } };
+  window.addEventListener('scroll', _s, { passive: true });
+  _s();
+} catch (e) {}
+</script>
+
+</body>
+</html>
 
