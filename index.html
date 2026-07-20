@@ -57,7 +57,7 @@
         {
           "@type": "Question",
           "name": "料金はいくらですか？",
-          "acceptedAnswer": { "@type": "Answer", "text": "デジタルよろず相談は1時間4,000円・2時間7,000円（移動費別）、AIの使い方レクチャーは1時間4,000円、Instagram代行は月15,000円〜です。AI時短診断は10,000円（60〜90分）、AI検索露出診断（AIにお店が出るかの実測レポート）も10,000円です。継続支援や代行は内容により料金が変わるため、事前にお見積もりします。" }
+          "acceptedAnswer": { "@type": "Answer", "text": "デジタルよろず相談は1時間4,000円・2時間7,000円（移動費別）、AIの使い方レクチャーは1時間4,000円、Instagram代行は月15,000円〜です。AI時短診断は10,000円（60〜90分）、AI検索露出診断（AIにお店が出るかの実測レポート）と属人化診断（その人しかできない仕事の棚卸しと手順書づくり）も各10,000円です。継続支援や代行は内容により料金が変わるため、事前にお見積もりします。" }
         },
         {
           "@type": "Question",
@@ -95,24 +95,44 @@
 }
 </script>
 <style>
+/* Hallmark · macrostructure: Feature Stack · genre: editorial · tone: 実直・生活者向け
+ * theme: custom（クリーム紙 · ティール accent · 和文ゴシック）· 2026-07-20 audit の指摘を反映
+ */
 :root{
   --teal:#20706a; --teal-dark:#164f4b; --accent:#20706a; --accent-dark:#164f4b; --warm:#d08a4e; --warm-dark:#b0662f; --soft:#4a9184; --soft-dark:#3c7c70;
-  --ink:#28333a; --ink-soft:#55636c; --cream:#faf6ef; --white:#fff; --line:#e6ded1;
+  --ink:#28333a; --ink-soft:#55636c; --cream:#faf6ef; --white:#fff; --line:#e6ded1; --mint:#eef6f4;
+  --ease-out:cubic-bezier(.22,.61,.36,1);
+  --dur:160ms;
+  --radius:8px;
+  --space-section:72px; --space-section-tight:48px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+html,body{overflow-x:clip}
 body{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;color:var(--ink);background:var(--cream);line-height:1.9;font-size:16px}
 img,svg{max-width:100%}
 .wrap{max-width:860px;margin:0 auto;padding:0 20px}
-section{padding:64px 0}
-h2{font-size:1.7rem;text-align:center;color:var(--teal-dark);margin-bottom:8px;line-height:1.5}
-.lead{text-align:center;color:var(--ink-soft);margin-bottom:40px}
-.btn{display:inline-block;padding:16px 36px;border-radius:999px;font-weight:bold;text-decoration:none;text-align:center;transition:.2s;font-size:1.05rem}
-.btn-primary{background:var(--soft);color:#fff;box-shadow:0 4px 14px rgba(74,145,132,.3)}
-.btn-primary:hover{background:var(--soft-dark);transform:translateY(-2px)}
+section{padding:var(--space-section) 0}
+/* 区切りの強弱をつける（白地セクションは詰める） */
+section.tight{padding:var(--space-section-tight) 0}
+/* 見出しは左寄せが基本。中央寄せは締めのCTAだけに絞る */
+h2{font-size:2.1rem;color:var(--teal-dark);margin-bottom:10px;line-height:1.45;letter-spacing:.01em}
+h2::after{content:"";display:block;width:52px;height:3px;background:var(--warm);margin-top:14px}
+.lead{color:var(--ink-soft);margin-bottom:40px;max-width:44em}
+.bg-white{background:var(--white)}
+.btn{display:inline-block;padding:15px 32px;border-radius:var(--radius);font-weight:bold;text-decoration:none;text-align:center;font-size:1.05rem;transition:background var(--dur) var(--ease-out),color var(--dur) var(--ease-out),border-color var(--dur) var(--ease-out)}
+.btn-primary{background:var(--soft);color:#fff;border:2px solid var(--soft)}
+.btn-primary:hover{background:var(--teal-dark);border-color:var(--teal-dark)}
 .btn-sub{background:#fff;color:var(--teal);border:2px solid var(--teal)}
-.btn-sub:hover{background:var(--soft);color:#fff}
-.badge{display:inline-block;background:var(--soft);color:#fff;font-size:.8rem;padding:2px 12px;border-radius:999px;margin-bottom:12px}
+.btn-sub:hover{background:var(--teal);color:#fff}
+/* キーボードで操作する人に、どこを選んでいるかを必ず見せる */
+a:focus-visible,summary:focus-visible,details:focus-visible{outline:3px solid var(--warm-dark);outline-offset:3px;border-radius:4px}
+.badge{display:inline-block;background:var(--soft);color:#fff;font-size:.8rem;padding:2px 12px;border-radius:var(--radius);margin-bottom:12px}
+/* 以前はHTMLに直書きしていた色・幅をクラス化（配色変更のとき取り残されないように） */
+.btn-ghost{background:transparent;color:#fff;border:2px solid #fff}
+.btn-ghost:hover{background:#fff;color:var(--teal-dark)}
+.note-wide{max-width:700px;margin:20px auto 0}
+.owner-name{font-size:.8rem;font-weight:normal;color:var(--ink-soft)}
 
 /* header */
 header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
@@ -134,25 +154,34 @@ header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0
 .totop.show{opacity:1;pointer-events:auto}
 .totop:hover{background:var(--teal-dark);transform:translateY(-3px)}
 
-/* hero */
-.hero{background:linear-gradient(160deg,#eef6f4 0%,var(--cream) 70%);padding:72px 0 64px;text-align:center}
-.hero h1{font-size:2rem;line-height:1.6;color:var(--ink);margin-bottom:20px}
+/* hero — グラデーションをやめ、クリーム単色＋下の罫線で区切る */
+.hero{background:var(--cream);border-bottom:1px solid var(--line);padding:76px 0 60px}
+.hero h1{font-size:2.5rem;line-height:1.45;color:var(--ink);margin-bottom:20px;overflow-wrap:anywhere}
 .hero h1 .em{color:var(--accent);border-bottom:4px solid var(--warm)}
-.hero p.sub{color:var(--ink-soft);margin-bottom:28px}
-.tags{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:32px}
-.tags span{background:#fff;border:1px solid var(--line);color:var(--ink-soft);font-size:.85rem;padding:6px 16px;border-radius:999px}
-.hero .cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.hero p.sub{color:var(--ink-soft);margin-bottom:28px;max-width:40em}
+.tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px}
+.tags span{background:#fff;border:1px solid var(--line);color:var(--ink-soft);font-size:.85rem;padding:6px 14px;border-radius:var(--radius)}
+.hero .cta-row{display:flex;gap:16px;flex-wrap:wrap}
 .hero .note{font-size:.85rem;color:var(--ink-soft);margin-top:14px}
 
 /* cards */
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px 22px;text-align:center}
-.card .icon{font-size:2.2rem;margin-bottom:10px}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px;text-align:left}
+.card .no{display:inline-block;font-size:.78rem;font-weight:bold;letter-spacing:.14em;color:var(--warm-dark);margin-bottom:8px}
 .card h3{color:var(--teal-dark);font-size:1.05rem;margin-bottom:10px}
-.card p{font-size:.92rem;color:var(--ink-soft);text-align:left;margin-bottom:12px}
+.card p{font-size:.92rem;color:var(--ink-soft);margin-bottom:12px}
 .card .price{font-size:.85rem;color:var(--ink-soft);margin-bottom:14px}
 .card .price strong{color:var(--ink)}
 .card .btn{width:100%;padding:12px 12px;font-size:.92rem}
+.card .btn + .btn{margin-top:10px}
+.card .price a{color:var(--teal);font-weight:bold}
+
+/* サービス一覧は「本命1つを大きく、残り2つを小さく」の非対称。3枚横並びのテンプレ感を崩す */
+.cards-lead{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.cards-lead .card.primary{grid-column:1 / -1;background:var(--mint);border-color:var(--soft);padding:34px 30px}
+.cards-lead .card.primary h3{font-size:1.4rem}
+.cards-lead .card.primary p{font-size:1rem;color:var(--ink)}
+.cards-lead .card.primary .btn{width:auto;padding:14px 30px;font-size:1rem}
 
 /* reasons */
 .reasons-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
@@ -193,8 +222,9 @@ header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0
 .about-box h3{color:var(--teal-dark);margin-bottom:12px}
 .about-box p{font-size:.95rem;color:var(--ink-soft);margin-bottom:10px}
 
-/* bottom cta */
-.bottom-cta{background:linear-gradient(160deg,var(--teal) 0%,var(--teal-dark) 100%);text-align:center;color:#fff}
+/* bottom cta — ここだけ中央寄せにして「締め」だと分かるようにする */
+.bottom-cta{background:var(--teal-dark);text-align:center;color:#fff}
+.bottom-cta h2::after{margin-left:auto;margin-right:auto}
 .bottom-cta h2{color:#fff}
 .bottom-cta p{color:#d8ebe8;margin-bottom:30px}
 .bottom-cta .cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
@@ -203,10 +233,21 @@ footer{background:var(--ink);color:#cfd8dc;padding:36px 0;text-align:center;font
 footer a{color:#cfd8dc}
 footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
 
+/* 「動きを控えめに」設定の端末では、浮き上がり・スクロール追従の動きを止める */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition-duration:.01ms !important;animation-duration:.01ms !important}
+  .totop:hover{transform:none}
+}
+
 @media (max-width:720px){
   section{padding:48px 0}
-  .hero h1{font-size:1.5rem}
-  .cards,.reasons-grid{grid-template-columns:1fr}
+  h2{font-size:1.6rem}
+  .hero h1{font-size:1.7rem}
+  .cards,.reasons-grid,.cards-lead{grid-template-columns:minmax(0,1fr)}
+  .cards-lead .card.primary{padding:26px 20px}
+  .cards-lead .card.primary h3{font-size:1.2rem}
+  .cards-lead .card.primary .btn{width:100%}
   .btn{width:100%;max-width:340px}
   .nav a.btn{width:auto}
   .logo small{display:none}
@@ -260,27 +301,29 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
   <div class="wrap">
     <h2>【あいまに】の3つのサービス</h2>
     <p class="lead">「何を頼めばいいか分からない」でも大丈夫です。<br>困っていることに合わせて、3つの窓口をご用意しています。</p>
-    <div class="cards">
-      <div class="card">
-        <div class="icon">💻</div>
+    <!-- 本命の「何でも相談」を横長・大きく、残り2つを小さく。3枚等価のテンプレ構成をやめた（2026-07-20） -->
+    <!-- 料金の詳細は「料金の目安」に一本化。ここは入口の目安だけ書く（二重管理で食い違うのを防ぐ） -->
+    <div class="cards-lead">
+      <div class="card primary">
+        <span class="no">SERVICE 01</span>
         <h3>デジタル何でも相談</h3>
         <p>「離れて住む親とビデオ通話したいけど、設定しに行く時間がない」「AIは怖い。でも使ってみたい」——そんな暮らしの困りごとから、パソコンの購入・初期設定、作業の自動化、ホームページづくりまで。「何ができるか、まず相談したい」だけでもOKです。</p>
-        <p class="price"><strong>1時間 4,000円／2時間 7,000円</strong><br>移動費別／無料相談あり</p>
+        <p class="price"><strong>1時間 4,000円〜</strong>／<a href="#prices">料金の目安を見る</a></p>
         <a class="btn btn-primary" href="https://forms.gle/HkjLuLgHaW19BaFg9" target="_blank" rel="noopener">相談フォームへ</a>
       </div>
       <div class="card">
-        <div class="icon">🤖</div>
+        <span class="no">SERVICE 02</span>
         <h3>AI導入支援（医療・介護を中心に）</h3>
         <p>医療・介護の現場の書類仕事や個人情報への配慮を中心に、AIで日々の業務を時短します。見積書・案内文・問い合わせ対応・発信など、中小企業・個人事業主の方ももちろん歓迎です。</p>
-        <p class="price"><strong>AI時短診断 10,000円</strong><br>AI検索露出診断 10,000円<br>AIレクチャー 1時間4,000円〜</p>
+        <p class="price"><strong>各種診断 10,000円〜</strong>／<a href="#prices">料金の目安を見る</a></p>
         <a class="btn btn-primary" href="https://forms.gle/HkjLuLgHaW19BaFg9" target="_blank" rel="noopener">無料相談・AI時短診断を相談する</a>
-        <a class="btn btn-sub" href="https://happyminayan-sys.github.io/aimani-lp/ai/" style="margin-top:10px">医療・介護向けの詳細・料金</a>
+        <a class="btn btn-sub" href="https://happyminayan-sys.github.io/aimani-lp/ai/">医療・介護向けの詳細・料金</a>
       </div>
       <div class="card">
-        <div class="icon">📷</div>
+        <span class="no">SERVICE 03</span>
         <h3>Instagram代行運用</h3>
         <p>投稿の文章づくりから運用まで、お店や仕事のInstagramをまるごとお手伝いします。顔出しの範囲やお問い合わせ窓口も、無理のない形で一緒に決められます。</p>
-        <p class="price"><strong>月15,000円〜</strong><br>まるごと代行は月30,000円〜</p>
+        <p class="price"><strong>月15,000円〜</strong>／<a href="#prices">料金の目安を見る</a></p>
         <a class="btn btn-primary" href="https://forms.gle/HkjLuLgHaW19BaFg9" target="_blank" rel="noopener">相談フォームへ</a>
       </div>
     </div>
@@ -288,33 +331,30 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
 </section>
 
 <!-- 3. 料金の目安 -->
-<section id="prices" style="background:#fff">
+<section id="prices" class="bg-white tight">
   <div class="wrap">
     <h2>料金の目安</h2>
-    <p class="lead">まずは小さく始められる料金をご用意しています。内容が決まっていないご相談・お見積もりは無料です。</p>
+    <p class="lead">まずは小さく始められる料金をご用意しています。内容が決まっていないご相談・お見積もりは無料です。<br>（料金はこのページに一本化しています）</p>
     <div class="cards">
       <div class="card">
-        <div class="icon">💻</div>
         <h3>デジタル何でも相談</h3>
         <p class="price"><strong>1時間 4,000円／2時間 7,000円</strong><br>パソコン・スマホの設定、購入同行、Wi-Fi・プリンターなど。移動費は別途です。</p>
       </div>
       <div class="card">
-        <div class="icon">✨</div>
         <h3>AI導入支援</h3>
-        <p class="price"><strong>AIレクチャー 1時間 4,000円</strong><br>2時間お得パック 7,000円<br><strong>AI時短診断 10,000円</strong><br><strong>AI検索露出診断 10,000円</strong><br>月イチ伴走 月12,000円</p>
+        <p class="price"><strong>AIレクチャー 1時間 4,000円</strong><br>2時間お得パック 7,000円<br><strong>AI時短診断 10,000円</strong>（その場で1つ時短を設定）<br><strong>AI検索露出診断 10,000円</strong>（60回実測のPDFレポート）<br><strong>属人化診断 10,000円</strong>（その場で手順書1本を作成）<br>月イチ伴走 月12,000円</p>
       </div>
       <div class="card">
-        <div class="icon">📷</div>
         <h3>Instagram代行運用</h3>
         <p class="price"><strong>キャプション提供 月15,000円</strong><br>まるごと代行 月30,000円<br>投稿頻度・枚数はご相談のうえ決めます。</p>
       </div>
     </div>
-    <p class="privacy-note" style="max-width:700px;margin:20px auto 0">Webページ作成は 50,000円〜。業務に合わせた設定・制作・継続支援は、内容を伺ってから事前にお見積もりします。</p>
+    <p class="privacy-note note-wide">Webページ作成は 50,000円〜。業務に合わせた設定・制作・継続支援は、内容を伺ってから事前にお見積もりします。</p>
   </div>
 </section>
 
 <!-- 4. 選ばれる理由 -->
-<section style="background:#fff">
+<section class="bg-white">
   <div class="wrap">
     <h2>【あいまに】が選ばれる理由</h2>
     <p class="lead">IT業者さんや広告代理店とは、スタート地点が違います。</p>
@@ -360,7 +400,7 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
 </section>
 
 <!-- 5. サービス詳細② AI導入支援（中小企業・個人事業主向け） -->
-<section id="service-ai" style="background:#fff">
+<section id="service-ai" class="bg-white">
   <div class="wrap">
     <h2>AI導入支援（医療・介護を中心に／中小企業・個人事業主も歓迎）</h2>
     <p class="lead">医療・介護の現場の書類仕事や、個人情報への配慮を中心にしたAI導入支援です。<br>見積書・案内文・問い合わせ対応・発信など、中小企業・個人事業主の業務効率化も、もちろんご相談ください。</p>
@@ -382,13 +422,19 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
         <li>AIの使い方レクチャーは、1時間 4,000円／2時間お得パック 7,000円です</li>
         <li>時間を取られている業務を3つ整理し、時短の方法を一緒に考えます</li>
         <li>AIでこう時短できる、という診断シートをお渡しします</li>
-        <li>月イチ伴走は月12,000円、設定・作成の代行は月30,000円〜です</li>
+        <li>月イチ伴走は月12,000円、設定・作成の代行は月30,000円〜です（代行は現在、伴走のお客さま向けに準備中）</li>
       </ul>
       <div class="price-line">AI検索露出診断 10,000円<small>レポート納品／オンラインで完結します</small></div>
       <ul class="dot">
         <li>ChatGPTなどのAIに「この地域のおすすめのお店は？」と聞いたとき、あなたのお店が出てくるかを計60回実測します</li>
         <li>出てこない原因と、無料でできる改善策3つを優先度順にレポートでお渡しします</li>
         <li>AIでお店を探す人はまだ少数ですが、伸びています。表示を保証するものではなく、早めに現状を知って備えるための診断です</li>
+      </ul>
+      <div class="price-line">属人化診断 10,000円<small>60分で棚卸し＋その場で手順書1本を作成→翌日シート納品</small></div>
+      <ul class="dot">
+        <li>「この仕事は〇〇さんしかやり方を知らない」という業務を、質問に答えるだけで棚卸しし、止まったら困る順に一覧にします</li>
+        <li>一番危ない業務1つを、その場で一緒に手順書にします（次の人が1人で再現できる粒度）</li>
+        <li>Excelマクロなどプログラムの中身の解読・修理は行いません。操作手順の見える化までを担当します</li>
       </ul>
       <div class="ctarow">
         <a class="btn btn-primary" href="https://forms.gle/HkjLuLgHaW19BaFg9" target="_blank" rel="noopener">無料相談・AI時短診断を相談する</a>
@@ -427,12 +473,12 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
 </section>
 
 <!-- 7. ご利用の流れ -->
-<section style="background:#fff" id="flow">
+<section id="flow" class="bg-white tight">
   <div class="wrap flow">
     <h2>ご利用の流れ</h2>
     <p class="lead">どのサービスも、お申し込みから着手まで同じ4ステップです。</p>
     <div class="step"><h3>相談フォームへ入力</h3><p>今、困っていること・やりたいことを教えてください。分からない欄は空欄でも大丈夫です。</p></div>
-    <div class="step"><h3>ヒアリング</h3><p>LINEまたはメッセージで、内容を詳しく伺います。</p></div>
+    <div class="step"><h3>ヒアリング</h3><p>メールで、内容を詳しく伺います。</p></div>
     <div class="step"><h3>ご提案・お見積もり</h3><p>内容に合わせて、できること・料金の目安をご提案します（お見積もりは無料です）。</p></div>
     <div class="step"><h3>着手</h3><p>ご納得いただいたうえで、実際の作業を始めます。</p></div>
   </div>
@@ -443,9 +489,10 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
   <div class="wrap faq">
     <h2>よくあるご質問</h2>
     <details><summary>どのサービスに当てはまるか自分では分かりません。相談だけでもいいですか？</summary><div class="a">大丈夫です。「何ができるか、まず相談したい」だけのご相談も歓迎しています。内容を伺ったうえで、一番合う窓口をこちらでご案内します。</div></details>
-    <details><summary>料金はいくらですか？</summary><div class="a"><b>デジタルよろず相談は1時間4,000円・2時間7,000円（移動費別）、AIの使い方レクチャーは1時間4,000円、Instagram代行は月15,000円〜</b>です。AI時短診断は10,000円（60〜90分）、AI検索露出診断（AIにお店が出るかの実測レポート）も10,000円です。継続支援や代行は内容により料金が変わるため、事前にお見積もりします。医療・介護向けの詳細・料金は<a href="https://happyminayan-sys.github.io/aimani-lp/ai/">専用ページ</a>をご覧ください。</div></details>
+    <details><summary>料金はいくらですか？</summary><div class="a"><b>デジタルよろず相談は1時間4,000円・2時間7,000円（移動費別）、AIの使い方レクチャーは1時間4,000円、Instagram代行は月15,000円〜</b>です。AI時短診断は10,000円（60〜90分）、AI検索露出診断（AIにお店が出るかの実測レポート）と属人化診断（その人しかできない仕事の棚卸しと手順書づくり）も各10,000円です。継続支援や代行は内容により料金が変わるため、事前にお見積もりします。医療・介護向けの詳細・料金は<a href="https://happyminayan-sys.github.io/aimani-lp/ai/">専用ページ</a>をご覧ください。</div></details>
     <details><summary>パソコンやAIが苦手でも大丈夫ですか？</summary><div class="a">大丈夫です。専門用語を使わず、分かる言葉で一つずつ説明します。</div></details>
     <details><summary>「AI検索露出診断」とは何ですか？</summary><div class="a">ChatGPTなどのAIに「この地域のおすすめのお店は？」といった質問を計60回行い、あなたのお店が出てくるか・代わりにどの競合が出ているか・AIが何を引用しているかを実測し、改善策と一緒にレポートでお渡しするサービスです（10,000円）。AIでお店を探す人はまだ少数ですが伸びており、無料でできる備えから優先度順にご提案します。AIへの表示を保証するものではありません。</div></details>
+    <details><summary>「属人化診断」とは何ですか？</summary><div class="a">「この仕事は〇〇さんしかやり方を知らない」という業務を、60分のオンライン相談で棚卸しし、止まったら困る順に一覧にしたうえで、一番危ない業務1つをその場で手順書にするサービスです（10,000円・翌日にまとめシートを納品）。担当の方の退職・異動・急なお休みに備えたい職場や、休みづらい個人事業主の方に向いています。Excelマクロなどプログラムの中身の解読・修理は行わず、操作手順の見える化までを担当します。</div></details>
     <details><summary>医療・介護以外の会社や個人事業でも相談できますか？</summary><div class="a">はい。少人数の会社・お店・個人事業主の書類づくり、問い合わせ対応、発信など、日々の業務をAIで楽にしたいご相談を歓迎しています。</div></details>
     <details><summary>お店や会社ではなく、個人の困りごとでも相談できますか？</summary><div class="a">はい。ご自宅のパソコン・スマホの設定、離れて住むご家族とビデオ通話できるようにする準備、AIを暮らしに使ってみたい、といった個人のご相談も歓迎です。</div></details>
     <details><summary>どんな人が運営しているのですか？</summary><div class="a">現役の看護師が、屋号「あいまに」で運営しています。運営者の氏名は<a href="#about">運営者について</a>と<a href="./tokushoho.html">特定商取引法に基づく表記</a>に記載しています。お申し込みは相談フォームから直接でも、ココナラ（本人確認済みプラットフォーム）経由でも受け付けています。</div></details>
@@ -455,14 +502,14 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
 </section>
 
 <!-- 9. 運営者について -->
-<section style="background:#fff" id="about">
+<section id="about" class="bg-white tight">
   <div class="wrap">
     <h2>運営者について</h2>
     <div class="about-box">
       <!-- 氏名は対面用名刺（Claudeコード\名刺\あいまに名刺.html）と同表記（2026-07-17 実名・顔出しOKに方針転換）。
            顔写真を使う場合は photo.jpg をリポジトリ直下に置き、下のimgコメントを外す -->
       <!-- <img src="./photo.jpg" alt="運営者の顔写真" style="width:110px;height:110px;border-radius:50%;object-fit:cover;float:right;margin:0 0 10px 16px"> -->
-      <h3>【あいまに】<span style="font-size:.8rem;font-weight:normal;color:#777">運営者: 佐藤 三奈子</span></h3>
+      <h3>【あいまに】<span class="owner-name">運営者: 佐藤 三奈子</span></h3>
       <p>現役の看護師です。本業を続けながら、副業として「あいまに」の屋号で活動しています。</p>
       <p>デジタルの困りごと相談、中小企業・個人事業主のAI導入支援、Instagram代行運用の3つを、現場で人手や時間が足りない感覚を知っているからこそのペースで、お手伝いしています。医療・介護のAI活用も専門領域です。</p>
       <p>「あいまに」＝AIが、あなたに“あいま（合間）”をつくる。手のかかる作業をAIに任せて、生まれた時間を本当に大事なことに使ってほしい。そんな思いで名づけました。</p>
@@ -477,20 +524,16 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
     <p>デジタルのこと、AIのこと、Instagramのこと。<br>迷ったら、まずは相談フォームにひとこと書いてみてください。</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="https://forms.gle/HkjLuLgHaW19BaFg9" target="_blank" rel="noopener">相談フォームへ（無料）</a>
-      <a class="btn btn-sub" style="background:transparent;color:#fff;border-color:#fff" href="./ai/">AI導入支援の詳細を見る</a>
+      <a class="btn btn-ghost" href="./ai/">AI導入支援の詳細を見る</a>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
+    <!-- リンクの羅列はやめ、実際に押される4本だけに絞った（2026-07-20） -->
     <div class="links">
-      <a href="#top">先頭へ</a>
-      <a href="#services">サービス一覧</a>
-      <a href="#service-digital">デジタル何でも相談</a>
-      <a href="#service-ai">AI導入支援</a>
-      <a href="#service-instagram">Instagram代行運用</a>
-      <a href="#flow">ご利用の流れ</a>
+      <a href="#services">サービスと料金</a>
       <a href="#faq">よくある質問</a>
       <a href="#about">運営者について</a>
       <!-- noteは未開設のためリンクを削除（2026-07-17）。開設したら <a href="（noteのURL）" target="_blank" rel="noopener">note</a> を戻す -->
