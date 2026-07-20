@@ -201,6 +201,13 @@ header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0
 .detail-box .price-line small{font-weight:normal;color:var(--ink-soft);display:block;margin-top:4px}
 .detail-box .ctarow{text-align:center}
 .privacy-note{font-size:.9rem;color:var(--ink-soft);background:var(--cream);border-radius:10px;padding:14px 18px;margin:18px 0}
+/* 別ページへ送る案内。本文リンクだと押されないので、囲って左に太いラインを入れボタンで出す */
+.next-page{border-left:5px solid var(--warm);background:var(--cream);padding:18px 20px;margin:22px 0 4px}
+.next-page-label{font-weight:bold;color:var(--teal-dark);margin-bottom:4px}
+.next-page-text{font-size:.92rem;color:var(--ink-soft);margin-bottom:14px}
+.next-page .btn{padding:13px 26px;font-size:.98rem}
+/* 本文中のリンクも見て分かる形に（色＋太字＋下線） */
+.detail-box a:not(.btn),.faq .a a,.about-box a,.card .price a{color:var(--teal);font-weight:bold;text-decoration:underline;text-underline-offset:3px}
 
 /* flow */
 .flow{counter-reset:step}
@@ -439,7 +446,12 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
       <div class="ctarow">
         <a class="btn btn-primary" href="https://forms.gle/HkjLuLgHaW19BaFg9" target="_blank" rel="noopener">無料相談・AI時短診断を相談する</a>
       </div>
-      <p class="privacy-note">医療・介護の事業所さまは、料金と内容を公開した<a href="https://happyminayan-sys.github.io/aimani-lp/ai/">AI時短診断の専用ページ</a>もご覧いただけます。</p>
+      <!-- 医療・介護の見込み客をサブページへ送る主要導線。本文中の小さなリンクだと押されないのでボタンにした（2026-07-20 本人指摘） -->
+      <div class="next-page">
+        <p class="next-page-label">医療・介護の事業所さまへ</p>
+        <p class="next-page-text">現場の書類仕事がどう変わるか、料金と内容を公開した専用ページをご用意しています。</p>
+        <a class="btn btn-sub" href="https://happyminayan-sys.github.io/aimani-lp/ai/">AI時短診断の専用ページを見る</a>
+      </div>
     </div>
   </div>
 </section>
