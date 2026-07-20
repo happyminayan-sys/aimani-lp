@@ -96,6 +96,11 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--warm-dark);outline
 .btn-sub:hover{background:var(--soft);color:#fff}
 .badge{display:inline-block;background:var(--soft);color:#fff;font-size:.8rem;padding:2px 12px;border-radius:8px;margin-bottom:12px}
 .card .no{display:inline-block;font-size:.78rem;font-weight:bold;letter-spacing:.14em;color:var(--warm-dark);margin-bottom:8px}
+/* 総合LPへ戻る導線。小さな灰色リンクでは押されないのでボタンにした（2026-07-20 本人指摘の同種修正） */
+.backlink{background:var(--ink);text-align:center;padding:26px 20px}
+.backlink-text{color:#cfd8dc;font-size:.95rem;margin-bottom:12px}
+.backlink-btn{background:transparent;color:#fff;border:2px solid #fff;padding:12px 26px;font-size:.95rem}
+.backlink-btn:hover{background:#fff;color:var(--ink)}
 
 /* header */
 header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
@@ -479,8 +484,9 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
 </section>
 
 <!-- 総合LPへの戻り導線。1リポジトリ合同方式で総合LPがルートにあるので相対パス（../）でよい＝URL差し替え不要 -->
-<div style="background:var(--ink);text-align:center;padding:14px 0;font-size:.8rem">
-  <a href="../" style="color:#cfd8dc">← 【あいまに】の他のサービス一覧（デジタル何でも相談・Instagram代行）はこちら</a>
+<div class="backlink">
+  <p class="backlink-text">パソコン相談・Instagram代行もあります</p>
+  <a class="btn btn-sub backlink-btn" href="../">【あいまに】のサービス一覧を見る</a>
 </div>
 
 <footer>
