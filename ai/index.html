@@ -86,12 +86,15 @@ img,svg{max-width:100%}
 section{padding:64px 0}
 h2{font-size:1.7rem;text-align:center;color:var(--teal-dark);margin-bottom:8px;line-height:1.5}
 .lead{text-align:center;color:var(--ink-soft);margin-bottom:40px}
-.btn{display:inline-block;padding:16px 36px;border-radius:999px;font-weight:bold;text-decoration:none;text-align:center;transition:.2s;font-size:1.05rem}
+.btn{display:inline-block;padding:15px 32px;border-radius:8px;font-weight:bold;text-decoration:none;text-align:center;transition:background .16s cubic-bezier(.22,.61,.36,1),color .16s cubic-bezier(.22,.61,.36,1),border-color .16s cubic-bezier(.22,.61,.36,1);font-size:1.05rem}
+/* キーボード操作の人に選択位置を見せる（2026-07-20 総合LPと同じ対応） */
+a:focus-visible,summary:focus-visible{outline:3px solid var(--warm-dark);outline-offset:3px;border-radius:4px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.01ms !important;animation-duration:.01ms !important}}
 .btn-primary{background:var(--soft);color:#fff;box-shadow:0 4px 14px rgba(74,145,132,.3)}
 .btn-primary:hover{background:var(--soft-dark);transform:translateY(-2px)}
 .btn-sub{background:#fff;color:var(--teal);border:2px solid var(--teal)}
 .btn-sub:hover{background:var(--soft);color:#fff}
-.badge{display:inline-block;background:var(--soft);color:#fff;font-size:.8rem;padding:2px 12px;border-radius:999px;margin-bottom:12px}
+.badge{display:inline-block;background:var(--soft);color:#fff;font-size:.8rem;padding:2px 12px;border-radius:8px;margin-bottom:12px}
 
 /* header */
 header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
@@ -114,7 +117,7 @@ header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0
 .totop:hover{background:var(--teal-dark);transform:translateY(-3px)}
 
 /* hero */
-.hero{background:linear-gradient(160deg,#eef6f4 0%,var(--cream) 70%);padding:72px 0 64px;text-align:center}
+.hero{background:var(--cream);border-bottom:1px solid var(--line);padding:72px 0 64px;text-align:center}
 .hero .target{color:var(--teal);font-weight:bold;letter-spacing:.05em;margin-bottom:16px;font-size:.95rem}
 .hero h1{font-size:2rem;line-height:1.6;color:var(--ink);margin-bottom:20px}
 .hero h1 .em{color:var(--accent);border-bottom:4px solid var(--warm)}
@@ -163,7 +166,7 @@ header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0
 .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
 .plan{background:#fff;border:1px solid var(--line);border-radius:14px;padding:30px 22px;display:flex;flex-direction:column;position:relative}
 .plan.main{border:2px solid var(--warm)}
-.plan .tag{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--warm);color:#fff;font-size:.78rem;padding:3px 16px;border-radius:999px;white-space:nowrap}
+.plan .tag{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--warm);color:#fff;font-size:.78rem;padding:3px 16px;border-radius:8px;white-space:nowrap}
 .plan h3{color:var(--teal-dark);text-align:center;font-size:1.05rem;margin-bottom:6px}
 .plan .price{text-align:center;font-size:1.6rem;font-weight:bold;color:var(--ink);margin:8px 0 2px}
 .plan .price small{font-size:.85rem;font-weight:normal;color:var(--ink-soft)}
@@ -210,7 +213,7 @@ header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0
 .about-box p{font-size:.95rem;color:var(--ink-soft);margin-bottom:10px}
 
 /* bottom cta */
-.bottom-cta{background:linear-gradient(160deg,var(--teal) 0%,var(--teal-dark) 100%);text-align:center;color:#fff}
+.bottom-cta{background:var(--teal-dark);text-align:center;color:#fff}
 .bottom-cta h2{color:#fff}
 .bottom-cta p{color:#d8ebe8;margin-bottom:30px}
 .bottom-cta .cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
@@ -383,7 +386,7 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
         <a class="btn btn-sub" href="#shindan">まず無料診断から</a>
       </div>
       <div class="plan">
-        <h3>③ まるごと代行</h3>
+        <h3>③ AI業務まるごと代行</h3>
         <p class="price">月30,000円〜</p>
         <p class="monitor">&nbsp;</p>
         <ul>
