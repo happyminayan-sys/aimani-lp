@@ -289,6 +289,12 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
   [id]{scroll-margin-top:104px}
   .totop{right:14px;bottom:14px;width:46px;height:46px;font-size:1.2rem}
 }
+
+/* 日本語の改行を整える（2026-07-21 本人指摘「改行ダサい」）
+   balance=行の長さを揃えて最後に1〜2文字だけ残るのを防ぐ／pretty=段落の最終行が短くなりすぎるのを防ぐ
+   auto-phrase=文節（意味のかたまり）で折り返す。対応していないブラウザでは無視されるだけで表示は壊れない */
+h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;line-break:strict}
+.lead,.hero .sub,.bottom-cta p,.next-page-text,.card p,.step p,.about-box p,.detail-box li,.faq .a{text-wrap:pretty;word-break:auto-phrase;line-break:strict}
 </style>
 </head>
 <body>

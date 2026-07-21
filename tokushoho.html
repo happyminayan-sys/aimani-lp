@@ -34,6 +34,10 @@
   a:focus-visible { outline:3px solid #be7b49; outline-offset:3px; }
   .back:hover { background:var(--ink); color:#fff; }
   @media (max-width:600px){ th, td { display:block; width:100%; } th { border-bottom:none; padding-bottom:4px; } td { padding-top:0; } }
+
+/* 日本語の改行を整える（他ページと同じ設定） */
+  h1,th{text-wrap:balance;word-break:auto-phrase;line-break:strict}
+  td,.sub,.note{text-wrap:pretty;word-break:auto-phrase;line-break:strict}
 </style>
 </head>
 <body>
