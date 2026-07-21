@@ -12,6 +12,8 @@
 <!-- 1リポジトリ合同方式: 総合LPがルート、このAI導入版が /ai/ 配下（あいまに総合LP\README.md 参照） -->
 <meta property="og:url" content="https://happyminayan-sys.github.io/aimani-lp/ai/">
 <link rel="canonical" href="https://happyminayan-sys.github.io/aimani-lp/ai/">
+<!-- 名刺と同じ書体（丸ゴシック） -->
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -75,27 +77,31 @@
 </script>
 <style>
 :root{
-  --teal:#20706a; --teal-dark:#164f4b; --accent:#20706a; --accent-dark:#164f4b; --warm:#d08a4e; --warm-dark:#b0662f; --soft:#4a9184; --soft-dark:#3c7c70;
-  --ink:#28333a; --ink-soft:#55636c; --cream:#faf6ef; --white:#fff; --line:#e6ded1;
+  --teal:#4c7a5e; --teal-dark:#2e4a3a; --accent:#4c7a5e; --accent-dark:#2e4a3a; --warm:#e8a16b; --warm-dark:#be7b49; --warm-deep:#9c5f30; --soft:#4c7a5e; --soft-dark:#2e4a3a;
+  --ink:#3a342e; --ink-soft:#6b6259; --cream:#fbfaf5; --white:#fff; --line:#e2e6dc;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;color:var(--ink);background:var(--cream);line-height:1.9;font-size:16px}
+body{font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;color:var(--ink);background:var(--cream);line-height:1.9;font-size:16px}
 img,svg{max-width:100%}
 .wrap{max-width:860px;margin:0 auto;padding:0 20px}
 section{padding:64px 0}
-h2{font-size:1.7rem;text-align:center;color:var(--teal-dark);margin-bottom:8px;line-height:1.5}
+h2{font-family:"Zen Maru Gothic",inherit;font-size:2.1rem;text-align:center;color:var(--teal-dark);margin-bottom:10px;line-height:1.45;letter-spacing:.02em}
+/* 総合LPと同じ、見出し下のオレンジ丸バー（中央寄せ版） */
+h2::after{content:"";display:block;width:44px;height:6px;border-radius:999px;background:var(--warm);opacity:.85;margin:14px auto 0}
 .lead{text-align:center;color:var(--ink-soft);margin-bottom:40px}
 .btn{display:inline-block;padding:15px 32px;border-radius:8px;font-weight:bold;text-decoration:none;text-align:center;transition:background .16s cubic-bezier(.22,.61,.36,1),color .16s cubic-bezier(.22,.61,.36,1),border-color .16s cubic-bezier(.22,.61,.36,1);font-size:1.05rem}
 /* キーボード操作の人に選択位置を見せる（2026-07-20 総合LPと同じ対応） */
-a:focus-visible,summary:focus-visible{outline:3px solid var(--warm-dark);outline-offset:3px;border-radius:4px}
+a:focus-visible,summary:focus-visible{outline:3px solid var(--warm-deep);outline-offset:3px;border-radius:4px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.01ms !important;animation-duration:.01ms !important}}
-.btn-primary{background:var(--soft);color:#fff;box-shadow:0 4px 14px rgba(74,145,132,.3)}
-.btn-primary:hover{background:var(--soft-dark);transform:translateY(-2px)}
+.btn-primary{background:var(--teal);color:#fff}
+.btn-primary:hover{background:var(--teal-dark)}
 .btn-sub{background:#fff;color:var(--teal);border:2px solid var(--teal)}
 .btn-sub:hover{background:var(--soft);color:#fff}
 .badge{display:inline-block;background:var(--soft);color:#fff;font-size:.8rem;padding:2px 12px;border-radius:8px;margin-bottom:12px}
-.card .no{display:inline-block;font-size:.78rem;font-weight:bold;letter-spacing:.14em;color:var(--warm-dark);margin-bottom:8px}
+.numc{display:inline-flex;width:32px;height:32px;border-radius:50%;color:#fff;font-size:.95rem;align-items:center;justify-content:center;margin-right:9px;vertical-align:-5px;flex:0 0 auto}
+.nc-soft{background:var(--soft)} .nc-warm{background:var(--warm-deep)} .nc-teal{background:var(--teal)}
+.card h3{display:flex;align-items:center;justify-content:center;text-align:left;gap:2px}
 /* 総合LPへ戻る導線。小さな灰色リンクでは押されないのでボタンにした（2026-07-20 本人指摘の同種修正） */
 .backlink{background:var(--ink);text-align:center;padding:26px 20px}
 .backlink-text{color:#cfd8dc;font-size:.95rem;margin-bottom:12px}
@@ -103,7 +109,7 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--warm-dark);outline
 .backlink-btn:hover{background:#fff;color:var(--ink)}
 
 /* header */
-header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+header{background:#fff;border-bottom:1px solid var(--line);border-top:7px solid var(--teal);position:sticky;top:0;z-index:50}
 .nav{max-width:860px;margin:0 auto;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px}
 .logo{font-weight:bold;color:var(--teal-dark);font-size:1.1rem;text-decoration:none;white-space:nowrap}
 .logo small{font-weight:normal;color:var(--ink-soft);font-size:.75rem;margin-left:8px}
@@ -123,7 +129,11 @@ header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0
 .totop:hover{background:var(--teal-dark);transform:translateY(-3px)}
 
 /* hero */
-.hero{background:var(--cream);border-bottom:1px solid var(--line);padding:72px 0 64px;text-align:center}
+.hero{background:var(--cream);border-bottom:1px solid var(--line);padding:72px 0 64px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;width:320px;height:320px;border-radius:50%;background:#e7efe4;right:-100px;top:-110px}
+.hero::after{content:"";position:absolute;width:140px;height:140px;border-radius:50%;background:var(--warm);opacity:.16;left:-45px;bottom:-55px}
+.hero>.wrap{position:relative;z-index:2}
+h1,h2,h3,.logo,.btn{font-family:"Zen Maru Gothic",inherit}
 .hero .target{color:var(--teal);font-weight:bold;letter-spacing:.05em;margin-bottom:16px;font-size:.95rem}
 .hero h1{font-size:2rem;line-height:1.6;color:var(--ink);margin-bottom:20px}
 .hero h1 .em{color:var(--accent);border-bottom:4px solid var(--warm)}
@@ -158,7 +168,7 @@ header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0
 .privacy-box p{font-size:.95rem}
 
 /* shindan */
-.shindan{background:var(--soft);color:#fff;text-align:center}
+.shindan{background:var(--teal);color:#fff;text-align:center}
 .shindan h2{color:#fff}
 .shindan .lead{color:#d8ebe8}
 .shindan .box{background:#fff;color:var(--ink);border-radius:16px;padding:36px 28px;max-width:640px;margin:0 auto}
@@ -201,7 +211,7 @@ header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0
 /* faq */
 .faq details{background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:12px;overflow:hidden}
 .faq summary{padding:18px 22px;font-weight:bold;cursor:pointer;color:var(--ink);list-style:none;position:relative;padding-right:44px}
-.faq summary::before{content:"Q";color:var(--warm-dark);font-weight:bold;margin-right:10px}
+.faq summary::before{content:"Q";color:var(--warm-deep);font-weight:bold;margin-right:10px}
 .faq summary::after{content:"＋";position:absolute;right:20px;color:var(--teal);font-weight:bold}
 .faq details[open] summary::after{content:"－"}
 .faq .a{padding:0 22px 18px 46px;font-size:.94rem;color:var(--ink-soft)}
@@ -219,8 +229,12 @@ header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0
 .about-box p{font-size:.95rem;color:var(--ink-soft);margin-bottom:10px}
 
 /* bottom cta */
-.bottom-cta{background:var(--teal-dark);text-align:center;color:#fff}
+.bottom-cta{background:var(--cream);text-align:center;color:#fff;padding:56px 0 72px}
+.bottom-cta .wrap{background:var(--teal-dark);border-radius:22px;padding:56px 32px;position:relative;overflow:hidden;z-index:1}
+.bottom-cta .wrap::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:#fff;opacity:.06;right:-80px;top:-100px;z-index:-1}
+.bottom-cta .wrap::after{content:"";position:absolute;width:120px;height:120px;border-radius:50%;background:var(--warm);opacity:.28;left:-35px;bottom:-45px;z-index:-1}
 .bottom-cta h2{color:#fff}
+.bottom-cta h2::after{background:var(--warm)}
 .bottom-cta p{color:#d8ebe8;margin-bottom:30px}
 .bottom-cta .cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 
@@ -267,6 +281,7 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
 <!-- 1. ファーストビュー -->
 <div class="hero" id="top">
   <div class="wrap">
+    <img src="../logo.png" alt="あいまに ロゴ" style="width:110px;margin:0 auto 18px;display:block;background:#fff;border-radius:16px;padding:6px;border:1px solid #efeae0" onerror="this.style.display='none'">
     <p class="target">訪問看護・デイサービス・クリニック・整体院の方へ</p>
     <span class="badge">あなたの事業所に “AI社員” をひとり</span>
     <h1>申し送り・記録・お知らせ文。<br>その残業を、AIが<span class="em">“あいま（合間）”に変えます</span></h1>
@@ -285,15 +300,15 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
     <h2>こんな時間、毎週ありませんか？</h2>
     <p class="lead">現場が終わってから始まる「書きもの」の時間です</p>
     <div class="cards">
-      <div class="card"><span class="no">CASE 01</span><h3>記録・申し送りの下書き</h3><p>1日の終わりにまとめて書く記録。思い出しながら書くので、気づけば30分、1時間。</p></div>
-      <div class="card"><span class="no">CASE 02</span><h3>お知らせ文・案内文</h3><p>ご家族向けのお知らせ、行事の案内、料金改定の説明文。毎回ゼロから文章を考えている。</p></div>
-      <div class="card"><span class="no">CASE 03</span><h3>研修資料・マニュアル</h3><p>委員会の資料、新人さん向けの手順書。作らなきゃと思いながら後回しになっている。</p></div>
+      <div class="card"><h3><span class="numc nc-soft">1</span>記録・申し送りの下書き</h3><p>1日の終わりにまとめて書く記録。思い出しながら書くので、気づけば30分、1時間。</p></div>
+      <div class="card"><h3><span class="numc nc-warm">2</span>お知らせ文・案内文</h3><p>ご家族向けのお知らせ、行事の案内、料金改定の説明文。毎回ゼロから文章を考えている。</p></div>
+      <div class="card"><h3><span class="numc nc-teal">3</span>研修資料・マニュアル</h3><p>委員会の資料、新人さん向けの手順書。作らなきゃと思いながら後回しになっている。</p></div>
     </div>
   </div>
 </section>
 
 <!-- 2.5 Before / After（AI社員が入るとどう変わるか） -->
-<section id="henka" style="background:#eef6f4">
+<section id="henka" style="background:#e7efe4">
   <div class="wrap">
     <h2>“AI社員”が入ると、1日がこう変わる</h2>
     <p class="lead">むずかしい設定はいりません。看護師が隣で一緒に入れます</p>
