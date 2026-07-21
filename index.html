@@ -11,6 +11,8 @@
 <meta property="og:locale" content="ja_JP">
 <meta property="og:url" content="https://happyminayan-sys.github.io/aimani-lp/">
 <link rel="canonical" href="https://happyminayan-sys.github.io/aimani-lp/">
+<!-- 名刺と同じ書体（丸ゴシック）。オフラインでも本文は既存フォントで表示される -->
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -97,37 +99,39 @@
 <style>
 /* Hallmark · macrostructure: Feature Stack · genre: editorial · tone: 実直・生活者向け
  * theme: custom（クリーム紙 · ティール accent · 和文ゴシック）· 2026-07-20 audit の指摘を反映
+ * 2026-07-21: 名刺・チラシのモチーフに統一（丸ゴシック・ロゴ・丸数字・角丸CTAパネル）＋コントラストAA対応
  */
 :root{
-  --teal:#20706a; --teal-dark:#164f4b; --accent:#20706a; --accent-dark:#164f4b; --warm:#d08a4e; --warm-dark:#b0662f; --soft:#4a9184; --soft-dark:#3c7c70;
-  --ink:#28333a; --ink-soft:#55636c; --cream:#faf6ef; --white:#fff; --line:#e6ded1; --mint:#eef6f4;
+  --teal:#4c7a5e; --teal-dark:#2e4a3a; --accent:#4c7a5e; --accent-dark:#2e4a3a; --warm:#e8a16b; --warm-dark:#be7b49; --warm-deep:#9c5f30; --soft:#4c7a5e; --soft-dark:#2e4a3a;
+  --ink:#3a342e; --ink-soft:#6b6259; --cream:#fbfaf5; --white:#fff; --line:#e2e6dc; --mint:#e7efe4;
   --ease-out:cubic-bezier(.22,.61,.36,1);
   --dur:160ms;
-  --radius:8px;
+  --radius:14px;
   --space-section:72px; --space-section-tight:48px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 html,body{overflow-x:clip}
-body{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;color:var(--ink);background:var(--cream);line-height:1.9;font-size:16px}
+body{font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;color:var(--ink);background:var(--cream);line-height:1.9;font-size:16px}
 img,svg{max-width:100%}
 .wrap{max-width:860px;margin:0 auto;padding:0 20px}
 section{padding:var(--space-section) 0}
 /* 区切りの強弱をつける（白地セクションは詰める） */
 section.tight{padding:var(--space-section-tight) 0}
 /* 見出しは左寄せが基本。中央寄せは締めのCTAだけに絞る */
-h2{font-size:2.1rem;color:var(--teal-dark);margin-bottom:10px;line-height:1.45;letter-spacing:.01em}
-h2::after{content:"";display:block;width:52px;height:3px;background:var(--warm);margin-top:14px}
+h2{font-family:"Zen Maru Gothic",inherit;font-size:2.1rem;color:var(--teal-dark);margin-bottom:10px;line-height:1.45;letter-spacing:.02em}
+h2::after{content:"";display:block;width:44px;height:6px;border-radius:999px;background:var(--warm);opacity:.85;margin-top:14px}
+h1,h3,.logo{font-family:"Zen Maru Gothic",inherit}
 .lead{color:var(--ink-soft);margin-bottom:40px;max-width:44em}
 .bg-white{background:var(--white)}
-.btn{display:inline-block;padding:15px 32px;border-radius:var(--radius);font-weight:bold;text-decoration:none;text-align:center;font-size:1.05rem;transition:background var(--dur) var(--ease-out),color var(--dur) var(--ease-out),border-color var(--dur) var(--ease-out)}
-.btn-primary{background:var(--soft);color:#fff;border:2px solid var(--soft)}
+.btn{display:inline-block;padding:15px 32px;border-radius:12px;font-family:"Zen Maru Gothic",inherit;font-weight:bold;text-decoration:none;text-align:center;font-size:1.05rem;transition:background var(--dur) var(--ease-out),color var(--dur) var(--ease-out),border-color var(--dur) var(--ease-out)}
+/* 背景は濃い緑（白文字とのコントラスト約5.5:1・WCAG AA合格）。薄い緑#4c7a5eは3.9:1で不足 */
+.btn-primary{background:var(--teal);color:#fff;border:2px solid var(--teal)}
 .btn-primary:hover{background:var(--teal-dark);border-color:var(--teal-dark)}
 .btn-sub{background:#fff;color:var(--teal);border:2px solid var(--teal)}
 .btn-sub:hover{background:var(--teal);color:#fff}
 /* キーボードで操作する人に、どこを選んでいるかを必ず見せる */
-a:focus-visible,summary:focus-visible,details:focus-visible{outline:3px solid var(--warm-dark);outline-offset:3px;border-radius:4px}
-.badge{display:inline-block;background:var(--soft);color:#fff;font-size:.8rem;padding:2px 12px;border-radius:var(--radius);margin-bottom:12px}
+a:focus-visible,summary:focus-visible,details:focus-visible{outline:3px solid var(--warm-deep);outline-offset:3px;border-radius:4px}
 /* 以前はHTMLに直書きしていた色・幅をクラス化（配色変更のとき取り残されないように） */
 .btn-ghost{background:transparent;color:#fff;border:2px solid #fff}
 .btn-ghost:hover{background:#fff;color:var(--teal-dark)}
@@ -135,7 +139,7 @@ a:focus-visible,summary:focus-visible,details:focus-visible{outline:3px solid va
 .owner-name{font-size:.8rem;font-weight:normal;color:var(--ink-soft)}
 
 /* header */
-header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+header{background:#fff;border-bottom:1px solid var(--line);border-top:7px solid var(--teal);position:sticky;top:0;z-index:50}
 .nav{max-width:860px;margin:0 auto;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px}
 .logo{font-weight:bold;color:var(--teal-dark);font-size:1.1rem;text-decoration:none;white-space:nowrap}
 .logo small{font-weight:normal;color:var(--ink-soft);font-size:.75rem;margin-left:8px}
@@ -143,7 +147,7 @@ header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0
 
 /* セクションへ飛ぶリンク（長いページなので必須）。スマホ(375px)で収まるよう4つまで */
 .nav-links{display:flex;gap:20px;align-items:center;margin-left:auto;margin-right:4px}
-.nav-links a{color:var(--ink-soft);text-decoration:none;font-size:.88rem;font-weight:bold;white-space:nowrap;padding:3px 0;border-bottom:2px solid transparent;transition:.15s}
+.nav-links a{color:var(--ink-soft);text-decoration:none;font-size:.88rem;font-weight:bold;white-space:nowrap;padding:3px 0;border-bottom:2px solid transparent;transition:color var(--dur) var(--ease-out),border-color var(--dur) var(--ease-out)}
 .nav-links a:hover{color:var(--teal);border-bottom-color:var(--warm)}
 
 /* 固定ヘッダーに見出しが隠れないようにする（これが無いとジャンプ先が頭切れになる） */
@@ -155,8 +159,18 @@ header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0
 .totop:hover{background:var(--teal-dark);transform:translateY(-3px)}
 
 /* hero — グラデーションをやめ、クリーム単色＋下の罫線で区切る */
-.hero{background:var(--cream);border-bottom:1px solid var(--line);padding:76px 0 60px}
-.hero h1{font-size:2.5rem;line-height:1.45;color:var(--ink);margin-bottom:20px;overflow-wrap:anywhere}
+/* チラシのヘッダーと同じ、白い帯＋ロゴ＋やわらかい丸 */
+.hero{background:#fff;border-bottom:1px solid var(--line);padding:64px 0 56px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;width:300px;height:300px;border-radius:50%;background:var(--mint);right:-100px;top:-110px}
+.hero::after{content:"";position:absolute;width:140px;height:140px;border-radius:50%;background:var(--warm);opacity:.14;left:-45px;bottom:-55px}
+.hero .wrap{position:relative;z-index:2}
+/* ロゴは見出しの高さに揃える（縦中央に置くと浮いて見える） */
+.hero-flex{display:flex;gap:44px;align-items:flex-start}
+.hero-flex>div{min-width:0}
+.hero-logo{width:132px;flex:0 0 auto;margin-top:10px}
+/* ボタンと誤解されない「情報バッジ」。塗りつぶしオレンジ×白はボタンに見える＋コントラスト2.6:1で不足だった */
+.free-pill{display:inline-block;background:var(--cream);color:var(--warm-deep);border:1.5px solid var(--warm);font-family:"Zen Maru Gothic",inherit;font-weight:bold;font-size:.95rem;padding:8px 24px;border-radius:999px;margin-bottom:22px}
+.hero h1{font-size:clamp(1.65rem,2.9vw,2.35rem);line-height:1.5;color:var(--ink);margin-bottom:20px}
 .hero h1 .em{color:var(--accent);border-bottom:4px solid var(--warm)}
 .hero p.sub{color:var(--ink-soft);margin-bottom:28px;max-width:40em}
 .tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px}
@@ -166,9 +180,11 @@ header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0
 
 /* cards */
 .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px;text-align:left}
-.card .no{display:inline-block;font-size:.78rem;font-weight:bold;letter-spacing:.14em;color:var(--warm-dark);margin-bottom:8px}
-.card h3{color:var(--teal-dark);font-size:1.05rem;margin-bottom:10px}
+.card{background:#fff;border:1px solid #efeae0;border-radius:var(--radius);padding:26px 22px;text-align:left;box-shadow:0 3px 14px rgba(40,51,58,.06)}
+/* チラシと同じ色つき丸数字 */
+.numc{display:inline-flex;width:34px;height:34px;border-radius:50%;color:#fff;font-size:1rem;align-items:center;justify-content:center;margin-right:10px;vertical-align:-6px;flex:0 0 auto}
+.nc-soft{background:var(--soft)} .nc-warm{background:var(--warm-deep)} .nc-teal{background:var(--teal)}
+.card h3{display:flex;align-items:center;color:var(--teal-dark);font-size:1.05rem;margin-bottom:10px}
 .card p{font-size:.92rem;color:var(--ink-soft);margin-bottom:12px}
 .card .price{font-size:.85rem;color:var(--ink-soft);margin-bottom:14px}
 .card .price strong{color:var(--ink)}
@@ -194,7 +210,7 @@ header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0
 .detail-box h3:first-child{margin-top:0}
 .detail-box ul{list-style:none;margin-bottom:8px}
 .detail-box ul.check li{padding:6px 0 6px 30px;position:relative;font-size:.95rem;color:var(--ink-soft)}
-.detail-box ul.check li::before{content:"✓";position:absolute;left:4px;color:var(--warm-dark);font-weight:bold}
+.detail-box ul.check li::before{content:"✓";position:absolute;left:4px;color:var(--warm-deep);font-weight:bold}
 .detail-box ul.dot li{padding:5px 0 5px 24px;position:relative;font-size:.92rem;color:var(--ink-soft)}
 .detail-box ul.dot li::before{content:"・";position:absolute;left:6px;color:var(--teal)}
 .detail-box .price-line{background:var(--cream);border-radius:10px;padding:14px 18px;font-size:.95rem;font-weight:bold;color:var(--ink);margin:18px 0 22px}
@@ -219,7 +235,7 @@ header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0
 /* faq */
 .faq details{background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:12px;overflow:hidden}
 .faq summary{padding:18px 22px;font-weight:bold;cursor:pointer;color:var(--ink);list-style:none;position:relative;padding-right:44px}
-.faq summary::before{content:"Q";color:var(--warm-dark);font-weight:bold;margin-right:10px}
+.faq summary::before{content:"Q";color:var(--warm-deep);font-weight:bold;margin-right:10px}
 .faq summary::after{content:"＋";position:absolute;right:20px;color:var(--teal);font-weight:bold}
 .faq details[open] summary::after{content:"－"}
 .faq .a{padding:0 22px 18px 46px;font-size:.94rem;color:var(--ink-soft)}
@@ -230,7 +246,11 @@ header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0
 .about-box p{font-size:.95rem;color:var(--ink-soft);margin-bottom:10px}
 
 /* bottom cta — ここだけ中央寄せにして「締め」だと分かるようにする */
-.bottom-cta{background:var(--teal-dark);text-align:center;color:#fff}
+/* チラシのCTAと同じ、クリーム地に浮かぶ角丸の濃緑パネル */
+.bottom-cta{background:var(--cream);text-align:center;color:#fff;padding:56px 0 72px}
+.bottom-cta .wrap{background:var(--teal-dark);border-radius:22px;padding:56px 32px;position:relative;overflow:hidden;z-index:1}
+.bottom-cta .wrap::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:#fff;opacity:.06;right:-80px;top:-100px;z-index:-1}
+.bottom-cta .wrap::after{content:"";position:absolute;width:120px;height:120px;border-radius:50%;background:var(--warm);opacity:.28;left:-35px;bottom:-45px;z-index:-1}
 .bottom-cta h2::after{margin-left:auto;margin-right:auto}
 .bottom-cta h2{color:#fff}
 .bottom-cta p{color:#d8ebe8;margin-bottom:30px}
@@ -249,6 +269,8 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
 
 @media (max-width:720px){
   section{padding:48px 0}
+  .hero-flex{flex-direction:column;align-items:flex-start;gap:18px}
+  .hero-logo{width:110px}
   h2{font-size:1.6rem}
   .hero h1{font-size:1.7rem}
   .cards,.reasons-grid,.cards-lead{grid-template-columns:minmax(0,1fr)}
@@ -287,9 +309,13 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
 
 <!-- 1. ファーストビュー -->
 <div class="hero" id="top">
-  <div class="wrap">
+  <div class="wrap hero-flex">
+    <!-- 名刺・チラシと同じロゴ。GitHubへは logo.png も一緒にアップすること -->
+    <img class="hero-logo" src="./logo.png" alt="あいまに ロゴ" onerror="this.style.display='none'">
+    <div>
     <h1>パソコン・AI・SNS、<br>「困った」を<span class="em">まとめて相談</span>できる場所</h1>
     <p class="sub">現役看護師が、屋号「あいまに」で活動しています。<br>デジタルの困りごと、AIの導入、Instagramの運用まで。<br>専門用語を使わず、あなたのペースに合わせて伴走します。</p>
+    <span class="free-pill">ご相談・お見積もりは無料です</span>
     <div class="tags">
       <span>パソコン/スマホ/AIを「誰かに頼みたい」「教えてほしい」方</span>
       <span>医療・介護の事業所、中小企業・個人事業主でAIを仕事に使いたい方</span>
@@ -299,7 +325,8 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
       <a class="btn btn-primary" href="https://forms.gle/HkjLuLgHaW19BaFg9" target="_blank" rel="noopener">相談フォームへ（無料）</a>
       <a class="btn btn-sub" href="#services">3つのサービスを見る</a>
     </div>
-    <p class="note">ご相談は無料です。まずは今困っていることを聞かせてください。</p>
+    <p class="note">まずは今困っていることを聞かせてください。</p>
+    </div>
   </div>
 </div>
 
@@ -312,23 +339,20 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
     <!-- 料金の詳細は「料金の目安」に一本化。ここは入口の目安だけ書く（二重管理で食い違うのを防ぐ） -->
     <div class="cards-lead">
       <div class="card primary">
-        <span class="no">SERVICE 01</span>
-        <h3>デジタル何でも相談</h3>
+        <h3><span class="numc nc-soft">1</span>デジタル何でも相談</h3>
         <p>「離れて住む親とビデオ通話したいけど、設定しに行く時間がない」「AIは怖い。でも使ってみたい」——そんな暮らしの困りごとから、パソコンの購入・初期設定、作業の自動化、ホームページづくりまで。「何ができるか、まず相談したい」だけでもOKです。</p>
         <p class="price"><strong>1時間 4,000円〜</strong>／<a href="#prices">料金の目安を見る</a></p>
         <a class="btn btn-primary" href="https://forms.gle/HkjLuLgHaW19BaFg9" target="_blank" rel="noopener">相談フォームへ</a>
       </div>
       <div class="card">
-        <span class="no">SERVICE 02</span>
-        <h3>AI導入支援（医療・介護を中心に）</h3>
+        <h3><span class="numc nc-warm">2</span>AI導入支援（医療・介護を中心に）</h3>
         <p>医療・介護の現場の書類仕事や個人情報への配慮を中心に、AIで日々の業務を時短します。見積書・案内文・問い合わせ対応・発信など、中小企業・個人事業主の方ももちろん歓迎です。</p>
         <p class="price"><strong>各種診断 10,000円〜</strong>／<a href="#prices">料金の目安を見る</a></p>
         <a class="btn btn-primary" href="https://forms.gle/HkjLuLgHaW19BaFg9" target="_blank" rel="noopener">無料相談・AI時短診断を相談する</a>
         <a class="btn btn-sub" href="https://happyminayan-sys.github.io/aimani-lp/ai/">医療・介護向けの詳細・料金</a>
       </div>
       <div class="card">
-        <span class="no">SERVICE 03</span>
-        <h3>Instagram代行運用</h3>
+        <h3><span class="numc nc-teal">3</span>Instagram代行運用</h3>
         <p>投稿の文章づくりから運用まで、お店や仕事のInstagramをまるごとお手伝いします。顔出しの範囲やお問い合わせ窓口も、無理のない形で一緒に決められます。</p>
         <p class="price"><strong>月15,000円〜</strong>／<a href="#prices">料金の目安を見る</a></p>
         <a class="btn btn-primary" href="https://forms.gle/HkjLuLgHaW19BaFg9" target="_blank" rel="noopener">相談フォームへ</a>
