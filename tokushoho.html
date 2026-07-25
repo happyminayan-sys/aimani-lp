@@ -16,23 +16,41 @@
 <!-- 名刺・LPと同じ書体（丸ゴシック）。読めない環境では既存のゴシックに自動フォールバック -->
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  :root { --ink:#4c7a5e; --green:#4c7a5e; --cream:#fbfaf5; --orange:#be7b49; }
+  /* LP2枚と同じ統一デザイン（2026-07-25更新: 上罫線→緑帯マストヘッド・表の地色を--paperトークンに・色直書きをトークン化）。
+     変数名も総合LPと同じ体系（--teal=緑、--ink=文字色）に統一。旧版は--inkに緑が入っていて紛らわしかった */
+  :root {
+    --teal:#4c7a5e; --teal-dark:#2e4a3a; --warm:#e8a16b; --warm-deep:#9c5f30;
+    --ink:#3a342e; --ink-soft:#6b6259; --cream:#fbfaf5; --white:#fff;
+    --paper:#fffdf8; --line-card:#efeae0; --line:#e2e6dc; --mint:#f2f7f5;
+    --on-band:#ffffff; --on-band-soft:#d9e6de;
+    --radius:14px;
+    --shadow-card:0 3px 14px rgba(40,51,58,.06);
+    --shadow-band-glow:rgba(0,0,0,.08);
+  }
   * { margin:0; padding:0; box-sizing:border-box; }
-  /* LP2枚と同じ統一デザイン: 上端の濃緑帯・丸ゴシック見出し・オレンジ丸バー（2026-07-21） */
-  body { font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif; background:var(--cream); color:#333; line-height:1.9; border-top:7px solid var(--ink); }
+  body { font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif; background:var(--cream); color:var(--ink); line-height:1.9; }
+  /* 緑帯マストヘッド（総合LP・AI導入版と同じ） */
+  header { background:var(--teal-dark); box-shadow:0 2px 10px var(--shadow-band-glow); }
+  .nav { max-width:760px; margin:0 auto; padding:12px 20px; display:flex; justify-content:space-between; align-items:center; gap:16px; }
+  .logo { font-family:"Zen Maru Gothic",sans-serif; font-weight:bold; color:var(--on-band); font-size:1.1rem; text-decoration:none; white-space:nowrap; }
+  .logo small { font-weight:normal; color:var(--on-band-soft); font-size:.75rem; margin-left:8px; }
+  .nav a.back-top { color:var(--on-band-soft); text-decoration:none; font-size:.88rem; font-weight:bold; white-space:nowrap; }
+  .nav a.back-top:hover { color:var(--on-band); }
+  @media (max-width:600px){ .logo small { display:none; } }
   .wrap { max-width:760px; margin:0 auto; padding:40px 20px 60px; }
-  h1 { font-family:"Zen Maru Gothic",sans-serif; color:var(--ink); font-size:1.6rem; margin-bottom:8px; }
-  h1::after { content:""; display:block; width:44px; height:6px; border-radius:999px; background:#e8a16b; opacity:.85; margin-top:12px; }
-  .sub { color:#777; font-size:.9rem; margin-bottom:28px; }
-  table { width:100%; border-collapse:collapse; background:#fff; border-radius:14px; overflow:hidden; border:1px solid #efeae0; box-shadow:0 3px 14px rgba(40,51,58,.06); }
-  th, td { padding:14px 16px; text-align:left; vertical-align:top; border-bottom:1px solid #eee; font-size:.95rem; }
-  th { width:32%; background:#f2f7f5; color:var(--ink); font-weight:600; }
+  h1 { font-family:"Zen Maru Gothic",sans-serif; color:var(--teal); font-size:1.6rem; margin-bottom:8px; }
+  h1::after { content:""; display:block; width:44px; height:6px; border-radius:999px; background:var(--warm); opacity:.85; margin-top:12px; }
+  .sub { color:var(--ink-soft); font-size:.9rem; margin-bottom:28px; }
+  table { width:100%; border-collapse:collapse; background:var(--paper); border-radius:var(--radius); overflow:hidden; border:1px solid var(--line-card); box-shadow:var(--shadow-card); }
+  th, td { padding:14px 16px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line); font-size:.95rem; }
+  th { width:32%; background:var(--mint); color:var(--teal); font-weight:600; }
   tr:last-child th, tr:last-child td { border-bottom:none; }
-  .note { font-size:.85rem; color:#666; margin-top:20px; }
-  a { color:var(--green); }
-  .back { display:inline-block; margin-top:28px; font-family:"Zen Maru Gothic",sans-serif; font-weight:bold; color:var(--ink); text-decoration:none; border:2px solid var(--ink); border-radius:12px; padding:12px 26px; font-size:.95rem; }
-  a:focus-visible { outline:3px solid #be7b49; outline-offset:3px; }
-  .back:hover { background:var(--ink); color:#fff; }
+  .note { font-size:.85rem; color:var(--ink-soft); margin-top:20px; }
+  .td-note { font-size:.85rem; color:var(--ink-soft); }
+  a { color:var(--teal); }
+  .back { display:inline-block; margin-top:28px; font-family:"Zen Maru Gothic",sans-serif; font-weight:bold; color:var(--teal); text-decoration:none; border:2px solid var(--teal); border-radius:12px; padding:12px 26px; font-size:.95rem; }
+  a:focus-visible { outline:3px solid var(--warm-deep); outline-offset:3px; }
+  .back:hover { background:var(--teal); color:var(--white); }
   @media (max-width:600px){ th, td { display:block; width:100%; } th { border-bottom:none; padding-bottom:4px; } td { padding-top:0; } }
 
 /* 日本語の改行を整える（他ページと同じ設定） */
@@ -41,6 +59,12 @@
 </style>
 </head>
 <body>
+<header>
+  <div class="nav">
+    <a class="logo" href="./">【あいまに】<small>デジタル・AI・SNSの何でも窓口</small></a>
+    <a class="back-top" href="./">← トップへ戻る</a>
+  </div>
+</header>
 <div class="wrap">
   <h1>特定商取引法に基づく表記</h1>
   <p class="sub">屋号「あいまに」が提供するサービス（デジタル何でも相談・AI導入支援・Instagram代行運用）に適用されます。</p>
@@ -48,7 +72,7 @@
     <tr><th>販売事業者</th><td>佐藤 三奈子（屋号: あいまに）</td></tr>
     <tr><th>運営責任者</th><td>佐藤 三奈子</td></tr>
     <tr><th>所在地</th><td>ご請求があれば遅滞なく開示いたします。下記メールアドレスまでご請求ください。</td></tr>
-    <tr><th>電話番号</th><td>080-9329-0651<br><span style="font-size:.85rem;color:#666">看護師の勤務中は出られないことがあります。行き違いを防ぐため、お問い合わせは<b>メールがおすすめ</b>です（こちらから営業のお電話をすることは一切ありません）。</span></td></tr>
+    <tr><th>電話番号</th><td>080-9329-0651<br><span class="td-note">看護師の勤務中は出られないことがあります。行き違いを防ぐため、お問い合わせは<b>メールがおすすめ</b>です（こちらから営業のお電話をすることは一切ありません）。</span></td></tr>
     <tr><th>メールアドレス</th><td>aimani.support@gmail.com</td></tr>
     <tr><th>販売価格</th><td>各サービスの紹介ページに表示する価格（税込）によります。<br>例: デジタルよろず相談〔店舗購入同行（一緒に選んで購入まで・延長料金なし）10,000円・パソコン初期設定サポート 10,000円・オンライン購入サポート 5,000円の定額パック／何でも相談・トラブル対応 1時間4,000円・2時間7,000円（移動費別）〕／AIの使い方レクチャー 1時間4,000円・2時間7,000円／AI時短診断 10,000円／AI検索露出診断 10,000円／属人化診断 10,000円／月イチ伴走 月12,000円／Instagramキャプション提供 月15,000円／Instagramまるごと代行 月30,000円。Webページ作成・設定や作成の代行は、内容に合わせて事前にお見積もりします。</td></tr>
     <tr><th>商品代金以外の必要料金</th><td>銀行振込の場合の振込手数料。訪問サービスの場合の交通費（事前にお見積りし、ご了承をいただいてから確定します）。</td></tr>

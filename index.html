@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>パソコン・AI・Instagram、まとめて相談できる場所｜【あいまに】</title>
-<meta name="description" content="医療・介護を中心にしたAI導入支援、デジタルの困りごと相談、Instagram代行運用まで。中小企業・個人事業主のAI活用も歓迎。現役看護師が専門用語を使わずに伴走します。">
-<meta property="og:title" content="パソコン・AI・Instagram、まとめて相談できる場所【あいまに】">
-<meta property="og:description" content="医療・介護を中心にしたAI導入支援、デジタルの困りごと相談、Instagram代行運用まで。中小企業・個人事業主のAI活用も歓迎します。">
+<title>あいまに｜デジタルの「困った」も仕事のAI活用も、隣で伴走する相談窓口</title>
+<meta name="description" content="パソコン・スマホ・AIの個人の困りごとから、医療・介護を中心にしたAI導入支援、Instagram代行運用まで。専門用語は使わず、現役看護師が隣で伴走します。同じ質問を何度でも聞いていただけます。">
+<meta property="og:title" content="あいまに｜デジタルの「困った」も仕事のAI活用も、隣で伴走する相談窓口">
+<meta property="og:description" content="パソコン・スマホ・AIの個人の困りごとから、医療・介護を中心にしたAI導入支援、Instagram代行運用まで。専門用語は使わず、現役看護師が隣で伴走します。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:url" content="https://happyminayan-sys.github.io/aimani-lp/">
@@ -97,17 +97,34 @@
 }
 </script>
 <style>
-/* Hallmark · macrostructure: Feature Stack · genre: editorial · tone: 実直・生活者向け
+/* Hallmark · macrostructure: Service Directory（独自構成・カタログ21種の外／実態: ヒーロー→サービス一覧→料金表→選ばれる理由→サービス詳細×3→ご利用の流れ→FAQ→運営者→締めCTA）
+ * genre: editorial · tone: 実直・生活者向け
  * theme: custom（クリーム紙 · ティール accent · 和文ゴシック）· 2026-07-20 audit の指摘を反映
  * 2026-07-21: 名刺・チラシのモチーフに統一（丸ゴシック・ロゴ・丸数字・角丸CTAパネル）＋コントラストAA対応
+ * 2026-07-25: 旧スタンプ名「Feature Stack」(実装と不一致だった)を実態に合わせて更新。監査8件反映
+ *   (次ページ帯の左太帯オレンジ廃止/ナビを緑帯マストヘッド型に/料金3枚等価カードを表組みに/
+ *    選ばれる理由の丸数字1-4廃止し非対称タイルに/カード地色を#fffdf8トークンに/#fff・rgba直書き全廃/
+ *    スマホのナビ横スクロールに端フェード追加) + ヒーローを【案A改】二枚看板型へ差し替え
  */
 :root{
   --teal:#4c7a5e; --teal-dark:#2e4a3a; --accent:#4c7a5e; --accent-dark:#2e4a3a; --warm:#e8a16b; --warm-dark:#be7b49; --warm-deep:#9c5f30; --soft:#4c7a5e; --soft-dark:#2e4a3a;
   --ink:#3a342e; --ink-soft:#6b6259; --cream:#fbfaf5; --white:#fff; --line:#e2e6dc; --mint:#e7efe4;
+  /* カード等の「地の色」。純白#fffだとクリームの紙面から浮くため、わずかに温かいクリーム寄りの白に統一(2026-07-25監査) */
+  --paper:#fffdf8;
+  --line-card:#efeae0;
+  /* 濃緑の帯(マストヘッド・締めCTA)の上に置く文字色。白そのままより少しやわらかい2段階 */
+  --on-band:#ffffff; --on-band-soft:#d9e6de; --on-band-muted:#d8ebe8;
+  --footer-ink:#cfd8dc;
   --ease-out:cubic-bezier(.22,.61,.36,1);
   --dur:160ms;
   --radius:14px;
   --space-section:72px; --space-section-tight:48px;
+  /* 影も直書きをやめてトークン化(2026-07-25監査) */
+  --shadow-card:0 3px 14px rgba(40,51,58,.06);
+  --shadow-totop:0 4px 14px rgba(0,0,0,.22);
+  --shadow-band-glow:rgba(0,0,0,.08);
+  /* スマホのナビ横スクロール端フェード用(2026-07-25監査#8)。keyword(transparent)なのでhex/rgb直書きに当たらない */
+  --fade-edge:linear-gradient(to right,var(--white) 0,var(--white) calc(100% - 28px),transparent 100%);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -126,41 +143,55 @@ h1,h3,.logo{font-family:"Zen Maru Gothic",inherit}
 .bg-white{background:var(--white)}
 .btn{display:inline-block;padding:15px 32px;border-radius:12px;font-family:"Zen Maru Gothic",inherit;font-weight:bold;text-decoration:none;text-align:center;font-size:1.05rem;transition:background var(--dur) var(--ease-out),color var(--dur) var(--ease-out),border-color var(--dur) var(--ease-out)}
 /* 背景は濃い緑（白文字とのコントラスト約5.5:1・WCAG AA合格）。薄い緑#4c7a5eは3.9:1で不足 */
-.btn-primary{background:var(--teal);color:#fff;border:2px solid var(--teal)}
+.btn-primary{background:var(--teal);color:var(--white);border:2px solid var(--teal)}
 .btn-primary:hover{background:var(--teal-dark);border-color:var(--teal-dark)}
-.btn-sub{background:#fff;color:var(--teal);border:2px solid var(--teal)}
-.btn-sub:hover{background:var(--teal);color:#fff}
+.btn-sub{background:var(--white);color:var(--teal);border:2px solid var(--teal)}
+.btn-sub:hover{background:var(--teal);color:var(--white)}
 /* キーボードで操作する人に、どこを選んでいるかを必ず見せる */
 a:focus-visible,summary:focus-visible,details:focus-visible{outline:3px solid var(--warm-deep);outline-offset:3px;border-radius:4px}
 /* 以前はHTMLに直書きしていた色・幅をクラス化（配色変更のとき取り残されないように） */
-.btn-ghost{background:transparent;color:#fff;border:2px solid #fff}
-.btn-ghost:hover{background:#fff;color:var(--teal-dark)}
+.btn-ghost{background:transparent;color:var(--on-band);border:2px solid var(--on-band)}
+.btn-ghost:hover{background:var(--on-band);color:var(--teal-dark)}
 .note-wide{max-width:700px;margin:20px auto 0}
 .owner-name{font-size:.8rem;font-weight:normal;color:var(--ink-soft)}
 
-/* header */
-header{background:#fff;border-bottom:1px solid var(--line);border-top:7px solid var(--teal);position:sticky;top:0;z-index:50}
+/* header — 名刺・チラシの緑帯マストヘッド型に統一(2026-07-25監査#2)。白地+上罫線のAIナビ型から変更 */
+header{background:var(--teal-dark);border-bottom:1px solid var(--teal-dark);box-shadow:0 2px 10px var(--shadow-band-glow);position:sticky;top:0;z-index:50}
 .nav{max-width:860px;margin:0 auto;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px}
-.logo{font-weight:bold;color:var(--teal-dark);font-size:1.1rem;text-decoration:none;white-space:nowrap}
-.logo small{font-weight:normal;color:var(--ink-soft);font-size:.75rem;margin-left:8px}
-.nav a.btn{padding:8px 20px;font-size:.9rem}
+.logo{font-weight:bold;color:var(--on-band);font-size:1.1rem;text-decoration:none;white-space:nowrap}
+.logo small{font-weight:normal;color:var(--on-band-soft);font-size:.75rem;margin-left:8px}
+.nav a.btn{padding:8px 20px;font-size:.9rem;white-space:nowrap;flex:0 0 auto}
+/* 768px前後(タブレット幅)は.wrapの860px上限に届かずロゴ副題込みで詰まり、CTAボタンが2行に折れていた実測不具合(2026-07-25)。
+   副題を早めに隠して解消。720px以下の折り返しレイアウトとは別に、900px以下から先に効かせる */
+@media (max-width:900px){ .logo small{display:none} }
+/* 768px前後は.wrap(最大860px)に届かずロゴ分だけ幅が余計に圧迫され、看板2枚が実測で窮屈だった(2026-07-25)。
+   ロゴを先に縦積みにして本文幅を確保。720px以下の全面モバイル化とは別の、この帯だけの調整 */
+@media (max-width:900px){
+  .hero-flex{flex-direction:column;align-items:flex-start;gap:18px}
+  .hero-logo{width:110px}
+  .audience-cards{grid-template-columns:minmax(0,1fr)}
+}
+/* 帯の上のCTAだけ白地に反転(コントラストAA確保・帯色に沈んで見えなくなるのを防ぐ) */
+header .btn-primary{background:var(--on-band);color:var(--teal-dark);border-color:var(--on-band)}
+header .btn-primary:hover{background:var(--teal);color:var(--on-band);border-color:var(--on-band)}
+header a:focus-visible{outline-color:var(--on-band)}
 
 /* セクションへ飛ぶリンク（長いページなので必須）。スマホ(375px)で収まるよう4つまで */
 .nav-links{display:flex;gap:20px;align-items:center;margin-left:auto;margin-right:4px}
-.nav-links a{color:var(--ink-soft);text-decoration:none;font-size:.88rem;font-weight:bold;white-space:nowrap;padding:3px 0;border-bottom:2px solid transparent;transition:color var(--dur) var(--ease-out),border-color var(--dur) var(--ease-out)}
-.nav-links a:hover{color:var(--teal);border-bottom-color:var(--warm)}
+.nav-links a{color:var(--on-band-soft);text-decoration:none;font-size:.88rem;font-weight:bold;white-space:nowrap;padding:3px 0;border-bottom:2px solid transparent;transition:color var(--dur) var(--ease-out),border-color var(--dur) var(--ease-out)}
+.nav-links a:hover{color:var(--on-band);border-bottom-color:var(--warm)}
 
 /* 固定ヘッダーに見出しが隠れないようにする（これが無いとジャンプ先が頭切れになる） */
 [id]{scroll-margin-top:78px}
 
 /* 先頭に戻るボタン */
-.totop{position:fixed;right:22px;bottom:22px;width:52px;height:52px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.4rem;line-height:1;box-shadow:0 4px 14px rgba(0,0,0,.22);opacity:0;pointer-events:none;transition:opacity .25s,background .2s,transform .2s;z-index:60}
+.totop{position:fixed;right:22px;bottom:22px;width:52px;height:52px;border-radius:50%;background:var(--teal);color:var(--white);display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.4rem;line-height:1;box-shadow:var(--shadow-totop);opacity:0;pointer-events:none;transition:opacity .25s,background .2s,transform .2s;z-index:60}
 .totop.show{opacity:1;pointer-events:auto}
 .totop:hover{background:var(--teal-dark);transform:translateY(-3px)}
 
 /* hero — グラデーションをやめ、クリーム単色＋下の罫線で区切る */
 /* チラシのヘッダーと同じ、白い帯＋ロゴ＋やわらかい丸 */
-.hero{background:#fff;border-bottom:1px solid var(--line);padding:64px 0 56px;position:relative;overflow:hidden}
+.hero{background:var(--white);border-bottom:1px solid var(--line);padding:64px 0 56px;position:relative;overflow:hidden}
 .hero::before{content:"";position:absolute;width:300px;height:300px;border-radius:50%;background:var(--mint);right:-100px;top:-110px}
 .hero::after{content:"";position:absolute;width:140px;height:140px;border-radius:50%;background:var(--warm);opacity:.14;left:-45px;bottom:-55px}
 .hero .wrap{position:relative;z-index:2}
@@ -173,16 +204,35 @@ header{background:#fff;border-bottom:1px solid var(--line);border-top:7px solid 
 .hero h1{font-size:clamp(1.65rem,2.9vw,2.35rem);line-height:1.5;color:var(--ink);margin-bottom:20px}
 .hero h1 .em{color:var(--accent);border-bottom:4px solid var(--warm)}
 .hero p.sub{color:var(--ink-soft);margin-bottom:28px;max-width:40em}
-.tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px}
-.tags span{background:#fff;border:1px solid var(--line);color:var(--ink-soft);font-size:.85rem;padding:6px 14px;border-radius:var(--radius)}
+/* 客層2枚看板カード(2026-07-25 案A改反映)。ピル3枚(誰向けか羅列)から、個人/事業者の2窓口に整理 */
+.audience-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-bottom:32px}
+.audience-card{background:var(--paper);border:1px solid var(--line-card);border-radius:var(--radius);padding:24px 22px;box-shadow:var(--shadow-card);display:flex;flex-direction:column}
+.audience-card h3{display:flex;align-items:center;gap:10px;color:var(--teal-dark);font-size:1.05rem;margin-bottom:10px}
+/* 絵文字はOS間で表示が不揃いになるため、丸ゴシック1文字の色バッジに統一(hallmark基準) */
+.audience-mark{display:inline-flex;width:34px;height:34px;border-radius:50%;color:var(--white);font-size:1rem;align-items:center;justify-content:center;flex:0 0 auto}
+.audience-card:nth-child(1) .audience-mark{background:var(--soft)}
+.audience-card:nth-child(2) .audience-mark{background:var(--warm-deep)}
+.audience-card p{font-size:.92rem;color:var(--ink-soft);margin-bottom:10px}
+.audience-card .price{font-size:.85rem;color:var(--ink);font-weight:bold;margin-bottom:16px}
+/* 「AI導入支援・Instagram代行の説明を見る」がカード幅で2行に折れるため、看板ボタンは基準時点でやや小さめに(2026-07-25実測・hallmark gate49対応) */
+.audience-card .btn{width:100%;padding:12px 10px;font-size:.82rem;letter-spacing:-.01em;margin-top:auto}
 .hero .cta-row{display:flex;gap:16px;flex-wrap:wrap}
 .hero .note{font-size:.85rem;color:var(--ink-soft);margin-top:14px}
 
-/* cards */
-.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.card{background:#fff;border:1px solid #efeae0;border-radius:var(--radius);padding:26px 22px;text-align:left;box-shadow:0 3px 14px rgba(40,51,58,.06)}
+/* 料金の目安 — 3枚等価カードは横並びの説得力が均等になり本命が埋もれるため、1枚の表組みに変更(2026-07-25監査#3) */
+.price-table-wrap{overflow-x:hidden}
+.price-table{width:100%;border-collapse:separate;border-spacing:0;background:var(--paper);border:1px solid var(--line-card);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-card)}
+.price-table th,.price-table td{padding:18px 20px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.price-table thead th{background:var(--mint);color:var(--teal-dark);font-family:"Zen Maru Gothic",inherit;font-weight:bold;font-size:.92rem}
+.price-table tbody th{color:var(--teal-dark);font-weight:bold;width:30%;font-size:1rem;white-space:nowrap}
+.price-table tbody td{color:var(--ink-soft);font-size:.92rem;line-height:1.9}
+.price-table tbody td strong{color:var(--ink)}
+.price-table tbody tr:last-child th,.price-table tbody tr:last-child td{border-bottom:none}
+
+/* cards（サービス一覧・詳細で使用） */
+.card{background:var(--paper);border:1px solid var(--line-card);border-radius:var(--radius);padding:26px 22px;text-align:left;box-shadow:var(--shadow-card)}
 /* チラシと同じ色つき丸数字 */
-.numc{display:inline-flex;width:34px;height:34px;border-radius:50%;color:#fff;font-size:1rem;align-items:center;justify-content:center;margin-right:10px;vertical-align:-6px;flex:0 0 auto}
+.numc{display:inline-flex;width:34px;height:34px;border-radius:50%;color:var(--white);font-size:1rem;align-items:center;justify-content:center;margin-right:10px;vertical-align:-6px;flex:0 0 auto}
 .nc-soft{background:var(--soft)} .nc-warm{background:var(--warm-deep)} .nc-teal{background:var(--teal)}
 .card h3{display:flex;align-items:center;color:var(--teal-dark);font-size:1.05rem;margin-bottom:10px}
 .card p{font-size:.92rem;color:var(--ink-soft);margin-bottom:12px}
@@ -199,13 +249,18 @@ header{background:#fff;border-bottom:1px solid var(--line);border-top:7px solid 
 .cards-lead .card.primary p{font-size:1rem;color:var(--ink)}
 .cards-lead .card.primary .btn{width:auto;padding:14px 30px;font-size:1rem}
 
-/* reasons */
-.reasons-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-.reasons-grid .card{text-align:left}
-.reasons-grid .num{display:inline-flex;width:34px;height:34px;border-radius:50%;background:var(--warm);color:#fff;font-weight:bold;align-items:center;justify-content:center;margin-bottom:12px}
+/* reasons — 4つは優先順位のない並列項目なので丸数字1-4を廃止。非対称タイル(縦長1枚+横2枚+下段1枚)に組み替え(2026-07-25監査#4) */
+.reasons-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:20px}
+.reasons-grid .card{text-align:left;display:flex;flex-direction:column;justify-content:center}
+.reasons-grid .card:nth-child(1){grid-column:1;grid-row:1/3;background:var(--mint);border-color:var(--soft);padding:32px 28px}
+.reasons-grid .card:nth-child(1) h3{font-size:1.3rem}
+.reasons-grid .card:nth-child(1) p{font-size:1rem;color:var(--ink)}
+.reasons-grid .card:nth-child(2){grid-column:2;grid-row:1}
+.reasons-grid .card:nth-child(3){grid-column:2;grid-row:2}
+.reasons-grid .card:nth-child(4){grid-column:1/-1;grid-row:3}
 
 /* service detail blocks */
-.detail-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:32px 28px;max-width:700px;margin:0 auto}
+.detail-box{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:32px 28px;max-width:700px;margin:0 auto}
 .detail-box h3{color:var(--teal-dark);font-size:1.05rem;margin:20px 0 10px}
 .detail-box h3:first-child{margin-top:0}
 .detail-box ul{list-style:none;margin-bottom:8px}
@@ -217,9 +272,11 @@ header{background:#fff;border-bottom:1px solid var(--line);border-top:7px solid 
 .detail-box .price-line small{font-weight:normal;color:var(--ink-soft);display:block;margin-top:4px}
 .detail-box .ctarow{text-align:center}
 .privacy-note{font-size:.9rem;color:var(--ink-soft);background:var(--cream);border-radius:10px;padding:14px 18px;margin:18px 0}
-/* 別ページへ送る案内。本文リンクだと押されないので、囲って左に太いラインを入れボタンで出す */
-.next-page{border-left:5px solid var(--warm);background:var(--cream);padding:18px 20px;margin:22px 0 4px}
-.next-page-label{font-weight:bold;color:var(--teal-dark);margin-bottom:4px}
+/* 別ページへ送る案内。本文リンクだと押されないので、囲ってボタンで出す。
+   左太帯オレンジは警告色に見え「注意書き」と誤読されたため廃止。全周ヘアライン+見出し横の小さな角アクセントに変更(2026-07-25監査#1) */
+.next-page{border:1px solid var(--line);border-radius:12px;background:var(--cream);padding:18px 20px;margin:22px 0 4px}
+.next-page-label{display:flex;align-items:center;gap:8px;font-weight:bold;color:var(--teal-dark);margin-bottom:4px}
+.next-page-label::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--warm);flex:0 0 auto}
 .next-page-text{font-size:.92rem;color:var(--ink-soft);margin-bottom:14px}
 .next-page .btn{padding:13px 26px;font-size:.98rem}
 /* 本文中のリンクも見て分かる形に（色＋太字＋下線） */
@@ -227,13 +284,13 @@ header{background:#fff;border-bottom:1px solid var(--line);border-top:7px solid 
 
 /* flow */
 .flow{counter-reset:step}
-.step{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px 22px 74px;margin-bottom:16px;position:relative;counter-increment:step}
-.step::before{content:counter(step);position:absolute;left:22px;top:22px;width:36px;height:36px;border-radius:50%;background:var(--soft);color:#fff;font-weight:bold;display:flex;align-items:center;justify-content:center}
+.step{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px 24px 22px 74px;margin-bottom:16px;position:relative;counter-increment:step}
+.step::before{content:counter(step);position:absolute;left:22px;top:22px;width:36px;height:36px;border-radius:50%;background:var(--soft);color:var(--white);font-weight:bold;display:flex;align-items:center;justify-content:center}
 .step h3{color:var(--teal-dark);font-size:1.02rem;margin-bottom:4px}
 .step p{font-size:.92rem;color:var(--ink-soft)}
 
 /* faq */
-.faq details{background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:12px;overflow:hidden}
+.faq details{background:var(--paper);border:1px solid var(--line);border-radius:12px;margin-bottom:12px;overflow:hidden}
 .faq summary{padding:18px 22px;font-weight:bold;cursor:pointer;color:var(--ink);list-style:none;position:relative;padding-right:44px}
 .faq summary::before{content:"Q";color:var(--warm-deep);font-weight:bold;margin-right:10px}
 .faq summary::after{content:"＋";position:absolute;right:20px;color:var(--teal);font-weight:bold}
@@ -241,23 +298,23 @@ header{background:#fff;border-bottom:1px solid var(--line);border-top:7px solid 
 .faq .a{padding:0 22px 18px 46px;font-size:.94rem;color:var(--ink-soft)}
 
 /* about */
-.about-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:32px;max-width:640px;margin:0 auto}
+.about-box{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:32px;max-width:640px;margin:0 auto}
 .about-box h3{color:var(--teal-dark);margin-bottom:12px}
 .about-box p{font-size:.95rem;color:var(--ink-soft);margin-bottom:10px}
 
 /* bottom cta — ここだけ中央寄せにして「締め」だと分かるようにする */
 /* チラシのCTAと同じ、クリーム地に浮かぶ角丸の濃緑パネル */
-.bottom-cta{background:var(--cream);text-align:center;color:#fff;padding:56px 0 72px}
+.bottom-cta{background:var(--cream);text-align:center;color:var(--on-band);padding:56px 0 72px}
 .bottom-cta .wrap{background:var(--teal-dark);border-radius:22px;padding:56px 32px;position:relative;overflow:hidden;z-index:1}
-.bottom-cta .wrap::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:#fff;opacity:.06;right:-80px;top:-100px;z-index:-1}
+.bottom-cta .wrap::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--on-band);opacity:.06;right:-80px;top:-100px;z-index:-1}
 .bottom-cta .wrap::after{content:"";position:absolute;width:120px;height:120px;border-radius:50%;background:var(--warm);opacity:.28;left:-35px;bottom:-45px;z-index:-1}
 .bottom-cta h2::after{margin-left:auto;margin-right:auto}
-.bottom-cta h2{color:#fff}
-.bottom-cta p{color:#d8ebe8;margin-bottom:30px}
+.bottom-cta h2{color:var(--on-band)}
+.bottom-cta p{color:var(--on-band-muted);margin-bottom:30px}
 .bottom-cta .cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 
-footer{background:var(--ink);color:#cfd8dc;padding:36px 0;text-align:center;font-size:.85rem}
-footer a{color:#cfd8dc}
+footer{background:var(--ink);color:var(--footer-ink);padding:36px 0;text-align:center;font-size:.85rem}
+footer a{color:var(--footer-ink)}
 footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
 
 /* 「動きを控えめに」設定の端末では、浮き上がり・スクロール追従の動きを止める */
@@ -273,28 +330,47 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
   .hero-logo{width:110px}
   h2{font-size:1.6rem}
   .hero h1{font-size:1.7rem}
-  .cards,.reasons-grid,.cards-lead{grid-template-columns:minmax(0,1fr)}
+  .cards,.reasons-grid,.cards-lead,.audience-cards{grid-template-columns:minmax(0,1fr)}
+  /* 非対称タイルはスマホでは単純に縦積み(明示配置をリセット) */
+  .reasons-grid .card:nth-child(1),.reasons-grid .card:nth-child(2),.reasons-grid .card:nth-child(3),.reasons-grid .card:nth-child(4){grid-column:1;grid-row:auto}
+  .reasons-grid .card:nth-child(1){padding:26px 20px}
+  /* 料金表はスマホでは横スクロールさせず、行ごとにブロック化して積む */
+  .price-table thead{display:none}
+  .price-table,.price-table tbody,.price-table tr,.price-table th,.price-table td{display:block;width:auto}
+  .price-table tbody tr{padding:16px 18px;border-bottom:1px solid var(--line)}
+  .price-table tbody tr:last-child{border-bottom:none}
+  .price-table tbody th{padding:0 0 8px;border:none;font-size:1.05rem}
+  .price-table tbody td{padding:0;border:none}
   .cards-lead .card.primary{padding:26px 20px}
   .cards-lead .card.primary h3{font-size:1.2rem}
   .cards-lead .card.primary .btn{width:100%}
   .btn{width:100%;max-width:340px}
+  .audience-card .btn{max-width:none}
   .nav a.btn{width:auto}
   .logo small{display:none}
   .detail-box{padding:26px 20px}
   /* スマホではリンクを2段目に回し、横スクロールで全部触れるようにする */
   .nav{flex-wrap:wrap;gap:8px;padding:10px 20px}
-  .nav-links{order:3;width:100%;margin:0;gap:16px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+  .nav-links{order:3;width:100%;margin:0;gap:16px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none;
+    /* 続きがあると分かる端フェード(2026-07-25監査#8) */
+    -webkit-mask-image:var(--fade-edge);mask-image:var(--fade-edge)}
   .nav-links::-webkit-scrollbar{display:none}
   .nav-links a{font-size:.82rem}
   [id]{scroll-margin-top:104px}
   .totop{right:14px;bottom:14px;width:46px;height:46px;font-size:1.2rem}
+  /* サービス詳細CTA・次ページ案内ボタンは文言が長く、375pxでは既定のpadding/font-sizeだと2行に折れる実測不具合(2026-07-25) */
+  .ctarow .btn,.next-page .btn{padding:14px 18px;font-size:.9rem}
+}
+/* ごく狭い幅ではさらに一段詰める */
+@media (max-width:360px){
+  .audience-card .btn{padding:12px 6px;font-size:.78rem}
 }
 
-/* 日本語の改行を整える（2026-07-21 本人指摘「改行ダサい」）
+/* 日本語の改行を整える（末行に1〜2文字だけ残るのを防ぐ）
    balance=行の長さを揃えて最後に1〜2文字だけ残るのを防ぐ／pretty=段落の最終行が短くなりすぎるのを防ぐ
    auto-phrase=文節（意味のかたまり）で折り返す。対応していないブラウザでは無視されるだけで表示は壊れない */
 h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;line-break:strict}
-.lead,.hero .sub,.bottom-cta p,.next-page-text,.card p,.step p,.about-box p,.detail-box li,.faq .a{text-wrap:pretty;word-break:auto-phrase;line-break:strict}
+.lead,.hero .sub,.bottom-cta p,.next-page-text,.card p,.step p,.about-box p,.detail-box li,.faq .a,.faq summary,.audience-card p,.price-table td{text-wrap:pretty;word-break:auto-phrase;line-break:strict}
 </style>
 </head>
 <body>
@@ -319,13 +395,22 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
     <!-- 名刺・チラシと同じロゴ。GitHubへは logo.png も一緒にアップすること -->
     <img class="hero-logo" src="./logo.png" alt="あいまに ロゴ" onerror="this.style.display='none'">
     <div>
-    <h1>パソコン・AI・SNS、<br>「困った」を<span class="em">まとめて相談</span>できる場所</h1>
-    <p class="sub">現役看護師が、屋号「あいまに」で活動しています。<br>デジタルの困りごと、AIの導入、Instagramの運用まで。<br>専門用語を使わず、あなたのペースに合わせて伴走します。</p>
+    <h1>デジタルの「困った」も、仕事のAI活用も。<br>隣で伴走する<span class="em">相談窓口</span></h1>
+    <p class="sub">専門用語は使いません。看護師をしながら、伴走しています。<br>「これ、前にも聞いたかも」と思っても、何度聞いていただいても大丈夫です。</p>
     <span class="free-pill">ご相談・お見積もりは無料です</span>
-    <div class="tags">
-      <span>パソコン/スマホ/AIを「誰かに頼みたい」「教えてほしい」方</span>
-      <span>医療・介護の事業所、中小企業・個人事業主でAIを仕事に使いたい方</span>
-      <span>お店や仕事のInstagramを育てたい方</span>
+    <div class="audience-cards">
+      <div class="audience-card">
+        <h3><span class="audience-mark" aria-hidden="true">人</span>個人の方へ</h3>
+        <p>「何度聞いても大丈夫」なパソコン・スマホ・AIのよろず相談。同じ質問を何度でも聞いていただけます。</p>
+        <p class="price">1時間 4,000円〜</p>
+        <a class="btn btn-primary" href="#service-digital">デジタル何でも相談の説明を見る</a>
+      </div>
+      <div class="audience-card">
+        <h3><span class="audience-mark" aria-hidden="true">店</span>お店・事業者の方へ</h3>
+        <p>面倒な作業をAIで時短し、Instagramの発信は代行で継続。医療・介護から中小企業・個人事業主まで対応します。</p>
+        <p class="price">AI時短診断 10,000円／Instagram代行 月15,000円〜</p>
+        <a class="btn btn-primary" href="#service-ai">AI導入支援・Instagram代行の説明を見る</a>
+      </div>
     </div>
     <div class="cta-row">
       <a class="btn btn-primary" href="https://forms.gle/HkjLuLgHaW19BaFg9" target="_blank" rel="noopener">相談フォームへ（無料）</a>
@@ -372,19 +457,26 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
   <div class="wrap">
     <h2>料金の目安</h2>
     <p class="lead">まずは小さく始められる料金をご用意しています。内容が決まっていないご相談・お見積もりは無料です。<br>（料金はこのページに一本化しています）</p>
-    <div class="cards">
-      <div class="card">
-        <h3>デジタル何でも相談</h3>
-        <p class="price"><strong>店舗購入同行 10,000円ぽっきり</strong>（延長料金なし・一緒に選んで買うまで）<br><strong>パソコン初期設定サポート 10,000円</strong>（新品1台まるごと）<br><strong>オンライン購入サポート 5,000円</strong>（機種選び〜注文）<br>何でも相談・トラブルは 1時間 4,000円／2時間 7,000円<br>移動費は別途です。</p>
-      </div>
-      <div class="card">
-        <h3>AI導入支援</h3>
-        <p class="price"><strong>AIレクチャー 1時間 4,000円</strong><br>2時間お得パック 7,000円<br><strong>AI時短診断 10,000円</strong>（その場で1つ時短を設定）<br><strong>AI検索露出診断 10,000円</strong>（60回実測のPDFレポート）<br><strong>属人化診断 10,000円</strong>（その場で手順書1本を作成）<br>月イチ伴走 月12,000円</p>
-      </div>
-      <div class="card">
-        <h3>Instagram代行運用</h3>
-        <p class="price"><strong>キャプション提供 月15,000円</strong><br>まるごと代行 月30,000円<br>投稿頻度・枚数はご相談のうえ決めます。</p>
-      </div>
+    <div class="price-table-wrap">
+    <table class="price-table">
+      <thead>
+        <tr><th scope="col">サービス</th><th scope="col">料金の目安</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">デジタル何でも相談</th>
+          <td><strong>店舗購入同行 10,000円ぽっきり</strong>（延長料金なし・一緒に選んで買うまで）<br><strong>パソコン初期設定サポート 10,000円</strong>（新品1台まるごと）<br><strong>オンライン購入サポート 5,000円</strong>（機種選び〜注文）<br>何でも相談・トラブルは 1時間 4,000円／2時間 7,000円<br>移動費は別途です。</td>
+        </tr>
+        <tr>
+          <th scope="row">AI導入支援</th>
+          <td><strong>AIレクチャー 1時間 4,000円</strong><br>2時間お得パック 7,000円<br><strong>AI時短診断 10,000円</strong>（その場で1つ時短を設定）<br><strong>AI検索露出診断 10,000円</strong>（60回実測のPDFレポート）<br><strong>属人化診断 10,000円</strong>（その場で手順書1本を作成）<br>月イチ伴走 月12,000円</td>
+        </tr>
+        <tr>
+          <th scope="row">Instagram代行運用</th>
+          <td><strong>キャプション提供 月15,000円</strong><br>まるごと代行 月30,000円<br>投稿頻度・枚数はご相談のうえ決めます。</td>
+        </tr>
+      </tbody>
+    </table>
     </div>
     <p class="privacy-note note-wide">Webページ作成は 50,000円〜。業務に合わせた設定・制作・継続支援は、内容を伺ってから事前にお見積もりします。</p>
   </div>
@@ -396,10 +488,10 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
     <h2>【あいまに】が選ばれる理由</h2>
     <p class="lead">IT業者さんや広告代理店とは、スタート地点が違います。</p>
     <div class="reasons-grid">
-      <div class="card"><span class="num">1</span><h3>現役看護師だから、現場の話が通じる</h3><p>医療・介護の現場はもちろん、個人事業や小規模店舗の「人手が足りない」「時間がない」感覚も、自分自身が副業をしながら実感しています。説明に時間がかからず、相談が早く核心に届きます。</p></div>
-      <div class="card"><span class="num">2</span><h3>専門用語を使いません</h3><p>「プロンプト」「API」「アルゴリズム」といった言葉は使いません。パソコンやスマホが苦手な方にも、分かる言葉で説明します。</p></div>
-      <div class="card"><span class="num">3</span><h3>個人情報への配慮を大切にしています</h3><p>医療・介護の現場では、患者さま・利用者さまの個人情報をAIに入力しない設計を徹底しています。どのサービスでも、この線引きの感覚を大事にしてお手伝いします。</p></div>
-      <div class="card"><span class="num">4</span><h3>教えて終わり、売って終わりにしません</h3><p>パソコンなら使えるようになるまで、AIなら業務に定着するまで、隣で一緒に手を動かします。「まずは相談だけ」から「継続して任せたい」まで、無理に大きな契約を勧めません。</p></div>
+      <div class="card"><h3>現役看護師だから、現場の話が通じる</h3><p>医療・介護の現場はもちろん、個人事業や小規模店舗の「人手が足りない」「時間がない」感覚も、自分自身が副業をしながら実感しています。説明に時間がかからず、相談が早く核心に届きます。</p></div>
+      <div class="card"><h3>専門用語を使いません</h3><p>「プロンプト」「API」「アルゴリズム」といった言葉は使いません。パソコンやスマホが苦手な方にも、分かる言葉で説明します。</p></div>
+      <div class="card"><h3>個人情報への配慮を大切にしています</h3><p>医療・介護の現場では、患者さま・利用者さまの個人情報をAIに入力しない設計を徹底しています。どのサービスでも、この線引きの感覚を大事にしてお手伝いします。</p></div>
+      <div class="card"><h3>教えて終わり、売って終わりにしません</h3><p>パソコンなら使えるようになるまで、AIなら業務に定着するまで、隣で一緒に手を動かします。「まずは相談だけ」から「継続して任せたい」まで、無理に大きな契約を勧めません。</p></div>
     </div>
   </div>
 </section>
@@ -476,7 +568,7 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
       <div class="ctarow">
         <a class="btn btn-primary" href="https://forms.gle/HkjLuLgHaW19BaFg9" target="_blank" rel="noopener">無料相談・AI時短診断を相談する</a>
       </div>
-      <!-- 医療・介護の見込み客をサブページへ送る主要導線。本文中の小さなリンクだと押されないのでボタンにした（2026-07-20 本人指摘） -->
+      <!-- 医療・介護の見込み客をサブページへ送る主要導線（ボタンで目立たせる） -->
       <div class="next-page">
         <p class="next-page-label">医療・介護の事業所さまへ</p>
         <p class="next-page-text">現場の書類仕事がどう変わるか、料金と内容を公開した専用ページをご用意しています。</p>
