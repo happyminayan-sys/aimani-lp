@@ -76,12 +76,29 @@
 }
 </script>
 <style>
+/* 2026-07-25: 総合LPの監査反映と同じ新デザインへ統一（緑帯マストヘッド／カード地色--paperトークン／#fff・rgba直書き全廃／スマホのナビ端フェード）。
+   公開3ページ統一チェックリスト（あいまに総合LP\README.md）の対象ページ */
 :root{
+  --sand:#efe7d9; --warm-pale:#fff8ef;
   --teal:#4c7a5e; --teal-dark:#2e4a3a; --accent:#4c7a5e; --accent-dark:#2e4a3a; --warm:#e8a16b; --warm-dark:#be7b49; --warm-deep:#9c5f30; --soft:#4c7a5e; --soft-dark:#2e4a3a;
-  --ink:#3a342e; --ink-soft:#6b6259; --cream:#fbfaf5; --white:#fff; --line:#e2e6dc;
+  --ink:#3a342e; --ink-soft:#6b6259; --cream:#fbfaf5; --white:#fff; --line:#e2e6dc; --mint:#e7efe4;
+  /* カード等の「地の色」。純白#fffだとクリームの紙面から浮くため、わずかに温かいクリーム寄りの白に統一(総合LPと同じ) */
+  --paper:#fffdf8;
+  --line-card:#efeae0;
+  /* 濃緑の帯(マストヘッド・締めCTA・診断帯)の上に置く文字色 */
+  --on-band:#ffffff; --on-band-soft:#d9e6de; --on-band-muted:#d8ebe8;
+  --footer-ink:#cfd8dc;
+  --ease-out:cubic-bezier(.22,.61,.36,1);
+  --dur:160ms;
+  --radius:14px;
+  --shadow-card:0 3px 14px rgba(40,51,58,.06);
+  --shadow-totop:0 4px 14px rgba(0,0,0,.22);
+  --shadow-band-glow:rgba(0,0,0,.08);
+  --fade-edge:linear-gradient(to right,var(--white) 0,var(--white) calc(100% - 28px),transparent 100%);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+html,body{overflow-x:clip}
 body{font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;color:var(--ink);background:var(--cream);line-height:1.9;font-size:16px}
 img,svg{max-width:100%}
 .wrap{max-width:860px;margin:0 auto;padding:0 20px}
@@ -90,50 +107,58 @@ h2{font-family:"Zen Maru Gothic",inherit;font-size:2.1rem;text-align:center;colo
 /* 総合LPと同じ、見出し下のオレンジ丸バー（中央寄せ版） */
 h2::after{content:"";display:block;width:44px;height:6px;border-radius:999px;background:var(--warm);opacity:.85;margin:14px auto 0}
 .lead{text-align:center;color:var(--ink-soft);margin-bottom:40px}
-.btn{display:inline-block;padding:15px 32px;border-radius:8px;font-weight:bold;text-decoration:none;text-align:center;transition:background .16s cubic-bezier(.22,.61,.36,1),color .16s cubic-bezier(.22,.61,.36,1),border-color .16s cubic-bezier(.22,.61,.36,1);font-size:1.05rem}
+.btn{display:inline-block;padding:15px 32px;border-radius:12px;font-weight:bold;text-decoration:none;text-align:center;transition:background var(--dur) var(--ease-out),color var(--dur) var(--ease-out),border-color var(--dur) var(--ease-out);font-size:1.05rem}
 /* キーボード操作の人に選択位置を見せる（2026-07-20 総合LPと同じ対応） */
 a:focus-visible,summary:focus-visible{outline:3px solid var(--warm-deep);outline-offset:3px;border-radius:4px}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.01ms !important;animation-duration:.01ms !important}}
-.btn-primary{background:var(--teal);color:#fff}
-.btn-primary:hover{background:var(--teal-dark)}
-.btn-sub{background:#fff;color:var(--teal);border:2px solid var(--teal)}
-.btn-sub:hover{background:var(--soft);color:#fff}
-.badge{display:inline-block;background:var(--soft);color:#fff;font-size:.8rem;padding:2px 12px;border-radius:8px;margin-bottom:12px}
-.numc{display:inline-flex;width:32px;height:32px;border-radius:50%;color:#fff;font-size:.95rem;align-items:center;justify-content:center;margin-right:9px;vertical-align:-5px;flex:0 0 auto}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.01ms !important;animation-duration:.01ms !important}.totop:hover{transform:none}}
+/* ボタンは総合LPと同じ2px枠つき（枠なし/ありで高さが揃わないのを防ぐ） */
+.btn-primary{background:var(--teal);color:var(--white);border:2px solid var(--teal)}
+.btn-primary:hover{background:var(--teal-dark);border-color:var(--teal-dark)}
+.btn-sub{background:var(--white);color:var(--teal);border:2px solid var(--teal)}
+.btn-sub:hover{background:var(--teal);color:var(--white)}
+.badge{display:inline-block;background:var(--soft);color:var(--white);font-size:.8rem;padding:2px 12px;border-radius:8px;margin-bottom:12px}
+.numc{display:inline-flex;width:32px;height:32px;border-radius:50%;color:var(--white);font-size:.95rem;align-items:center;justify-content:center;margin-right:9px;vertical-align:-5px;flex:0 0 auto}
 .nc-soft{background:var(--soft)} .nc-warm{background:var(--warm-deep)} .nc-teal{background:var(--teal)}
 .card h3{display:flex;align-items:center;justify-content:center;text-align:left;gap:2px}
-/* 総合LPへ戻る導線。小さな灰色リンクでは押されないのでボタンにした（2026-07-20 本人指摘の同種修正） */
+/* 総合LPへ戻る導線はボタンで出す（小さなリンクでは押されないため） */
 .backlink{background:var(--ink);text-align:center;padding:26px 20px}
-.backlink-text{color:#cfd8dc;font-size:.95rem;margin-bottom:12px}
-.backlink-btn{background:transparent;color:#fff;border:2px solid #fff;padding:12px 26px;font-size:.95rem}
-.backlink-btn:hover{background:#fff;color:var(--ink)}
+.backlink-text{color:var(--footer-ink);font-size:.95rem;margin-bottom:12px}
+.backlink-btn{background:transparent;color:var(--white);border:2px solid var(--white);padding:12px 26px;font-size:.95rem}
+.backlink-btn:hover{background:var(--white);color:var(--ink)}
 
-/* header */
-header{background:#fff;border-bottom:1px solid var(--line);border-top:7px solid var(--teal);position:sticky;top:0;z-index:50}
+/* header — 総合LPと同じ、名刺・チラシの緑帯マストヘッド型（2026-07-25統一）。白地+上罫線型から変更 */
+header{background:var(--teal-dark);border-bottom:1px solid var(--teal-dark);box-shadow:0 2px 10px var(--shadow-band-glow);position:sticky;top:0;z-index:50}
 .nav{max-width:860px;margin:0 auto;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px}
-.logo{font-weight:bold;color:var(--teal-dark);font-size:1.1rem;text-decoration:none;white-space:nowrap}
-.logo small{font-weight:normal;color:var(--ink-soft);font-size:.75rem;margin-left:8px}
-.nav a.btn{padding:8px 20px;font-size:.9rem}
+.logo{font-weight:bold;color:var(--on-band);font-size:1.1rem;text-decoration:none;white-space:nowrap}
+.logo small{font-weight:normal;color:var(--on-band-soft);font-size:.75rem;margin-left:8px}
+.nav a.btn{padding:8px 20px;font-size:.9rem;white-space:nowrap;flex:0 0 auto}
+/* 帯の上のCTAだけ白地に反転(帯色に沈んで見えなくなるのを防ぐ・総合LPと同じ) */
+header .btn-primary{background:var(--on-band);color:var(--teal-dark);border-color:var(--on-band)}
+header .btn-primary:hover{background:var(--teal);color:var(--on-band);border-color:var(--on-band)}
+header a:focus-visible{outline-color:var(--on-band)}
+/* タブレット幅でロゴ副題込みだと詰まる実測不具合の予防（総合LPと同じ対応） */
+@media (max-width:900px){ .logo small{display:none} }
 
 /* セクションへ飛ぶリンク（長いページなので必須） */
 .nav-links{display:flex;gap:20px;align-items:center;margin-left:auto;margin-right:4px}
-.nav-links a{color:var(--ink-soft);text-decoration:none;font-size:.88rem;font-weight:bold;white-space:nowrap;padding:3px 0;border-bottom:2px solid transparent;transition:.15s}
-.nav-links a:hover{color:var(--teal);border-bottom-color:var(--warm)}
+.nav-links a{color:var(--on-band-soft);text-decoration:none;font-size:.88rem;font-weight:bold;white-space:nowrap;padding:3px 0;border-bottom:2px solid transparent;transition:color var(--dur) var(--ease-out),border-color var(--dur) var(--ease-out)}
+.nav-links a:hover{color:var(--on-band);border-bottom-color:var(--warm)}
 
 /* 固定ヘッダーに見出しが隠れないようにする（これが無いとジャンプ先が頭切れになる） */
 [id]{scroll-margin-top:78px}
 
 /* 先頭に戻るボタン */
-.totop{position:fixed;right:22px;bottom:22px;width:52px;height:52px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.4rem;line-height:1;box-shadow:0 4px 14px rgba(0,0,0,.22);opacity:0;pointer-events:none;transition:opacity .25s,background .2s,transform .2s;z-index:60}
+.totop{position:fixed;right:22px;bottom:22px;width:52px;height:52px;border-radius:50%;background:var(--teal);color:var(--white);display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.4rem;line-height:1;box-shadow:var(--shadow-totop);opacity:0;pointer-events:none;transition:opacity .25s,background .2s,transform .2s;z-index:60}
 .totop.show{opacity:1;pointer-events:auto}
 .totop:hover{background:var(--teal-dark);transform:translateY(-3px)}
 
-/* hero */
-.hero{background:var(--cream);border-bottom:1px solid var(--line);padding:72px 0 64px;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:"";position:absolute;width:320px;height:320px;border-radius:50%;background:#e7efe4;right:-100px;top:-110px}
+/* hero — 総合LP・チラシと同じ「白い帯」に統一（2026-07-25。クリーム地から変更） */
+.hero{background:var(--white);border-bottom:1px solid var(--line);padding:72px 0 64px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;width:320px;height:320px;border-radius:50%;background:var(--mint);right:-100px;top:-110px}
 .hero::after{content:"";position:absolute;width:140px;height:140px;border-radius:50%;background:var(--warm);opacity:.16;left:-45px;bottom:-55px}
 .hero>.wrap{position:relative;z-index:2}
 h1,h2,h3,.logo,.btn{font-family:"Zen Maru Gothic",inherit}
+.hero-logo{width:110px;margin:0 auto 18px;display:block;background:var(--white);border-radius:16px;padding:6px;border:1px solid var(--line-card)}
 .hero .target{color:var(--teal);font-weight:bold;letter-spacing:.05em;margin-bottom:16px;font-size:.95rem}
 .hero h1{font-size:2rem;line-height:1.6;color:var(--ink);margin-bottom:20px}
 .hero h1 .em{color:var(--accent);border-bottom:4px solid var(--warm)}
@@ -141,52 +166,52 @@ h1,h2,h3,.logo,.btn{font-family:"Zen Maru Gothic",inherit}
 .hero .cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 .hero .note{font-size:.85rem;color:var(--ink-soft);margin-top:14px}
 
-/* cards */
+/* cards — 地色は総合LPと同じ--paper＋やわらかい影 */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px 22px;text-align:center}
+.card{background:var(--paper);border:1px solid var(--line-card);border-radius:var(--radius);padding:28px 22px;text-align:center;box-shadow:var(--shadow-card)}
 .card .icon{font-size:2.2rem;margin-bottom:10px}
 .card h3{color:var(--teal-dark);font-size:1.05rem;margin-bottom:10px}
 .card p{font-size:.92rem;color:var(--ink-soft);text-align:left}
 
 /* before/after */
 .ba{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.ba .item{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
+.ba .item{background:var(--paper);border:1px solid var(--line-card);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow-card)}
 .ba .item h3{color:var(--teal-dark);font-size:1rem;margin-bottom:14px;text-align:center}
 .ba .row{font-size:.9rem;margin:0}
 .ba .before{color:var(--ink-soft)}
 .ba .after{color:var(--ink)}
 .ba .row b{display:inline-block;font-size:.72rem;padding:1px 9px;border-radius:6px;margin-right:7px;vertical-align:middle}
-.ba .before b{background:#efe7d9;color:var(--ink-soft)}
-.ba .after b{background:var(--soft);color:#fff}
+.ba .before b{background:var(--sand);color:var(--ink-soft)}
+.ba .after b{background:var(--soft);color:var(--white)}
 .ba .arrow{text-align:center;color:var(--warm);font-weight:bold;margin:6px 0;font-size:1.1rem}
 
 /* reasons */
 .reasons .card{text-align:left}
-.reasons .num{display:inline-flex;width:34px;height:34px;border-radius:50%;background:var(--warm);color:#fff;font-weight:bold;align-items:center;justify-content:center;margin-bottom:12px}
-.privacy-box{background:#fff;border:2px solid var(--teal);border-radius:14px;padding:28px;margin-top:28px}
+.reasons .num{display:inline-flex;width:34px;height:34px;border-radius:50%;background:var(--warm);color:var(--white);font-weight:bold;align-items:center;justify-content:center;margin-bottom:12px}
+.privacy-box{background:var(--paper);border:2px solid var(--teal);border-radius:var(--radius);padding:28px;margin-top:28px;box-shadow:var(--shadow-card)}
 .privacy-box h3{color:var(--teal-dark);margin-bottom:10px;font-size:1.15rem}
 .privacy-box p{font-size:.95rem}
 
 /* shindan */
-.shindan{background:var(--teal);color:#fff;text-align:center}
-.shindan h2{color:#fff}
-.shindan .lead{color:#d8ebe8}
-.shindan .box{background:#fff;color:var(--ink);border-radius:16px;padding:36px 28px;max-width:640px;margin:0 auto}
+.shindan{background:var(--teal);color:var(--on-band);text-align:center}
+.shindan h2{color:var(--on-band)}
+.shindan .lead{color:var(--on-band-muted)}
+.shindan .box{background:var(--paper);color:var(--ink);border-radius:16px;padding:36px 28px;max-width:640px;margin:0 auto}
 .shindan .box h3{color:var(--teal-dark);font-size:1.2rem;margin-bottom:14px}
 .shindan .box ul{list-style:none;text-align:left;max-width:420px;margin:0 auto 24px}
 .shindan .box li{padding:6px 0 6px 30px;position:relative;font-size:.95rem}
 .shindan .box li::before{content:"✓";position:absolute;left:4px;color:var(--warm-dark);font-weight:bold}
-.shindan .free{color:#ffe3c4;font-weight:bold;font-size:1.1rem;margin-bottom:16px}
+/* 白いボックスの上に乗る文字。旧#ffe3c4は白地にほぼ見えないコントラスト不良だった(2026-07-25実測で発見・修正) */
+.shindan .free{color:var(--warm-deep);font-weight:bold;font-size:1.1rem;margin-bottom:16px}
 
 /* plans */
 .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
-.plan{background:#fff;border:1px solid var(--line);border-radius:14px;padding:30px 22px;display:flex;flex-direction:column;position:relative}
+.plan{background:var(--paper);border:1px solid var(--line-card);border-radius:var(--radius);padding:30px 22px;display:flex;flex-direction:column;position:relative;box-shadow:var(--shadow-card)}
 .plan.main{border:2px solid var(--warm)}
-.plan .tag{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--warm);color:#fff;font-size:.78rem;padding:3px 16px;border-radius:8px;white-space:nowrap}
+.plan .tag{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--warm);color:var(--white);font-size:.78rem;padding:3px 16px;border-radius:8px;white-space:nowrap}
 .plan h3{color:var(--teal-dark);text-align:center;font-size:1.05rem;margin-bottom:6px}
-.plan .price{text-align:center;font-size:1.6rem;font-weight:bold;color:var(--ink);margin:8px 0 2px}
+.plan .price{text-align:center;font-size:1.6rem;font-weight:bold;color:var(--ink);margin:8px 0 12px}
 .plan .price small{font-size:.85rem;font-weight:normal;color:var(--ink-soft)}
-.plan .monitor{text-align:center;font-size:.82rem;color:var(--warm-dark);margin-bottom:12px}
 .plan ul{list-style:none;margin:12px 0 20px;flex:1}
 .plan li{font-size:.9rem;padding:5px 0 5px 24px;position:relative;color:var(--ink-soft)}
 .plan li::before{content:"・";position:absolute;left:6px;color:var(--teal)}
@@ -198,18 +223,18 @@ h1,h2,h3,.logo,.btn{font-family:"Zen Maru Gothic",inherit}
 .plan .way small{display:block;font-weight:normal;color:var(--ink-soft);font-size:.76rem}
 
 /* subsidy */
-.subsidy{background:#fff8ef;border:1px dashed var(--warm);border-radius:14px;padding:24px 28px;font-size:.95rem}
+.subsidy{background:var(--warm-pale);border:1px dashed var(--warm);border-radius:14px;padding:24px 28px;font-size:.95rem}
 .subsidy strong{color:var(--warm-dark)}
 
 /* flow */
 .flow{counter-reset:step}
-.step{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px 22px 74px;margin-bottom:16px;position:relative;counter-increment:step}
-.step::before{content:counter(step);position:absolute;left:22px;top:22px;width:36px;height:36px;border-radius:50%;background:var(--soft);color:#fff;font-weight:bold;display:flex;align-items:center;justify-content:center}
+.step{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px 22px 74px;margin-bottom:16px;position:relative;counter-increment:step}
+.step::before{content:counter(step);position:absolute;left:22px;top:22px;width:36px;height:36px;border-radius:50%;background:var(--soft);color:var(--white);font-weight:bold;display:flex;align-items:center;justify-content:center}
 .step h3{color:var(--teal-dark);font-size:1.02rem;margin-bottom:4px}
 .step p{font-size:.92rem;color:var(--ink-soft)}
 
 /* faq */
-.faq details{background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:12px;overflow:hidden}
+.faq details{background:var(--paper);border:1px solid var(--line);border-radius:12px;margin-bottom:12px;overflow:hidden}
 .faq summary{padding:18px 22px;font-weight:bold;cursor:pointer;color:var(--ink);list-style:none;position:relative;padding-right:44px}
 .faq summary::before{content:"Q";color:var(--warm-deep);font-weight:bold;margin-right:10px}
 .faq summary::after{content:"＋";position:absolute;right:20px;color:var(--teal);font-weight:bold}
@@ -218,28 +243,34 @@ h1,h2,h3,.logo,.btn{font-family:"Zen Maru Gothic",inherit}
 
 /* blog */
 .blog-list{display:grid;gap:14px}
-.blog-list a{display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 22px;text-decoration:none;color:var(--ink);transition:.2s}
+.blog-list a{display:block;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 22px;text-decoration:none;color:var(--ink);transition:border-color var(--dur) var(--ease-out)}
 .blog-list a:hover{border-color:var(--teal)}
 .blog-list .date{font-size:.8rem;color:var(--ink-soft)}
 .blog-list .prep{text-align:center;color:var(--ink-soft);font-size:.9rem}
 
 /* about */
-.about-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:32px;max-width:640px;margin:0 auto}
+.about-box{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:32px;max-width:640px;margin:0 auto}
 .about-box h3{color:var(--teal-dark);margin-bottom:12px}
 .about-box p{font-size:.95rem;color:var(--ink-soft);margin-bottom:10px}
+.owner-name{font-size:.8rem;font-weight:normal;color:var(--ink-soft)}
+/* 白地・薄緑地セクションの背景（インラインstyleの色直書きをやめてクラス化・総合LPと同じ） */
+.bg-white{background:var(--white)}
+.bg-mint{background:var(--mint)}
 
 /* bottom cta */
-.bottom-cta{background:var(--cream);text-align:center;color:#fff;padding:56px 0 72px}
+.bottom-cta{background:var(--cream);text-align:center;color:var(--on-band);padding:56px 0 72px}
 .bottom-cta .wrap{background:var(--teal-dark);border-radius:22px;padding:56px 32px;position:relative;overflow:hidden;z-index:1}
-.bottom-cta .wrap::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:#fff;opacity:.06;right:-80px;top:-100px;z-index:-1}
+.bottom-cta .wrap::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--on-band);opacity:.06;right:-80px;top:-100px;z-index:-1}
 .bottom-cta .wrap::after{content:"";position:absolute;width:120px;height:120px;border-radius:50%;background:var(--warm);opacity:.28;left:-35px;bottom:-45px;z-index:-1}
-.bottom-cta h2{color:#fff}
+.bottom-cta h2{color:var(--on-band)}
 .bottom-cta h2::after{background:var(--warm)}
-.bottom-cta p{color:#d8ebe8;margin-bottom:30px}
+.bottom-cta p{color:var(--on-band-muted);margin-bottom:30px}
 .bottom-cta .cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.bottom-cta .btn-ghost{background:transparent;color:var(--on-band);border-color:var(--on-band)}
+.bottom-cta .btn-ghost:hover{background:var(--on-band);color:var(--teal-dark)}
 
-footer{background:var(--ink);color:#cfd8dc;padding:36px 0;text-align:center;font-size:.85rem}
-footer a{color:#cfd8dc}
+footer{background:var(--ink);color:var(--footer-ink);padding:36px 0;text-align:center;font-size:.85rem}
+footer a{color:var(--footer-ink)}
 footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
 
 @media (max-width:720px){
@@ -252,18 +283,21 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
   .logo small{display:none}
   /* スマホではリンクを2段目に回し、横スクロールで全部触れるようにする */
   .nav{flex-wrap:wrap;gap:8px;padding:10px 20px}
-  .nav-links{order:3;width:100%;margin:0;gap:16px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+  .nav-links{order:3;width:100%;margin:0;gap:16px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none;
+    /* 続きがあると分かる端フェード(総合LPと同じ・2026-07-25) */
+    -webkit-mask-image:var(--fade-edge);mask-image:var(--fade-edge)}
   .nav-links::-webkit-scrollbar{display:none}
   .nav-links a{font-size:.82rem}
   [id]{scroll-margin-top:104px}
   .totop{right:14px;bottom:14px;width:46px;height:46px;font-size:1.2rem}
 }
 
-/* 日本語の改行を整える（2026-07-21 本人指摘「改行ダサい」）
+/* 日本語の改行を整える（末行に1〜2文字だけ残るのを防ぐ）
    balance=行の長さを揃えて最後に1〜2文字だけ残るのを防ぐ／pretty=段落の最終行が短くなりすぎるのを防ぐ
    auto-phrase=文節（意味のかたまり）で折り返す。対応していないブラウザでは無視されるだけで表示は壊れない */
 h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;line-break:strict}
-.lead,.hero .sub,.bottom-cta p,.next-page-text,.card p,.step p,.about-box p,.detail-box li,.faq .a{text-wrap:pretty;word-break:auto-phrase;line-break:strict}
+/* 2026-07-25: このページ固有の要素（Before/After文・料金プランの箇条書き・診断ボックス・補助金欄）が適用先から漏れていたので追加 */
+.lead,.hero .sub,.hero .note,.bottom-cta p,.next-page-text,.card p,.step p,.about-box p,.detail-box li,.faq summary,.faq .a,.ba .row,.plan li,.plan .price,.plan .soon,.shindan .box li,.privacy-box p,.subsidy,.blog-list .prep,.backlink-text,footer p{text-wrap:pretty;word-break:auto-phrase;line-break:strict}
 </style>
 </head>
 <body>
@@ -287,7 +321,7 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
 <!-- 1. ファーストビュー -->
 <div class="hero" id="top">
   <div class="wrap">
-    <img src="../logo.png" alt="あいまに ロゴ" style="width:110px;margin:0 auto 18px;display:block;background:#fff;border-radius:16px;padding:6px;border:1px solid #efeae0" onerror="this.style.display='none'">
+    <img class="hero-logo" src="../logo.png" alt="あいまに ロゴ" onerror="this.style.display='none'">
     <p class="target">訪問看護・デイサービス・クリニック・整体院の方へ</p>
     <span class="badge">あなたの事業所に “AI社員” をひとり</span>
     <h1>申し送り・記録・お知らせ文。<br>その残業を、AIが<span class="em">“あいま（合間）”に変えます</span></h1>
@@ -314,7 +348,7 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
 </section>
 
 <!-- 2.5 Before / After（AI社員が入るとどう変わるか） -->
-<section id="henka" style="background:#e7efe4">
+<section id="henka" class="bg-mint">
   <div class="wrap">
     <h2>“AI社員”が入ると、1日がこう変わる</h2>
     <p class="lead">むずかしい設定はいりません。看護師が隣で一緒に入れます</p>
@@ -343,7 +377,7 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
 </section>
 
 <!-- 3. 選ばれる理由 -->
-<section id="reasons" style="background:#fff">
+<section id="reasons" class="bg-white">
   <div class="wrap reasons">
     <h2>【あいまに】が選ばれる3つの理由</h2>
     <p class="lead">IT業者さんとは、スタート地点が違います</p>
@@ -386,7 +420,6 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
       <div class="plan">
         <h3>① AI時短診断</h3>
         <p class="price">10,000円<small>（単発）</small></p>
-        <p class="monitor">口コミ3件までは、この価格でご案内します</p>
         <ul>
           <li>60〜90分</li>
           <li>時間を取られている業務3つをヒアリング</li>
@@ -403,7 +436,6 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
         <span class="tag">続けたい方の主力プラン</span>
         <h3>② 月イチ伴走プラン</h3>
         <p class="price">月12,000円<small>（解約自由）</small></p>
-        <p class="monitor">&nbsp;</p>
         <ul>
           <li>月1回60分（訪問 or オンライン）</li>
           <li>質問し放題（2営業日以内に返信）</li>
@@ -415,7 +447,6 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
       <div class="plan">
         <h3>③ AI業務まるごと代行</h3>
         <p class="price">月30,000円〜</p>
-        <p class="monitor">&nbsp;</p>
         <ul>
           <li>AIの設定・文書テンプレ・お知らせ文・研修資料を、こちらで作って納品</li>
           <li>「教えない、やってあげる」プラン</li>
@@ -437,7 +468,7 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
 </section>
 
 <!-- 7. ご利用の流れ -->
-<section id="flow" style="background:#fff">
+<section id="flow" class="bg-white">
   <div class="wrap flow">
     <h2>ご利用の流れ</h2>
     <p class="lead">お申し込みから当日まで、ぜんぶで4ステップです</p>
@@ -463,7 +494,7 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
 </section>
 
 <!-- 9. ブログ -->
-<section style="background:#fff" id="blog">
+<section class="bg-white" id="blog">
   <div class="wrap">
     <h2>現場のAI時短メモ</h2>
     <p class="lead">医療・介護の現場で今日から使えるAI活用を、看護師目線で書いています</p>
@@ -484,7 +515,7 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
       <!-- 氏名は対面用名刺（Claudeコード\名刺\あいまに名刺.html）と同表記（2026-07-17 実名・顔出しOKに方針転換）。
            顔写真を使う場合は photo.jpg をリポジトリ直下に置き、下のimgコメントを外す -->
       <!-- <img src="../photo.jpg" alt="運営者の顔写真" style="width:110px;height:110px;border-radius:50%;object-fit:cover;float:right;margin:0 0 10px 16px"> -->
-      <h3>【あいまに】<span style="font-size:.8rem;font-weight:normal;color:#777">運営者: 佐藤 三奈子</span></h3>
+      <h3>【あいまに】<span class="owner-name">運営者: 佐藤 三奈子</span></h3>
       <p>現役の看護師です。病棟・施設での勤務を続けながら、副業として医療・介護の小さな事業所さんのAI活用をお手伝いしています。</p>
       <p>お申し込みは、このページの無料診断フォームから直接でも、ココナラ（本人確認済みプラットフォーム）経由でも受け付けています。事業者情報は<a href="../tokushoho.html">特定商取引法に基づく表記</a>をご覧ください。</p>
       <p>「あいまに」＝AIが、あなたに“あいま（合間）”をつくる。事務仕事をAIに任せて生まれた時間を、患者さま・利用者さま、そして自分自身に向けられるように。そんな思いで名づけました。</p>
@@ -499,7 +530,7 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
     <p>無料診断に答えていただければ、あなたの事業所の「AIで消せる作業」の目安をお返しします。</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="#shindan">無料AI時短かんたん診断</a>
-      <a class="btn btn-sub" style="background:transparent;color:#fff;border-color:#fff" href="https://coconala.com/services/4316019" target="_blank" rel="noopener">ココナラで相談する</a>
+      <a class="btn btn-ghost" href="https://coconala.com/services/4316019" target="_blank" rel="noopener">ココナラで相談する</a>
     </div>
   </div>
 </section>
@@ -526,7 +557,7 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
     </div>
     <!-- 2026-07-17: 実名公開OK・LPからの直接申込を解禁したため、特商法表記は独立ページ（リポジトリ直下 tokushoho.html）へ移行。
          氏名は表示し、住所・電話番号は「請求があれば遅滞なく開示する旨」の省略特例を採用。※法務判断は未確認。心配なら専門家に相談すること -->
-    <p style="font-size:.8rem;margin-bottom:10px"><a href="../tokushoho.html" style="color:#9aa5ab">特定商取引法に基づく表記</a></p>
+    <p style="font-size:.8rem;margin-bottom:10px"><a href="../tokushoho.html">特定商取引法に基づく表記</a></p>
     <p>© 2026 あいまに — 医療・介護の小さな事業所のAI導入伴走</p>
   </div>
 </footer>
