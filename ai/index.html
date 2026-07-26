@@ -266,6 +266,9 @@ h1,h2,h3,.logo,.btn{font-family:"Zen Maru Gothic",inherit}
 .bottom-cta h2::after{background:var(--warm)}
 .bottom-cta p{color:var(--on-band-muted);margin-bottom:30px}
 .bottom-cta .cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+/* LINEはサブ導線。主導線(無料診断フォーム)と競合しないよう、ボタンではなく1行のテキストリンクにした(2026-07-26) */
+.cta-line{margin:22px 0 0;font-size:.9rem;color:var(--on-band-muted);text-wrap:pretty;word-break:auto-phrase;line-break:strict}
+.cta-line a{color:var(--on-band);text-decoration:underline;text-underline-offset:3px;font-weight:600}
 .bottom-cta .btn-ghost{background:transparent;color:var(--on-band);border-color:var(--on-band)}
 .bottom-cta .btn-ghost:hover{background:var(--on-band);color:var(--teal-dark)}
 
@@ -532,6 +535,7 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
       <a class="btn btn-primary" href="#shindan">無料AI時短かんたん診断</a>
       <a class="btn btn-ghost" href="https://coconala.com/services/4316019" target="_blank" rel="noopener">ココナラで相談する</a>
     </div>
+    <p class="cta-line">診断に答えるのがわずらわしい方は、<a href="https://line.me/R/ti/p/@709nfiek" target="_blank" rel="noopener">LINEで友だち追加</a>していただければ、そちらからのご相談でも大丈夫です。</p>
   </div>
 </section>
 
