@@ -312,6 +312,9 @@ header a:focus-visible{outline-color:var(--on-band)}
 .bottom-cta h2{color:var(--on-band)}
 .bottom-cta p{color:var(--on-band-muted);margin-bottom:30px}
 .bottom-cta .cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+/* LINEはサブ導線。主導線(相談フォーム)と競合しないよう、ボタンではなく1行のテキストリンクにした(2026-07-26) */
+.cta-line{margin:22px 0 0;font-size:.9rem;color:var(--on-band-muted);text-wrap:pretty;word-break:auto-phrase;line-break:strict}
+.cta-line a{color:var(--on-band);text-decoration:underline;text-underline-offset:3px;font-weight:600}
 
 footer{background:var(--ink);color:var(--footer-ink);padding:36px 0;text-align:center;font-size:.85rem}
 footer a{color:var(--footer-ink)}
@@ -660,6 +663,7 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
       <a class="btn btn-primary" href="https://forms.gle/HkjLuLgHaW19BaFg9" target="_blank" rel="noopener">相談フォームへ（無料）</a>
       <a class="btn btn-ghost" href="./ai/">AI導入支援の詳細を見る</a>
     </div>
+    <p class="cta-line">フォームの入力がわずらわしい方は、<a href="https://line.me/R/ti/p/@709nfiek" target="_blank" rel="noopener">LINEで友だち追加</a>していただければ、そちらからのご相談でも大丈夫です。</p>
   </div>
 </section>
 
