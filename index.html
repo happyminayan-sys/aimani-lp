@@ -59,7 +59,7 @@
         {
           "@type": "Question",
           "name": "料金はいくらですか？",
-          "acceptedAnswer": { "@type": "Answer", "text": "デジタルよろず相談は、店舗購入同行（一緒に選んで購入まで・延長料金なし・目安1〜2時間）10,000円ぽっきり・パソコン初期設定サポート10,000円・オンライン購入サポート5,000円の定額パックと、何でも相談・トラブル対応の時間制（1時間4,000円・2時間7,000円／移動費別）があります。AIの使い方レクチャーは1時間4,000円、Instagram代行は月15,000円〜です。AI時短診断は10,000円（60〜90分）、AI検索露出診断（AIにお店が出るかの実測レポート）と属人化診断（その人しかできない仕事の棚卸しと手順書づくり）も各10,000円です。継続支援や代行は内容により料金が変わるため、事前にお見積もりします。" }
+          "acceptedAnswer": { "@type": "Answer", "text": "デジタルよろず相談は、店舗購入同行（一緒に選んで購入まで・延長料金なし・目安1〜2時間）10,000円ぽっきり・パソコン初期設定サポート10,000円・オンライン購入サポート5,000円の定額パックと、何でも相談・トラブル対応の時間制（1時間4,000円・2時間お得パック7,000円。お得パックはオンラインまたはご来訪の場合のみ）があります。こちらがご訪問する場合は1回につき出張基本料5,000円（車で片道1時間以内の交通費を含みます。片道1時間を超える場合は交通費の実費を別途申し受けます）が加わり、定額パックは出張基本料を含んだ価格です。AIの使い方レクチャーは1時間4,000円、Instagram代行は月15,000円〜です。AI時短診断は10,000円（60〜90分）、AI検索露出診断（AIにお店が出るかの実測レポート）と属人化診断（その人しかできない仕事の棚卸しと手順書づくり）も各10,000円です。月イチ伴走は月12,000円、導入集中支援（訪問4時間×2回・1か月・出張基本料込み）は42,000円です。そのほかの継続支援や代行は内容により料金が変わるため、事前にお見積もりします。" }
         },
         {
           "@type": "Question",
@@ -122,9 +122,11 @@
   /* 影も直書きをやめてトークン化(2026-07-25監査) */
   --shadow-card:0 3px 14px rgba(40,51,58,.06);
   --shadow-totop:0 4px 14px rgba(0,0,0,.22);
+  /* もくじパネル（ヘッダーから垂れ下がる箱）。本文の上に浮くので影はカードより強く */
+  --shadow-menu:0 14px 34px rgba(40,51,58,.20);
   --shadow-band-glow:rgba(0,0,0,.08);
-  /* スマホのナビ横スクロール端フェード用(2026-07-25監査#8)。keyword(transparent)なのでhex/rgb直書きに当たらない */
-  --fade-edge:linear-gradient(to right,var(--white) 0,var(--white) calc(100% - 28px),transparent 100%);
+  /* （2026-08-02削除）スマホのナビ横スクロール端フェード --fade-edge。
+     横スクロール自体をやめ「もくじ」パネルに置き換えたため、使う場所が無くなった */
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -180,6 +182,55 @@ header a:focus-visible{outline-color:var(--on-band)}
 .nav-links{display:flex;gap:20px;align-items:center;margin-left:auto;margin-right:4px}
 .nav-links a{color:var(--on-band-soft);text-decoration:none;font-size:.88rem;font-weight:bold;white-space:nowrap;padding:3px 0;border-bottom:2px solid transparent;transition:color var(--dur) var(--ease-out),border-color var(--dur) var(--ease-out)}
 .nav-links a:hover{color:var(--on-band);border-bottom-color:var(--warm)}
+
+/* ── もくじ（2026-08-02 本人指摘「ナビの4つ以外の見出しが読み飛ばされる」への対応）─────────────
+   ヘッダーには4つしか置けないのに、ページには見出しが9つある。3か所で同じ全一覧に届くようにした。
+   ①ヘッダーの「もくじ▾」パネル（どこまで読んでも開ける・現在地を色で表示）
+   ②ヒーロー直下の「このページに書いてあること」一覧（最初に全体像を見せる）
+   ③フッターの全リンク（読み終わったあとの受け皿）
+   スマホでは横スクロールのナビ（隠れて気づかれない）をやめ、もくじパネルに一本化する。 */
+.nav{position:relative}
+.menu>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:7px;color:var(--on-band-soft);font-family:"Zen Maru Gothic",inherit;font-weight:bold;font-size:.88rem;padding:6px 15px;border:1.5px solid var(--on-band-soft);border-radius:999px;white-space:nowrap;transition:color var(--dur) var(--ease-out),background var(--dur) var(--ease-out),border-color var(--dur) var(--ease-out)}
+.menu>summary::-webkit-details-marker{display:none}
+/* ▾は絵文字だと端末で形が変わるのでCSSの三角形で描く */
+.menu>summary::after{content:"";width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid currentColor;transition:transform var(--dur) var(--ease-out)}
+.menu>summary:hover{color:var(--on-band);border-color:var(--on-band)}
+.menu[open]>summary{background:var(--on-band);color:var(--teal-dark);border-color:var(--on-band)}
+.menu[open]>summary::after{transform:rotate(180deg)}
+.menu-panel{position:absolute;top:calc(100% + 8px);right:20px;width:min(370px,calc(100% - 40px));background:var(--paper);border:1px solid var(--line-card);border-radius:16px;box-shadow:var(--shadow-menu);padding:14px 14px 12px;max-height:min(72vh,620px);overflow-y:auto;z-index:5}
+.menu-title{font-family:"Zen Maru Gothic",inherit;font-size:.76rem;font-weight:bold;color:var(--ink-soft);letter-spacing:.04em;margin:0 6px 6px}
+.menu-panel>.menu-title:not(:first-child){margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.menu-title+.menu-sub{border-top:none;margin-top:0;padding-top:0}
+.menu-list{list-style:none}
+.menu-list a{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:10px;text-decoration:none;color:var(--ink);font-size:.9rem;line-height:1.65}
+.menu-list a:hover{background:var(--mint)}
+.menu-list .mn{flex:0 0 auto;width:21px;height:21px;margin-top:3px;border-radius:50%;border:1.5px solid var(--soft);color:var(--teal-dark);font-family:"Zen Maru Gothic",inherit;font-size:.7rem;display:inline-flex;align-items:center;justify-content:center}
+/* いま画面に出ている見出しに色をつける（どこまで読んだかが分かる） */
+.menu-list a.is-current{background:var(--mint);color:var(--teal-dark);font-weight:bold;box-shadow:inset 3px 0 0 var(--warm)}
+.menu-list a.is-current .mn{background:var(--soft);border-color:var(--soft);color:var(--white)}
+.menu-sub{list-style:none;border-top:1px solid var(--line);margin-top:8px;padding-top:8px}
+.menu-sub a{display:block;padding:7px 10px;border-radius:10px;font-size:.85rem;color:var(--teal);font-weight:bold;text-decoration:none;line-height:1.6}
+.menu-sub a:hover{background:var(--mint)}
+.menu-sub a::before{content:"↗";margin-right:6px;color:var(--ink-soft);font-weight:normal}
+
+/* ②ヒーロー直下の目次。カードを4回くり返すと同じ見た目になるので、
+   ここは本の目次のような「行」で組む（番号は輪郭だけの丸にして、サービスの塗り丸数字と区別する） */
+.toc-band{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.toc-band h2{font-size:1.5rem}
+.toc-band .lead{margin-bottom:22px}
+.toc-list{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 26px}
+.toc-list li{border-bottom:1px solid var(--line)}
+.toc-list a{display:flex;gap:12px;align-items:flex-start;padding:13px 10px;text-decoration:none;border-radius:10px;transition:background var(--dur) var(--ease-out)}
+.toc-list a:hover{background:var(--mint)}
+.toc-num{flex:0 0 auto;width:26px;height:26px;margin-top:2px;border-radius:50%;border:1.5px solid var(--soft);color:var(--teal-dark);font-family:"Zen Maru Gothic",inherit;font-size:.8rem;display:inline-flex;align-items:center;justify-content:center;transition:background var(--dur) var(--ease-out),color var(--dur) var(--ease-out)}
+.toc-list a:hover .toc-num{background:var(--soft);border-color:var(--soft);color:var(--white)}
+/* 長い見出しでも箱からはみ出さないようにする（flexの子は既定で縮まないため） */
+.toc-list a>span:last-child{min-width:0}
+.toc-title{display:block;font-family:"Zen Maru Gothic",inherit;font-weight:bold;color:var(--teal-dark);font-size:.98rem;line-height:1.6}
+.toc-desc{display:block;font-size:.84rem;color:var(--ink-soft);line-height:1.75;margin-top:1px}
+.toc-other{margin-top:20px;font-size:.88rem;color:var(--ink-soft)}
+/* inline-block: リンクの途中で改行して末尾に2文字だけ残るのを防ぐ（丸ごと次の行へ送る） */
+.toc-other a{color:var(--teal);font-weight:bold;text-decoration:underline;text-underline-offset:3px;display:inline-block}
 
 /* 固定ヘッダーに見出しが隠れないようにする（これが無いとジャンプ先が頭切れになる） */
 [id]{scroll-margin-top:78px}
@@ -318,7 +369,7 @@ header a:focus-visible{outline-color:var(--on-band)}
 
 footer{background:var(--ink);color:var(--footer-ink);padding:36px 0;text-align:center;font-size:.85rem}
 footer a{color:var(--footer-ink)}
-footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+footer .links{margin-bottom:14px;display:flex;gap:6px 20px;justify-content:center;flex-wrap:wrap}
 
 /* 「動きを控えめに」設定の端末では、浮き上がり・スクロール追従の動きを止める */
 @media (prefers-reduced-motion:reduce){
@@ -352,14 +403,20 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
   .nav a.btn{width:auto}
   .logo small{display:none}
   .detail-box{padding:26px 20px}
-  /* スマホではリンクを2段目に回し、横スクロールで全部触れるようにする */
-  .nav{flex-wrap:wrap;gap:8px;padding:10px 20px}
-  .nav-links{order:3;width:100%;margin:0;gap:16px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none;
-    /* 続きがあると分かる端フェード(2026-07-25監査#8) */
-    -webkit-mask-image:var(--fade-edge);mask-image:var(--fade-edge)}
-  .nav-links::-webkit-scrollbar{display:none}
-  .nav-links a{font-size:.82rem}
-  [id]{scroll-margin-top:104px}
+  /* スマホは「横スクロールで続きが見えるリンク列」をやめ、もくじパネル1つに集約(2026-08-02)。
+     横スクロールは指を横に動かさないと続きが出ないため、置いた4つ自体が気づかれていなかった */
+  .nav{gap:10px;padding:10px 16px}
+  .nav-links{display:none}
+  .menu>summary{padding:6px 13px;font-size:.85rem}
+  /* 高さの上限は「全項目が一度に見える」ことを優先（下が切れると結局読み飛ばしが起きる）。
+     行の余白もAI導入LPと同じだけ詰めて、2枚のもくじの見え方を揃える */
+  .menu-panel{left:16px;right:16px;width:auto;max-height:min(70vh,560px)}
+  .menu-list a,.menu-sub a{padding:6px 10px}
+  .toc-list{grid-template-columns:minmax(0,1fr)}
+  /* 9行を縦に積むと画面1枚分を超えるので、行の余白だけ詰める（文字は減らさない） */
+  .toc-list a{padding:11px 8px;gap:10px}
+  .toc-band h2{font-size:1.35rem}
+  [id]{scroll-margin-top:74px}
   .totop{right:14px;bottom:14px;width:46px;height:46px;font-size:1.2rem}
   /* サービス詳細CTA・次ページ案内ボタンは文言が長く、375pxでは既定のpadding/font-sizeだと2行に折れる実測不具合(2026-07-25) */
   .ctarow .btn,.next-page .btn{padding:14px 18px;font-size:.9rem}
@@ -372,8 +429,8 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
 /* 日本語の改行を整える（末行に1〜2文字だけ残るのを防ぐ）
    balance=行の長さを揃えて最後に1〜2文字だけ残るのを防ぐ／pretty=段落の最終行が短くなりすぎるのを防ぐ
    auto-phrase=文節（意味のかたまり）で折り返す。対応していないブラウザでは無視されるだけで表示は壊れない */
-h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;line-break:strict}
-.lead,.hero .sub,.bottom-cta p,.next-page-text,.card p,.step p,.about-box p,.detail-box li,.faq .a,.faq summary,.audience-card p,.price-table td{text-wrap:pretty;word-break:auto-phrase;line-break:strict}
+h1,h2,h3,.free-pill,.next-page-label,.toc-title{text-wrap:balance;word-break:auto-phrase;line-break:strict}
+.lead,.hero .sub,.bottom-cta p,.next-page-text,.card p,.step p,.about-box p,.detail-box li,.faq .a,.faq summary,.audience-card p,.price-table td,.toc-desc,.toc-other,.menu-list a,.menu-sub a{text-wrap:pretty;word-break:auto-phrase;line-break:strict}
 </style>
 </head>
 <body>
@@ -381,13 +438,38 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
 <header>
   <div class="nav">
     <a class="logo" href="#top">【あいまに】<small>デジタル・AI・SNSの何でも窓口</small></a>
-    <!-- リンクは4つまで。スマホ(375px)で5つ並べるとはみ出す。3事業へ直接飛ばす（本命の「何でも相談」を先頭に） -->
-    <nav class="nav-links">
+    <!-- 直リンクは3事業だけ（パソコンの幅に収まる上限）。残りの見出しは右の「もくじ」に全部入れる。
+         スマホでは .nav-links を隠し、もくじパネル1つに集約する（2026-08-02） -->
+    <nav class="nav-links" aria-label="主なサービス">
       <a href="#service-digital">何でも相談</a>
       <a href="#service-ai">AI導入</a>
       <a href="#service-instagram">Instagram</a>
-      <a href="#faq">よくある質問</a>
     </nav>
+    <!-- もくじ: JSが動かない環境でも details/summary だけで開閉できる（ライブラリ不要） -->
+    <details class="menu" id="menu">
+      <summary>もくじ</summary>
+      <div class="menu-panel">
+        <p class="menu-title">このページの見出し（全9）</p>
+        <nav aria-label="このページの見出し">
+          <ol class="menu-list">
+            <li><a href="#services"><span class="mn">1</span>【あいまに】の3つのサービス</a></li>
+            <li><a href="#prices"><span class="mn">2</span>料金の目安</a></li>
+            <li><a href="#reasons"><span class="mn">3</span>【あいまに】が選ばれる理由</a></li>
+            <li><a href="#service-digital"><span class="mn">4</span>デジタル何でも相談</a></li>
+            <li><a href="#service-ai"><span class="mn">5</span>AI導入支援（医療・介護／中小企業）</a></li>
+            <li><a href="#service-instagram"><span class="mn">6</span>Instagram代行運用</a></li>
+            <li><a href="#flow"><span class="mn">7</span>ご利用の流れ</a></li>
+            <li><a href="#faq"><span class="mn">8</span>よくあるご質問</a></li>
+            <li><a href="#about"><span class="mn">9</span>運営者について</a></li>
+          </ol>
+        </nav>
+        <p class="menu-title">別のページ</p>
+        <ul class="menu-sub">
+          <li><a href="https://happyminayan-sys.github.io/aimani-lp/ai/">AI時短診断の専用ページ（医療・介護向け）</a></li>
+          <li><a href="./tokushoho.html">特定商取引法に基づく表記</a></li>
+        </ul>
+      </div>
+    </details>
     <a class="btn btn-primary" href="https://forms.gle/HkjLuLgHaW19BaFg9" target="_blank" rel="noopener">相談する</a>
   </div>
 </header>
@@ -404,7 +486,7 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
     <div class="audience-cards">
       <div class="audience-card">
         <h3><span class="audience-mark" aria-hidden="true">人</span>個人の方へ</h3>
-        <p>「何度聞いても大丈夫」なパソコン・スマホ・AIのよろず相談。同じ質問を何度でも聞いていただけます。</p>
+        <p>「何度聞いても大丈夫」なパソコン・スマホ・AIのよろず相談。</p>
         <p class="price">1時間 4,000円〜</p>
         <a class="btn btn-primary" href="#service-digital">デジタル何でも相談の説明を見る</a>
       </div>
@@ -423,6 +505,29 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
     </div>
   </div>
 </div>
+
+<!-- 1.5 このページの目次（2026-08-02追加）
+     ヘッダーには4つしかリンクを置けず、料金・選ばれる理由・ご利用の流れ・運営者が読み飛ばされていた。
+     最初に「何が書いてあるか」を全部見せて、読みたい所へ直接飛べるようにする。
+     見出しを増やしたら、ここ・ヘッダーのもくじ・フッターの3か所を必ず揃えること -->
+<section id="toc" class="toc-band tight">
+  <nav class="wrap" aria-label="このページの目次">
+    <h2>このページに書いてあること</h2>
+    <p class="lead">気になる見出しを押すと、その場所へ飛べます。<br>読んでいる途中でも、上の「もくじ」から開き直せます。</p>
+    <ol class="toc-list">
+      <li><a href="#services"><span class="toc-num">1</span><span><span class="toc-title">【あいまに】の3つのサービス</span><span class="toc-desc">何でも相談・AI導入・Instagram代行</span></span></a></li>
+      <li><a href="#prices"><span class="toc-num">2</span><span><span class="toc-title">料金の目安</span><span class="toc-desc">3つのサービスの料金と出張基本料</span></span></a></li>
+      <li><a href="#reasons"><span class="toc-num">3</span><span><span class="toc-title">【あいまに】が選ばれる理由</span><span class="toc-desc">IT業者・広告代理店とはちがう4つ</span></span></a></li>
+      <li><a href="#service-digital"><span class="toc-num">4</span><span><span class="toc-title">デジタル何でも相談</span><span class="toc-desc">購入・初期設定・AIの使い方（暮らしもOK）</span></span></a></li>
+      <li><a href="#service-ai"><span class="toc-num">5</span><span><span class="toc-title">AI導入支援（医療・介護／中小企業）</span><span class="toc-desc">3つの診断と月イチ伴走の中身・料金</span></span></a></li>
+      <li><a href="#service-instagram"><span class="toc-num">6</span><span><span class="toc-title">Instagram代行運用</span><span class="toc-desc">投稿文づくりから運用まで代行</span></span></a></li>
+      <li><a href="#flow"><span class="toc-num">7</span><span><span class="toc-title">ご利用の流れ</span><span class="toc-desc">フォーム入力→ヒアリング→ご提案→着手</span></span></a></li>
+      <li><a href="#faq"><span class="toc-num">8</span><span><span class="toc-title">よくあるご質問</span><span class="toc-desc">料金・苦手でも大丈夫か・遠方対応 10問</span></span></a></li>
+      <li><a href="#about"><span class="toc-num">9</span><span><span class="toc-title">運営者について</span><span class="toc-desc">現役の看護師が運営。屋号の由来も</span></span></a></li>
+    </ol>
+    <p class="toc-other">このページのほかに: <a href="https://happyminayan-sys.github.io/aimani-lp/ai/">AI時短診断の専用ページ（医療・介護向け）</a>／<a href="./tokushoho.html">特定商取引法に基づく表記</a></p>
+  </nav>
+</section>
 
 <!-- 2. 3つのサービス紹介 -->
 <section id="services">
@@ -459,7 +564,7 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
 <section id="prices" class="bg-white tight">
   <div class="wrap">
     <h2>料金の目安</h2>
-    <p class="lead">まずは小さく始められる料金をご用意しています。内容が決まっていないご相談・お見積もりは無料です。<br>（料金はこのページに一本化しています）</p>
+    <p class="lead">まずは小さく始められる料金をご用意しています。内容が決まっていないご相談・お見積もりは無料です。<br>（医療・介護向けの詳しい料金は、専用ページにも掲載しています）</p>
     <div class="price-table-wrap">
     <table class="price-table">
       <thead>
@@ -468,11 +573,11 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
       <tbody>
         <tr>
           <th scope="row">デジタル何でも相談</th>
-          <td><strong>店舗購入同行 10,000円ぽっきり</strong>（延長料金なし・一緒に選んで買うまで）<br><strong>パソコン初期設定サポート 10,000円</strong>（新品1台まるごと）<br><strong>オンライン購入サポート 5,000円</strong>（機種選び〜注文）<br>何でも相談・トラブルは 1時間 4,000円／2時間 7,000円<br>移動費は別途です。</td>
+          <td><strong>店舗購入同行 10,000円ぽっきり</strong>（延長料金なし・一緒に選んで買うまで）<br><strong>パソコン初期設定サポート 10,000円</strong>（新品1台まるごと）<br><strong>オンライン購入サポート 5,000円</strong>（機種選び〜注文）<br>何でも相談・トラブルは 1時間 4,000円／2時間お得パック 7,000円<br><strong>ご訪問の場合は出張基本料 5,000円</strong>（車で片道1時間以内の交通費込み）<br><small>定額パックは出張基本料込みの価格です。お得パックはオンライン・ご来訪のみ。車で片道1時間を超える場合は交通費の実費を別途申し受けます。</small></td>
         </tr>
         <tr>
           <th scope="row">AI導入支援</th>
-          <td><strong>AIレクチャー 1時間 4,000円</strong><br>2時間お得パック 7,000円<br><strong>AI時短診断 10,000円</strong>（その場で1つ時短を設定）<br><strong>AI検索露出診断 10,000円</strong>（60回実測のPDFレポート）<br><strong>属人化診断 10,000円</strong>（その場で手順書1本を作成）<br>月イチ伴走 月12,000円</td>
+          <td><strong>AIレクチャー 1時間 4,000円</strong><br>2時間お得パック 7,000円<br><strong>AI時短診断 10,000円</strong>（その場で1つ時短を設定）<br><strong>AI検索露出診断 10,000円</strong>（60回実測のPDFレポート）<br><strong>属人化診断 10,000円</strong>（その場で手順書1本を作成）<br>月イチ伴走 月12,000円<br><strong>導入集中支援 42,000円</strong>（訪問4時間×2回・1か月・出張基本料込み）<br><small>2時間お得パックはオンライン・ご来訪のみ。ご訪問の場合は出張基本料 5,000円が加わります（車で片道1時間以内の交通費込み・超える場合は実費を別途申し受けます）。導入集中支援は出張基本料込みの価格です。</small></td>
         </tr>
         <tr>
           <th scope="row">Instagram代行運用</th>
@@ -485,15 +590,15 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
   </div>
 </section>
 
-<!-- 4. 選ばれる理由 -->
-<section class="bg-white">
+<!-- 4. 選ばれる理由（id はもくじから飛ぶために2026-08-02に追加） -->
+<section id="reasons" class="bg-white">
   <div class="wrap">
     <h2>【あいまに】が選ばれる理由</h2>
     <p class="lead">IT業者さんや広告代理店とは、スタート地点が違います。</p>
     <div class="reasons-grid">
       <div class="card"><h3>現役看護師だから、現場の話が通じる</h3><p>医療・介護の現場はもちろん、個人事業や小規模店舗の「人手が足りない」「時間がない」感覚も、自分自身が副業をしながら実感しています。説明に時間がかからず、相談が早く核心に届きます。</p></div>
       <div class="card"><h3>専門用語を使いません</h3><p>「プロンプト」「API」「アルゴリズム」といった言葉は使いません。パソコンやスマホが苦手な方にも、分かる言葉で説明します。</p></div>
-      <div class="card"><h3>個人情報への配慮を大切にしています</h3><p>医療・介護の現場では、患者さま・利用者さまの個人情報をAIに入力しない設計を徹底しています。どのサービスでも、この線引きの感覚を大事にしてお手伝いします。</p></div>
+      <div class="card"><h3>個人情報への配慮を大切にしています</h3><p>医療・介護の現場では、患者さま・利用者さまの個人情報をAIに入力しない設計でお手伝いします。どのサービスでも、この線引きの感覚を大事にしています。</p></div>
       <div class="card"><h3>教えて終わり、売って終わりにしません</h3><p>パソコンなら使えるようになるまで、AIなら業務に定着するまで、隣で一緒に手を動かします。「まずは相談だけ」から「継続して任せたい」まで、無理に大きな契約を勧めません。</p></div>
     </div>
   </div>
@@ -523,7 +628,7 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
         <li>AIの使い方レクチャー（文章作成・調べ物・資料づくりなど）</li>
         <li>毎日の事務作業の自動化のご提案</li>
       </ul>
-      <div class="price-line">店舗購入同行 10,000円ぽっきり（延長料金なし）／パソコン初期設定サポート 10,000円／オンライン購入サポート 5,000円<small>何でも相談・トラブル対応は1時間 4,000円・2時間 7,000円／購入同行は事前に在庫を確認してから同行（目安1〜2時間）／移動費別／ご相談・お見積もりは無料です</small></div>
+      <div class="price-line">店舗購入同行 10,000円ぽっきり（延長料金なし）／パソコン初期設定サポート 10,000円／オンライン購入サポート 5,000円<small>何でも相談・トラブル対応は1時間 4,000円・2時間お得パック 7,000円（オンライン・ご来訪のみ）／ご訪問は出張基本料 5,000円（車で片道1時間以内の交通費込み・超える場合は実費を別途申し受けます）／定額パックは出張基本料込み／購入同行は事前に在庫を確認してから同行（目安1〜2時間）<br>ご相談・お見積もりは無料です</small></div>
       <div class="ctarow">
         <a class="btn btn-primary" href="https://forms.gle/HkjLuLgHaW19BaFg9" target="_blank" rel="noopener">相談フォームへ</a>
       </div>
@@ -551,7 +656,7 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
       </ul>
       <div class="price-line">AI時短診断 10,000円<small>60〜90分／無料相談・お見積もりあり</small></div>
       <ul class="dot">
-        <li>AIの使い方レクチャーは、1時間 4,000円／2時間お得パック 7,000円です</li>
+        <li>AIの使い方レクチャーは、1時間 4,000円／2時間お得パック 7,000円（オンライン・ご来訪のみ）です。こちらがご訪問する場合は出張基本料 5,000円（車で片道1時間以内の交通費込み）が加わります（片道1時間を超える場合は交通費の実費を別途申し受けます）</li>
         <li>時間を取られている業務を3つ整理し、時短の方法を一緒に考えます</li>
         <li>AIでこう時短できる、という診断シートをお渡しします</li>
         <li>月イチ伴走は月12,000円、設定・作成の代行は月30,000円〜です（代行は現在、伴走のお客さま向けに準備中）</li>
@@ -626,7 +731,7 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
   <div class="wrap faq">
     <h2>よくあるご質問</h2>
     <details><summary>どのサービスに当てはまるか自分では分かりません。相談だけでもいいですか？</summary><div class="a">大丈夫です。「何ができるか、まず相談したい」だけのご相談も歓迎しています。内容を伺ったうえで、一番合う窓口をこちらでご案内します。</div></details>
-    <details><summary>料金はいくらですか？</summary><div class="a"><b>デジタルよろず相談は、店舗購入同行（一緒に選んで購入まで・延長料金なし・目安1〜2時間）10,000円ぽっきり・パソコン初期設定サポート10,000円・オンライン購入サポート5,000円の定額パックと、何でも相談・トラブル対応の時間制（1時間4,000円・2時間7,000円／移動費別）があります。AIの使い方レクチャーは1時間4,000円、Instagram代行は月15,000円〜</b>です。AI時短診断は10,000円（60〜90分）、AI検索露出診断（AIにお店が出るかの実測レポート）と属人化診断（その人しかできない仕事の棚卸しと手順書づくり）も各10,000円です。継続支援や代行は内容により料金が変わるため、事前にお見積もりします。医療・介護向けの詳細・料金は<a href="https://happyminayan-sys.github.io/aimani-lp/ai/">専用ページ</a>をご覧ください。</div></details>
+    <details><summary>料金はいくらですか？</summary><div class="a"><b>デジタルよろず相談は、店舗購入同行（一緒に選んで購入まで・延長料金なし・目安1〜2時間）10,000円ぽっきり・パソコン初期設定サポート10,000円・オンライン購入サポート5,000円の定額パックと、何でも相談・トラブル対応の時間制（1時間4,000円・2時間お得パック7,000円。お得パックはオンラインまたはご来訪の場合のみ）があります。こちらがご訪問する場合は1回につき出張基本料5,000円（車で片道1時間以内の交通費を含みます。片道1時間を超える場合は交通費の実費を別途申し受けます）が加わり、定額パックは出張基本料を含んだ価格です。AIの使い方レクチャーは1時間4,000円、Instagram代行は月15,000円〜</b>です。AI時短診断は10,000円（60〜90分）、AI検索露出診断（AIにお店が出るかの実測レポート）と属人化診断（その人しかできない仕事の棚卸しと手順書づくり）も各10,000円です。月イチ伴走は月12,000円、導入集中支援（訪問4時間×2回・1か月・出張基本料込み）は42,000円です。そのほかの継続支援や代行は内容により料金が変わるため、事前にお見積もりします。医療・介護向けの詳細・料金は<a href="https://happyminayan-sys.github.io/aimani-lp/ai/">専用ページ</a>をご覧ください。</div></details>
     <details><summary>パソコンやAIが苦手でも大丈夫ですか？</summary><div class="a">大丈夫です。専門用語を使わず、分かる言葉で一つずつ説明します。</div></details>
     <details><summary>「AI検索露出診断」とは何ですか？</summary><div class="a">ChatGPTなどのAIに「この地域のおすすめのお店は？」といった質問を計60回行い、あなたのお店が出てくるか・代わりにどの競合が出ているか・AIが何を引用しているかを実測し、改善策と一緒にレポートでお渡しするサービスです（10,000円）。AIでお店を探す人はまだ少数ですが伸びており、無料でできる備えから優先度順にご提案します。AIへの表示を保証するものではありません。</div></details>
     <details><summary>「属人化診断」とは何ですか？</summary><div class="a">「この仕事は〇〇さんしかやり方を知らない」という業務を、60分のオンライン相談で棚卸しし、止まったら困る順に一覧にしたうえで、一番危ない業務1つをその場で手順書にするサービスです（10,000円・翌日にまとめシートを納品）。担当の方の退職・異動・急なお休みに備えたい職場や、休みづらい個人事業主の方に向いています。Excelマクロなどプログラムの中身の解読・修理は行わず、操作手順の見える化までを担当します。</div></details>
@@ -648,7 +753,7 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
       <!-- <img src="./photo.jpg" alt="運営者の顔写真" style="width:110px;height:110px;border-radius:50%;object-fit:cover;float:right;margin:0 0 10px 16px"> -->
       <h3>【あいまに】<span class="owner-name">運営者: 佐藤 三奈子</span></h3>
       <p>現役の看護師です。本業を続けながら、副業として「あいまに」の屋号で活動しています。</p>
-      <p>デジタルの困りごと相談、中小企業・個人事業主のAI導入支援、Instagram代行運用の3つを、現場で人手や時間が足りない感覚を知っているからこそのペースで、お手伝いしています。医療・介護のAI活用も専門領域です。</p>
+      <p>デジタルの困りごと相談、中小企業・個人事業主のAI導入支援、Instagram代行運用の3つを、現場で人手や時間が足りない感覚を知っているからこそのペースで、お手伝いしています。医療・介護のAI活用を中心にしています。</p>
       <p>「あいまに」＝AIが、あなたに“あいま（合間）”をつくる。手のかかる作業をAIに任せて、生まれた時間を本当に大事なことに使ってほしい。そんな思いで名づけました。</p>
     </div>
   </div>
@@ -661,7 +766,7 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
     <p>デジタルのこと、AIのこと、Instagramのこと。<br>迷ったら、まずは相談フォームにひとこと書いてみてください。</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="https://forms.gle/HkjLuLgHaW19BaFg9" target="_blank" rel="noopener">相談フォームへ（無料）</a>
-      <a class="btn btn-ghost" href="./ai/">AI導入支援の詳細を見る</a>
+      <a class="btn btn-ghost" href="https://happyminayan-sys.github.io/aimani-lp/ai/">AI導入支援の詳細を見る</a>
     </div>
     <p class="cta-line">フォームの入力がわずらわしい方は、<a href="https://line.me/R/ti/p/@709nfiek" target="_blank" rel="noopener">LINEで友だち追加</a>していただければ、そちらからのご相談でも大丈夫です。</p>
   </div>
@@ -669,12 +774,20 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
 
 <footer>
   <div class="wrap">
-    <!-- リンクの羅列はやめ、実際に押される4本だけに絞った（2026-07-20） -->
+    <!-- 2026-08-02: 4本に絞る運用をやめ、全見出しを並べた（本人指摘「載っている情報を全部届けてほしい」）。
+         最後まで読んだ人が、戻って読み直す受け皿になる。ヘッダーのもくじ・目次セクションと中身を揃えること -->
     <div class="links">
-      <a href="#services">サービスと料金</a>
-      <a href="#faq">よくある質問</a>
+      <a href="#services">3つのサービス</a>
+      <a href="#prices">料金の目安</a>
+      <a href="#reasons">選ばれる理由</a>
+      <a href="#service-digital">デジタル何でも相談</a>
+      <a href="#service-ai">AI導入支援</a>
+      <a href="#service-instagram">Instagram代行運用</a>
+      <a href="#flow">ご利用の流れ</a>
+      <a href="#faq">よくあるご質問</a>
       <a href="#about">運営者について</a>
       <!-- noteは未開設のためリンクを削除（2026-07-17）。開設したら <a href="（noteのURL）" target="_blank" rel="noopener">note</a> を戻す -->
+      <a href="https://happyminayan-sys.github.io/aimani-lp/ai/">AI時短診断の専用ページ</a>
       <a href="./tokushoho.html">特定商取引法に基づく表記</a>
     </div>
     <p>© 2026 あいまに</p>
@@ -690,6 +803,43 @@ try {
   var _s = function () { if (window.pageYOffset > 500) { _t.classList.add('show'); } else { _t.classList.remove('show'); } };
   window.addEventListener('scroll', _s, { passive: true });
   _s();
+} catch (e) {}
+
+// もくじパネルの開け閉めと「いま読んでいる見出し」の色づけ。
+// JSが動かなくても details/summary だけで開閉でき、リンクも全部生きているので本文には影響しない
+try {
+  var _m = document.getElementById('menu');
+  // リンクを押したら閉じる（開いたままだと飛んだ先が隠れる）
+  _m.addEventListener('click', function (ev) {
+    if (ev.target.closest('a')) { _m.removeAttribute('open'); }
+  });
+  // パネルの外を押したとき・Escキーで閉じる
+  document.addEventListener('click', function (ev) {
+    if (_m.hasAttribute('open') && !_m.contains(ev.target)) { _m.removeAttribute('open'); }
+  });
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape') { _m.removeAttribute('open'); }
+  });
+
+  // いま画面に出ている見出しをもくじの中で色づけする（どこまで読んだかが分かる）
+  var _links = [].slice.call(_m.querySelectorAll('.menu-list a[href^="#"]'));
+  var _secs = _links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+  var _tick = false;
+  var _spy = function () {
+    var cur = -1;
+    for (var i = 0; i < _secs.length; i++) {
+      if (_secs[i] && _secs[i].getBoundingClientRect().top <= 120) { cur = i; }
+    }
+    for (var j = 0; j < _links.length; j++) {
+      if (j === cur) { _links[j].classList.add('is-current'); _links[j].setAttribute('aria-current', 'true'); }
+      else { _links[j].classList.remove('is-current'); _links[j].removeAttribute('aria-current'); }
+    }
+    _tick = false;
+  };
+  window.addEventListener('scroll', function () {
+    if (!_tick) { _tick = true; window.requestAnimationFrame(_spy); }
+  }, { passive: true });
+  _spy();
 } catch (e) {}
 </script>
 
