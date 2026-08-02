@@ -94,7 +94,10 @@
   --shadow-card:0 3px 14px rgba(40,51,58,.06);
   --shadow-totop:0 4px 14px rgba(0,0,0,.22);
   --shadow-band-glow:rgba(0,0,0,.08);
-  --fade-edge:linear-gradient(to right,var(--white) 0,var(--white) calc(100% - 28px),transparent 100%);
+  /* もくじパネル（ヘッダーから垂れ下がる箱）。本文の上に浮くので影はカードより強く */
+  --shadow-menu:0 14px 34px rgba(40,51,58,.20);
+  /* （2026-08-02削除）スマホのナビ横スクロール端フェード --fade-edge。
+     横スクロール自体をやめ「もくじ」パネルに置き換えたため、使う場所が無くなった */
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -143,6 +146,51 @@ header a:focus-visible{outline-color:var(--on-band)}
 .nav-links{display:flex;gap:20px;align-items:center;margin-left:auto;margin-right:4px}
 .nav-links a{color:var(--on-band-soft);text-decoration:none;font-size:.88rem;font-weight:bold;white-space:nowrap;padding:3px 0;border-bottom:2px solid transparent;transition:color var(--dur) var(--ease-out),border-color var(--dur) var(--ease-out)}
 .nav-links a:hover{color:var(--on-band);border-bottom-color:var(--warm)}
+
+/* ── もくじ（2026-08-02。総合LPと同じ仕組み）─────────────────────────────
+   ヘッダーに置けるリンクは3〜4本なのに見出しは10ある。3か所で同じ全一覧に届くようにした。
+   ①ヘッダーの「もくじ▾」パネル（現在地を色で表示）②ヒーロー直下の一覧 ③フッターの全リンク
+   スマホでは横スクロールのナビ（隠れて気づかれない）をやめ、もくじパネルに一本化する */
+.nav{position:relative}
+.menu>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:7px;color:var(--on-band-soft);font-family:"Zen Maru Gothic",inherit;font-weight:bold;font-size:.88rem;padding:6px 15px;border:1.5px solid var(--on-band-soft);border-radius:999px;white-space:nowrap;transition:color var(--dur) var(--ease-out),background var(--dur) var(--ease-out),border-color var(--dur) var(--ease-out)}
+.menu>summary::-webkit-details-marker{display:none}
+/* ▾は絵文字だと端末で形が変わるのでCSSの三角形で描く */
+.menu>summary::after{content:"";width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid currentColor;transition:transform var(--dur) var(--ease-out)}
+.menu>summary:hover{color:var(--on-band);border-color:var(--on-band)}
+.menu[open]>summary{background:var(--on-band);color:var(--teal-dark);border-color:var(--on-band)}
+.menu[open]>summary::after{transform:rotate(180deg)}
+.menu-panel{position:absolute;top:calc(100% + 8px);right:20px;width:min(370px,calc(100% - 40px));background:var(--paper);border:1px solid var(--line-card);border-radius:16px;box-shadow:var(--shadow-menu);padding:14px 14px 12px;max-height:min(72vh,620px);overflow-y:auto;z-index:5;text-align:left}
+.menu-title{font-family:"Zen Maru Gothic",inherit;font-size:.76rem;font-weight:bold;color:var(--ink-soft);letter-spacing:.04em;margin:0 6px 6px}
+.menu-panel>.menu-title:not(:first-child){margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.menu-title+.menu-sub{border-top:none;margin-top:0;padding-top:0}
+.menu-list{list-style:none}
+.menu-list a{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:10px;text-decoration:none;color:var(--ink);font-size:.9rem;line-height:1.65}
+.menu-list a:hover{background:var(--mint)}
+.menu-list .mn{flex:0 0 auto;width:21px;height:21px;margin-top:3px;border-radius:50%;border:1.5px solid var(--soft);color:var(--teal-dark);font-family:"Zen Maru Gothic",inherit;font-size:.7rem;display:inline-flex;align-items:center;justify-content:center}
+/* いま画面に出ている見出しに色をつける（どこまで読んだかが分かる） */
+.menu-list a.is-current{background:var(--mint);color:var(--teal-dark);font-weight:bold;box-shadow:inset 3px 0 0 var(--warm)}
+.menu-list a.is-current .mn{background:var(--soft);border-color:var(--soft);color:var(--white)}
+.menu-sub{list-style:none;border-top:1px solid var(--line);margin-top:8px;padding-top:8px}
+.menu-sub a{display:block;padding:7px 10px;border-radius:10px;font-size:.85rem;color:var(--teal);font-weight:bold;text-decoration:none;line-height:1.6}
+.menu-sub a:hover{background:var(--mint)}
+.menu-sub a::before{content:"↗";margin-right:6px;color:var(--ink-soft);font-weight:normal}
+
+/* ②ヒーロー直下の目次。カードを何度もくり返すと同じ見た目になるので、本の目次のような「行」で組む */
+.toc-band{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.toc-band h2{font-size:1.5rem}
+.toc-band .lead{margin-bottom:22px}
+.toc-list{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 26px;text-align:left}
+.toc-list li{border-bottom:1px solid var(--line)}
+.toc-list a{display:flex;gap:12px;align-items:flex-start;padding:13px 10px;text-decoration:none;border-radius:10px;transition:background var(--dur) var(--ease-out)}
+.toc-list a:hover{background:var(--mint)}
+.toc-list a>span:last-child{min-width:0}
+.toc-num{flex:0 0 auto;width:26px;height:26px;margin-top:2px;border-radius:50%;border:1.5px solid var(--soft);color:var(--teal-dark);font-family:"Zen Maru Gothic",inherit;font-size:.8rem;display:inline-flex;align-items:center;justify-content:center;transition:background var(--dur) var(--ease-out),color var(--dur) var(--ease-out)}
+.toc-list a:hover .toc-num{background:var(--soft);border-color:var(--soft);color:var(--white)}
+.toc-title{display:block;font-family:"Zen Maru Gothic",inherit;font-weight:bold;color:var(--teal-dark);font-size:.98rem;line-height:1.6}
+.toc-desc{display:block;font-size:.84rem;color:var(--ink-soft);line-height:1.75;margin-top:1px}
+.toc-other{margin-top:20px;font-size:.88rem;color:var(--ink-soft)}
+/* inline-block: リンクの途中で改行して末尾に2文字だけ残るのを防ぐ（丸ごと次の行へ送る） */
+.toc-other a{color:var(--teal);font-weight:bold;text-decoration:underline;text-underline-offset:3px;display:inline-block}
 
 /* 固定ヘッダーに見出しが隠れないようにする（これが無いとジャンプ先が頭切れになる） */
 [id]{scroll-margin-top:78px}
@@ -284,23 +332,28 @@ footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;fl
   .btn{width:100%;max-width:340px}
   .nav a.btn{width:auto}
   .logo small{display:none}
-  /* スマホではリンクを2段目に回し、横スクロールで全部触れるようにする */
-  .nav{flex-wrap:wrap;gap:8px;padding:10px 20px}
-  .nav-links{order:3;width:100%;margin:0;gap:16px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none;
-    /* 続きがあると分かる端フェード(総合LPと同じ・2026-07-25) */
-    -webkit-mask-image:var(--fade-edge);mask-image:var(--fade-edge)}
-  .nav-links::-webkit-scrollbar{display:none}
-  .nav-links a{font-size:.82rem}
-  [id]{scroll-margin-top:104px}
+  /* スマホは「横スクロールで続きが見えるリンク列」をやめ、もくじパネル1つに集約(2026-08-02) */
+  .nav{gap:10px;padding:10px 16px}
+  .nav-links{display:none}
+  .menu>summary{padding:6px 13px;font-size:.85rem}
+  /* 高さの上限は「全項目が一度に見える」ことを優先（下が切れると結局読み飛ばしが起きる）。
+     10項目＋別ページ2本が1画面に収まるよう、行の余白も詰める */
+  .menu-panel{left:16px;right:16px;width:auto;max-height:min(70vh,560px)}
+  .menu-list a,.menu-sub a{padding:6px 10px}
+  .toc-list{grid-template-columns:minmax(0,1fr)}
+  /* 10行を縦に積むと画面1枚分を超えるので、行の余白だけ詰める（文字は減らさない） */
+  .toc-list a{padding:11px 8px;gap:10px}
+  .toc-band h2{font-size:1.35rem}
+  [id]{scroll-margin-top:74px}
   .totop{right:14px;bottom:14px;width:46px;height:46px;font-size:1.2rem}
 }
 
 /* 日本語の改行を整える（末行に1〜2文字だけ残るのを防ぐ）
    balance=行の長さを揃えて最後に1〜2文字だけ残るのを防ぐ／pretty=段落の最終行が短くなりすぎるのを防ぐ
    auto-phrase=文節（意味のかたまり）で折り返す。対応していないブラウザでは無視されるだけで表示は壊れない */
-h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;line-break:strict}
+h1,h2,h3,.free-pill,.next-page-label,.toc-title{text-wrap:balance;word-break:auto-phrase;line-break:strict}
 /* 2026-07-25: このページ固有の要素（Before/After文・料金プランの箇条書き・診断ボックス・補助金欄）が適用先から漏れていたので追加 */
-.lead,.hero .sub,.hero .note,.bottom-cta p,.next-page-text,.card p,.step p,.about-box p,.detail-box li,.faq summary,.faq .a,.ba .row,.plan li,.plan .price,.plan .soon,.shindan .box li,.privacy-box p,.subsidy,.blog-list .prep,.backlink-text,footer p{text-wrap:pretty;word-break:auto-phrase;line-break:strict}
+.lead,.hero .sub,.hero .note,.bottom-cta p,.next-page-text,.card p,.step p,.about-box p,.detail-box li,.faq summary,.faq .a,.ba .row,.plan li,.plan .price,.plan .soon,.shindan .box li,.privacy-box p,.subsidy,.blog-list .prep,.backlink-text,footer p,.toc-desc,.toc-other,.menu-list a,.menu-sub a{text-wrap:pretty;word-break:auto-phrase;line-break:strict}
 </style>
 </head>
 <body>
@@ -308,14 +361,39 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
 <header>
   <div class="nav">
     <a class="logo" href="#top">【あいまに】<small>医療・介護のAI導入伴走</small></a>
-    <!-- リンクは4つまで。スマホ(375px)で5つ並べると「よくある質問」がはみ出す。
-         「こんな時間」(#nayami)はヒーロー直下でスクロールすれば目に入るため、ナビからは外しフッターにだけ残す -->
-    <nav class="nav-links">
+    <!-- 直リンクは3本だけ（パソコンの幅に収まる上限）。残りの見出しは右の「もくじ」に全部入れる。
+         スマホでは .nav-links を隠し、もくじパネル1つに集約する（2026-08-02） -->
+    <nav class="nav-links" aria-label="主な見出し">
       <a href="#henka">変わること</a>
-      <a href="#reasons">選ばれる理由</a>
       <a href="#plans">料金</a>
       <a href="#faq">よくある質問</a>
     </nav>
+    <!-- もくじ: JSが動かない環境でも details/summary だけで開閉できる（ライブラリ不要） -->
+    <details class="menu" id="menu">
+      <summary>もくじ</summary>
+      <div class="menu-panel">
+        <p class="menu-title">このページの見出し（全10）</p>
+        <nav aria-label="このページの見出し">
+          <ol class="menu-list">
+            <li><a href="#nayami"><span class="mn">1</span>こんな時間、毎週ありませんか？</a></li>
+            <li><a href="#henka"><span class="mn">2</span>AI社員が入ると1日がこう変わる</a></li>
+            <li><a href="#reasons"><span class="mn">3</span>【あいまに】が選ばれる3つの理由</a></li>
+            <li><a href="#shindan"><span class="mn">4</span>無料AI時短かんたん診断</a></li>
+            <li><a href="#plans"><span class="mn">5</span>サービスと料金</a></li>
+            <li><a href="#hojokin"><span class="mn">6</span>補助金が使える場合があります</a></li>
+            <li><a href="#flow"><span class="mn">7</span>ご利用の流れ</a></li>
+            <li><a href="#faq"><span class="mn">8</span>よくあるご質問</a></li>
+            <li><a href="#blog"><span class="mn">9</span>現場のAI時短メモ</a></li>
+            <li><a href="#about"><span class="mn">10</span>運営者について</a></li>
+          </ol>
+        </nav>
+        <p class="menu-title">別のページ</p>
+        <ul class="menu-sub">
+          <li><a href="../">【あいまに】のサービス一覧（パソコン相談・Instagram代行も）</a></li>
+          <li><a href="../tokushoho.html">特定商取引法に基づく表記</a></li>
+        </ul>
+      </div>
+    </details>
     <!-- ここはフォームへ直リンクしない。#shindan（ページ内の診断セクション）に送り、無料・匿名OK・営業電話なしを読ませてからフォームへ渡す -->
     <a class="btn btn-primary" href="#shindan">無料診断</a>
   </div>
@@ -336,6 +414,29 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
     <p class="note">患者さま・利用者さまの個人情報はAIに入力しない設計です</p>
   </div>
 </div>
+
+<!-- 1.5 このページの目次（2026-08-02追加。総合LPと同じ仕組み）
+     ヘッダーには3〜4本しかリンクを置けず、補助金・ご利用の流れ・運営者などが読み飛ばされていた。
+     見出しを増やしたら、ここ・ヘッダーのもくじ・フッターの3か所を必ず揃えること -->
+<section id="toc" class="toc-band">
+  <nav class="wrap" aria-label="このページの目次">
+    <h2>このページに書いてあること</h2>
+    <p class="lead">気になる見出しを押すと、その場所へ飛べます。<br>読んでいる途中でも、上の「もくじ」から開き直せます。</p>
+    <ol class="toc-list">
+      <li><a href="#nayami"><span class="toc-num">1</span><span><span class="toc-title">こんな時間、毎週ありませんか？</span><span class="toc-desc">記録・お知らせ文・研修資料に消える時間</span></span></a></li>
+      <li><a href="#henka"><span class="toc-num">2</span><span><span class="toc-title">“AI社員”が入ると1日がこう変わる</span><span class="toc-desc">3つの仕事のBefore／After</span></span></a></li>
+      <li><a href="#reasons"><span class="toc-num">3</span><span><span class="toc-title">【あいまに】が選ばれる3つの理由</span><span class="toc-desc">現役看護師・専門用語なし・当日から時短</span></span></a></li>
+      <li><a href="#shindan"><span class="toc-num">4</span><span><span class="toc-title">無料AI時短かんたん診断</span><span class="toc-desc">5つの質問に答えるだけ・約3分・無料</span></span></a></li>
+      <li><a href="#plans"><span class="toc-num">5</span><span><span class="toc-title">サービスと料金</span><span class="toc-desc">診断10,000円／月イチ伴走12,000円ほか</span></span></a></li>
+      <li><a href="#hojokin"><span class="toc-num">6</span><span><span class="toc-title">補助金が使える場合があります</span><span class="toc-desc">介護テクノロジー導入支援事業など</span></span></a></li>
+      <li><a href="#flow"><span class="toc-num">7</span><span><span class="toc-title">ご利用の流れ</span><span class="toc-desc">お申し込み→ヒアリング→当日→お渡し</span></span></a></li>
+      <li><a href="#faq"><span class="toc-num">8</span><span><span class="toc-title">よくあるご質問</span><span class="toc-desc">AIが苦手・個人情報・準備するもの 6問</span></span></a></li>
+      <li><a href="#blog"><span class="toc-num">9</span><span><span class="toc-title">現場のAI時短メモ</span><span class="toc-desc">看護師目線のAI活用（記事は準備中）</span></span></a></li>
+      <li><a href="#about"><span class="toc-num">10</span><span><span class="toc-title">運営者について</span><span class="toc-desc">現役の看護師が運営。屋号の由来も</span></span></a></li>
+    </ol>
+    <p class="toc-other">このページのほかに: <a href="../">【あいまに】のサービス一覧（パソコン相談・Instagram代行も）</a>／<a href="../tokushoho.html">特定商取引法に基づく表記</a></p>
+  </nav>
+</section>
 
 <!-- 2. あるある共感 -->
 <section id="nayami">
@@ -440,8 +541,8 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
         <h3>② 月イチ伴走プラン</h3>
         <p class="price">月12,000円<small>（解約自由）</small></p>
         <ul>
-          <li>月1回60分（訪問 or オンライン）</li>
-          <li>質問し放題（2営業日以内に返信）</li>
+          <li>月1回60分（オンライン。ご訪問をご希望の場合は出張基本料5,000円／回。車で片道1時間以内の交通費を含み、片道1時間を超える場合は交通費の実費を別途申し受けます）</li>
+          <li>質問し放題（返信は2営業日以内）</li>
           <li>毎月1つ、新しい時短を導入</li>
           <li>顧問契約のような縛りはありません</li>
         </ul>
@@ -452,16 +553,24 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
         <p class="price">月30,000円〜</p>
         <ul>
           <li>AIの設定・文書テンプレ・お知らせ文・研修資料を、こちらで作って納品</li>
-          <li>「教えない、やってあげる」プラン</li>
+          <li>「教えない、やってあげる」プランです</li>
         </ul>
         <p class="soon">現在は伴走プランのお客さま向けに準備中です</p>
       </div>
     </div>
+    <div class="subsidy" style="margin-top:1.4em">
+      <strong>「1か月で形にしたい」ときは、短期集中もあります。</strong>
+      Google Workspace の導入など、期限が決まっている場面向けの<strong>導入集中支援 42,000円</strong>（訪問4時間×2回・1か月・出張基本料込み。車で片道1時間以内の交通費を含み、片道1時間を超える場合は交通費の実費を別途申し受けます）。
+      どこを自動にしてどこは人が見るかの線引き、実際の設定、職員さん向けの短い手引きまでを、まとめて進めます。
+      1か月で終わりにせず、そのまま月イチ伴走へ続けることもできます。<br>
+      <small>※週1回×2時間×4回をご希望の場合は52,000円です（訪問が4回になり移動が増えるため）。同じ作業時間なら、隔週にまとめるほうが1万円お安くなります。</small><br>
+      <small>※アカウント発行・メール移行・管理者設定といった導入作業そのものは行いません（情報担当の方か契約業者の担当範囲です）。管理者権限のIDやパスワードはお預かりしません。</small>
+    </div>
   </div>
 </section>
 
-<!-- 6. 補助金 -->
-<section style="padding-top:0">
+<!-- 6. 補助金（id はもくじから飛ぶために2026-08-02に追加） -->
+<section id="hojokin" style="padding-top:0">
   <div class="wrap">
     <div class="subsidy">
       <strong>補助金が使える場合があります。</strong>
@@ -510,8 +619,8 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
   </div>
 </section>
 
-<!-- 10. 運営者情報 -->
-<section>
+<!-- 10. 運営者情報（id はもくじから飛ぶために2026-08-02に追加） -->
+<section id="about">
   <div class="wrap">
     <h2>運営者について</h2>
     <div class="about-box">
@@ -529,7 +638,7 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
 <!-- 11. 最後のCTA -->
 <section class="bottom-cta">
   <div class="wrap">
-    <h2>「うちの事業所でもできますか？」<br>だけでも、お気軽にどうぞ</h2>
+    <h2>「うちの事業所でもできますか？」<br>だけでも、<span style="display:inline-block">お気軽にどうぞ</span></h2>
     <p>無料診断に答えていただければ、あなたの事業所の「AIで消せる作業」の目安をお返しします。</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="#shindan">無料AI時短かんたん診断</a>
@@ -554,9 +663,11 @@ h1,h2,h3,.free-pill,.next-page-label{text-wrap:balance;word-break:auto-phrase;li
       <a href="#reasons">選ばれる理由</a>
       <a href="#shindan">無料診断</a>
       <a href="#plans">サービスと料金</a>
+      <a href="#hojokin">補助金について</a>
       <a href="#flow">ご利用の流れ</a>
       <a href="#faq">よくある質問</a>
-      <a href="#blog">ブログ</a>
+      <a href="#blog">現場のAI時短メモ</a>
+      <a href="#about">運営者について</a>
       <!-- noteは未開設のためリンクを削除（2026-07-17）。開設したら <a href="（noteのURL）" target="_blank" rel="noopener">note</a> を戻す -->
     </div>
     <!-- 2026-07-17: 実名公開OK・LPからの直接申込を解禁したため、特商法表記は独立ページ（リポジトリ直下 tokushoho.html）へ移行。
@@ -575,6 +686,40 @@ try {
   var _s = function () { if (window.pageYOffset > 500) { _t.classList.add('show'); } else { _t.classList.remove('show'); } };
   window.addEventListener('scroll', _s, { passive: true });
   _s();
+} catch (e) {}
+
+// もくじパネルの開け閉めと「いま読んでいる見出し」の色づけ（総合LPと同じ）。
+// JSが動かなくても details/summary だけで開閉でき、リンクも全部生きているので本文には影響しない
+try {
+  var _m = document.getElementById('menu');
+  _m.addEventListener('click', function (ev) {
+    if (ev.target.closest('a')) { _m.removeAttribute('open'); }   // 飛んだ先が隠れないよう閉じる
+  });
+  document.addEventListener('click', function (ev) {
+    if (_m.hasAttribute('open') && !_m.contains(ev.target)) { _m.removeAttribute('open'); }
+  });
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape') { _m.removeAttribute('open'); }
+  });
+
+  var _links = [].slice.call(_m.querySelectorAll('.menu-list a[href^="#"]'));
+  var _secs = _links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+  var _tick = false;
+  var _spy = function () {
+    var cur = -1;
+    for (var i = 0; i < _secs.length; i++) {
+      if (_secs[i] && _secs[i].getBoundingClientRect().top <= 120) { cur = i; }
+    }
+    for (var j = 0; j < _links.length; j++) {
+      if (j === cur) { _links[j].classList.add('is-current'); _links[j].setAttribute('aria-current', 'true'); }
+      else { _links[j].classList.remove('is-current'); _links[j].removeAttribute('aria-current'); }
+    }
+    _tick = false;
+  };
+  window.addEventListener('scroll', function () {
+    if (!_tick) { _tick = true; window.requestAnimationFrame(_spy); }
+  }, { passive: true });
+  _spy();
 } catch (e) {}
 </script>
 
