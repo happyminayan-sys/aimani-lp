@@ -59,7 +59,7 @@
         {
           "@type": "Question",
           "name": "料金はいくらですか？",
-          "acceptedAnswer": { "@type": "Answer", "text": "ご相談の内容によって変わります。目安は、デジタル何でも相談が1時間4,000円（購入同行・初期設定などの定額パックは5,000〜10,000円）、AI導入支援が各種診断 各10,000円・月イチ伴走 月12,000円・導入集中支援 42,000円、Instagram代行運用が月15,000円〜、お店紹介ページ制作が1ページ50,000円ぽっきりです。こちらがご訪問する場合は、1回につき出張基本料5,000円（車で片道1時間以内の交通費込み）が加わります。定額パックと導入集中支援は、出張基本料を含んだ価格です。上記は個人・小規模事業者さま向けの料金です。そのほかの継続支援や代行は内容により料金が変わるため、事前にお見積もりします。" }
+          "acceptedAnswer": { "@type": "Answer", "text": "ご相談の内容によって変わります。目安は、デジタル何でも相談が1時間4,000円（定額パックは5,000〜20,000円。パソコンおまかせパック＝機種選び＋店舗同行＋初期設定が20,000円ぽっきり、パソコン初期設定サポートが13,000円、オンライン購入サポートが5,000円）、AI導入支援が各種診断 各10,000円・月イチ伴走 月12,000円・導入集中支援 42,000円、Instagram代行運用が月15,000円〜、お店紹介ページ制作が1ページ50,000円ぽっきりです。時間で決まるご相談・レクチャーは、オンライン・ご来訪なら1時間4,000円、2時間以上は1時間あたり3,500円（2時間7,000円・3時間10,500円）。ご訪問なら実働2時間13,000円から（出張費込み・3時間17,000円・4時間21,000円）で、移動時間が加わるため実働2時間から承ります。パソコンおまかせパック20,000円・パソコン初期設定サポート13,000円・導入集中支援42,000円の3つは出張基本料を含んだ価格なので追加はかかりません。オンライン購入サポート・AI検索露出診断・属人化診断はオンラインで完結するため、こちらも出張基本料はかかりません。AI時短診断・月イチ伴走をご訪問でご希望の場合は出張基本料5,000円が加わります（AI時短診断のご訪問15,000円・月イチ伴走のご訪問月17,000円）。上記は個人・小規模事業者さま向けの料金です。そのほかの継続支援や代行は内容により料金が変わるため、事前にお見積もりします。" }
         },
         {
           "@type": "Question",
@@ -278,6 +278,19 @@ header a:focus-visible{outline-color:var(--on-band)}
 .price-table tbody th{color:var(--teal-dark);font-weight:bold;width:30%;font-size:1rem;white-space:nowrap}
 .price-table tbody td{color:var(--ink-soft);font-size:.92rem;line-height:1.9}
 .price-table tbody td strong{color:var(--ink)}
+/* 料金の行ごとに「出張費が要るのか要らないのか」をその場で見せる目印 */
+.price-table .fee{display:inline-block;font-size:.74rem;line-height:1.6;padding:1px 9px;border-radius:999px;
+  margin-left:7px;white-space:nowrap;font-weight:bold}
+.price-table .fee-in{background:var(--mint);color:var(--teal-dark)}
+.price-table .fee-add{background:#FBEEDC;color:#8A5F14}
+.price-table .fee-on{background:#EDF1F7;color:#3F566E}
+.price-table .pgroup{margin:0 0 14px}
+.price-table .ghead{display:block;font-weight:bold;color:var(--teal-dark);font-size:.88rem;
+  margin:0 0 4px;padding-bottom:3px;border-bottom:1px dashed var(--line)}
+.price-table .sub{display:block;padding-left:1em;font-size:.87rem}
+.price-table .pline{display:block;margin-top:5px}
+.price-table .pnote{display:block;margin-top:8px;padding:7px 11px;background:var(--mint);
+  border-radius:8px;font-size:.88rem;color:var(--teal-dark);font-weight:bold}
 .price-table tbody tr:last-child th,.price-table tbody tr:last-child td{border-bottom:none}
 
 /* cards（サービス一覧・詳細で使用） */
@@ -579,11 +592,55 @@ h1,h2,h3,.free-pill,.next-page-label,.toc-title{text-wrap:balance;word-break:aut
       <tbody>
         <tr>
           <th scope="row">デジタル何でも相談</th>
-          <td><strong>店舗購入同行 10,000円ぽっきり</strong>（延長料金なし・一緒に選んで買うまで）<br><strong>パソコン初期設定サポート 10,000円</strong>（新品1台まるごと）<br><strong>オンライン購入サポート 5,000円</strong>（機種選び〜注文）<br>何でも相談・トラブルは 1時間 4,000円／2時間お得パック 7,000円<br><strong>ご訪問の場合は出張基本料 5,000円</strong>（車で片道1時間以内の交通費込み）<br><small>定額パックは出張基本料込みの価格です。お得パックはオンライン・ご来訪のみ。車で片道1時間を超える場合は交通費の実費を別途申し受けます。</small></td>
+          <td>
+            <div class="pgroup">
+              <span class="ghead">パソコンのこと（値段が決まっているもの）</span>
+              <span class="pline"><strong>パソコンおまかせパック 20,000円ぽっきり</strong><span class="fee fee-in">出張費コミコミ</span></span>
+              <span class="sub">機種選び→お店に同行→初期設定まで、同じ日にまとめて。延長料金なし</span>
+              <span class="pline"><strong>パソコン初期設定サポート 13,000円</strong><span class="fee fee-in">出張費コミコミ</span></span>
+              <span class="sub">もう買ってある新品1台の設定だけ</span>
+              <span class="pline"><strong>オンライン購入サポート 5,000円</strong><span class="fee fee-on">オンライン</span></span>
+              <span class="sub">機種選び〜ご注文まで（60分）。お伺いしないので出張費はかかりません</span>
+              <span class="pnote">設定だけなら13,000円、買うところからご一緒しても＋7,000円です。</span>
+            </div>
+            <div class="pgroup">
+              <span class="ghead">何でも相談・トラブル対応（時間で決まるもの）</span>
+              <span class="pline"><strong>オンライン・ご来訪</strong><span class="fee fee-on">出張費なし</span></span>
+              <span class="sub">1時間 <b>4,000円</b>／2時間 <b>7,000円</b>／3時間 <b>10,500円</b>　<b>2時間以上は1時間あたり3,500円</b>になります</span>
+              <span class="pline"><strong>ご訪問 実働2時間 13,000円から</strong><span class="fee fee-in">出張費コミコミ</span></span>
+              <span class="sub">3時間なら 17,000円／4時間なら 21,000円（出張基本料5,000円＋実働1時間あたり4,000円）。<b>移動の時間が加わるため、ご訪問は実働2時間から</b>承ります。1時間で足りるご用件は、オンラインかご来訪をご案内します</span>
+            </div>
+            <small>ご訪問で車で片道1時間を超える場合は、交通費の実費を別途申し受けます（お見積り時に必ずお伝えします）。</small>
+          </td>
         </tr>
         <tr>
           <th scope="row">AI導入支援</th>
-          <td><strong>AIレクチャー 1時間 4,000円</strong><br>2時間お得パック 7,000円<br><strong>AI時短診断 10,000円</strong>（その場で1つ時短を設定）<br><strong>AI検索露出診断 10,000円</strong>（60回実測のPDFレポート）<br><strong>属人化診断 10,000円</strong>（その場で手順書1本を作成）<br>月イチ伴走 月12,000円<br><strong>導入集中支援 42,000円</strong>（訪問4時間×2回・1か月・出張基本料込み）<br><small>2時間お得パックはオンライン・ご来訪のみ。ご訪問の場合は出張基本料 5,000円が加わります（車で片道1時間以内の交通費込み・超える場合は実費を別途申し受けます）。導入集中支援は出張基本料込みの価格です。</small></td>
+          <td>
+            <div class="pgroup">
+              <span class="ghead">1回だけの診断（レポートつき）</span>
+              <span class="pline"><strong>AI時短診断 10,000円</strong><span class="fee fee-add">ご訪問は＋5,000円</span></span>
+              <span class="sub">60〜90分。減らせる作業をトップ3まで見つけて、その場で1つ設定します</span>
+              <span class="pline"><strong>属人化診断 10,000円</strong><span class="fee fee-on">オンライン</span></span>
+              <span class="sub">60分のビデオ通話で棚卸し＋その場で手順書1本。翌日にシートを納品</span>
+              <span class="pline"><strong>AI検索露出診断 10,000円</strong><span class="fee fee-on">オンライン</span></span>
+              <span class="sub">60回実測のPDFレポート。お伺いしないので出張費はかかりません</span>
+            </div>
+            <div class="pgroup">
+              <span class="ghead">続けて使うもの</span>
+              <span class="pline"><strong>月イチ伴走 月12,000円</strong><span class="fee fee-add">ご訪問は＋5,000円</span></span>
+              <span class="sub">解約は自由です。オンラインなら追加料金はかかりません</span>
+              <span class="pline"><strong>導入集中支援 42,000円</strong><span class="fee fee-in">出張費コミコミ</span></span>
+              <span class="sub">訪問4時間×2回・1か月。週1回×2時間×4回をご希望の場合は52,000円（お伺いの回数が増えるぶん）</span>
+            </div>
+            <div class="pgroup">
+              <span class="ghead">AIの使い方レクチャー（時間で決まるもの）</span>
+              <span class="pline"><strong>オンライン・ご来訪</strong><span class="fee fee-on">出張費なし</span></span>
+              <span class="sub">1時間 <b>4,000円</b>／2時間 <b>7,000円</b>／3時間 <b>10,500円</b>　<b>2時間以上は1時間あたり3,500円</b>になります</span>
+              <span class="pline"><strong>ご訪問 実働2時間 13,000円から</strong><span class="fee fee-in">出張費コミコミ</span></span>
+              <span class="sub">3時間なら 17,000円／4時間なら 21,000円（出張基本料5,000円＋実働1時間あたり4,000円）。<b>移動の時間が加わるため、ご訪問は実働2時間から</b>承ります</span>
+            </div>
+            <small><b>「ご訪問は＋5,000円」の中身</b>＝出張基本料 5,000円／回（車で片道1時間以内の交通費を含みます。超える場合は交通費の実費を別途申し受けます）。<b>「実働2時間から」は、上の“時間で決まるもの”だけの決まり</b>です。AI時短診断・月イチ伴走のように値段が決まっているメニューは、そのままご訪問でも承ります（例: AI時短診断をご訪問で＝10,000円＋5,000円＝<b>15,000円</b>／月イチ伴走をご訪問で＝12,000円＋5,000円＝<b>17,000円</b>）。</small>
+          </td>
         </tr>
         <tr>
           <th scope="row">Instagram代行運用</th>
@@ -638,7 +695,7 @@ h1,h2,h3,.free-pill,.next-page-label,.toc-title{text-wrap:balance;word-break:aut
         <li>AIの使い方レクチャー（文章作成・調べ物・資料づくりなど）</li>
         <li>毎日の事務作業の自動化のご提案</li>
       </ul>
-      <div class="price-line">店舗購入同行 10,000円ぽっきり（延長料金なし）／パソコン初期設定サポート 10,000円／オンライン購入サポート 5,000円<small>何でも相談・トラブル対応は1時間 4,000円・2時間お得パック 7,000円（オンライン・ご来訪のみ）／ご訪問は出張基本料 5,000円（車で片道1時間以内の交通費込み・超える場合は実費を別途申し受けます）／定額パックは出張基本料込み／購入同行は事前に在庫を確認してから同行（目安1〜2時間）<br>ご相談・お見積もりは無料です</small></div>
+      <div class="price-line">パソコンおまかせパック 20,000円ぽっきり<b>［出張費コミコミ］</b>（機種選び＋店舗同行＋初期設定・延長料金なし）／パソコン初期設定サポート 13,000円<b>［出張費コミコミ］</b>／オンライン購入サポート 5,000円<b>［オンライン］</b><small>設定だけなら13,000円、買うところからご一緒しても＋7,000円です／何でも相談・トラブル対応は、オンライン・ご来訪なら1時間 4,000円・2時間以上は1時間あたり3,500円（2時間7,000円／3時間10,500円）、ご訪問なら実働2時間 13,000円から（出張費込み・3時間17,000円）。ご訪問は移動の時間が加わるため実働2時間から承ります（車で片道1時間を超える場合は交通費の実費を別途申し受けます）／お店に行く前に候補機種を決め、在庫を確認してから同行します（目安1〜2時間）<br>ご相談・お見積もりは無料です</small></div>
       <div class="ctarow">
         <a class="btn btn-primary" href="https://forms.gle/HkjLuLgHaW19BaFg9" target="_blank" rel="noopener">相談フォームへ</a>
       </div>
@@ -666,7 +723,7 @@ h1,h2,h3,.free-pill,.next-page-label,.toc-title{text-wrap:balance;word-break:aut
       </ul>
       <div class="price-line">AI時短診断 10,000円<small>60〜90分／無料相談・お見積もりあり</small></div>
       <ul class="dot">
-        <li>AIの使い方レクチャーは、1時間 4,000円／2時間お得パック 7,000円（オンライン・ご来訪のみ）です。こちらがご訪問する場合は出張基本料 5,000円（車で片道1時間以内の交通費込み）が加わります（片道1時間を超える場合は交通費の実費を別途申し受けます）</li>
+        <li>AIの使い方レクチャーは、<b>オンライン・ご来訪</b>なら1時間 4,000円／<b>2時間以上は1時間あたり3,500円</b>（2時間 7,000円・3時間 10,500円）。<b>ご訪問</b>なら<b>実働2時間 13,000円から</b>（出張基本料5,000円＋実働1時間あたり4,000円・3時間 17,000円）です。ご訪問は移動の時間が加わるため実働2時間から承ります（車で片道1時間を超える場合は交通費の実費を別途申し受けます）</li>
         <li>時間を取られている業務を3つ整理し、時短の方法を一緒に考えます</li>
         <li>AIでこう時短できる、という診断シートをお渡しします</li>
         <li>月イチ伴走は月12,000円、設定・作成の代行は月30,000円〜です（代行は現在、伴走のお客さま向けに準備中）</li>
@@ -746,12 +803,13 @@ h1,h2,h3,.free-pill,.next-page-label,.toc-title{text-wrap:balance;word-break:aut
          項目は「料金の目安」の表の4行と同じ並びにすること（増減したら表・ここ・上の構造化データの3か所を同時に直す） -->
     <details><summary>料金はいくらですか？</summary><div class="a">ご相談の内容によって変わります。目安は次のとおりです。
       <ul>
-        <li><b>デジタル何でも相談</b>: 1時間 <b>4,000円</b>（購入同行・初期設定などの定額パックは <b>5,000〜10,000円</b>）</li>
+        <li><b>デジタル何でも相談</b>: 1時間 <b>4,000円</b>（定額パックは <b>5,000〜20,000円</b>／パソコンおまかせパック 20,000円・初期設定 13,000円・オンライン購入サポート 5,000円）</li>
         <li><b>AI導入支援</b>: 各種診断 <b>各10,000円</b>／月イチ伴走 <b>月12,000円</b>／導入集中支援 <b>42,000円</b></li>
         <li><b>Instagram代行運用</b>: <b>月15,000円〜</b></li>
         <li><b>お店紹介ページ制作</b>: 1ページ <b>50,000円ぽっきり</b></li>
       </ul>
-      こちらがご訪問する場合は、1回につき<b>出張基本料 5,000円</b>（車で片道1時間以内の交通費込み）が加わります。定額パックと導入集中支援は、出張基本料を含んだ価格です。<br>
+      <b>時間で決まるご相談・レクチャー</b>は、オンライン・ご来訪なら1時間 4,000円、<b>2時間以上は1時間あたり3,500円</b>（2時間 7,000円／3時間 10,500円）。<b>ご訪問なら実働2時間 13,000円から</b>（出張費込み。3時間 17,000円／4時間 21,000円）で、移動の時間が加わるため<b>実働2時間から</b>承ります。<br>
+      <b>パソコンおまかせパック（20,000円）・パソコン初期設定サポート（13,000円）・導入集中支援（42,000円）の3つは、出張基本料を含んだ価格</b>なので追加はかかりません。<b>オンライン購入サポート・AI検索露出診断・属人化診断はオンラインで完結</b>するため、こちらも出張基本料はかかりません。<b>AI時短診断・月イチ伴走をご訪問でご希望の場合</b>は、それぞれの料金に<b>出張基本料 5,000円</b>が加わります（AI時短診断のご訪問 15,000円／月イチ伴走のご訪問 月17,000円）。<br>
       くわしい一覧は<a href="#prices">料金の目安</a>をご覧ください（個人・小規模事業者さま向けの料金です）。医療・介護向けの詳細は<a href="https://happyminayan-sys.github.io/aimani-lp/ai/">専用ページ</a>に掲載しています。</div></details>
     <details><summary>パソコンやAIが苦手でも大丈夫ですか？</summary><div class="a">大丈夫です。専門用語を使わず、分かる言葉で一つずつ説明します。</div></details>
     <details><summary>「AI検索露出診断」とは何ですか？</summary><div class="a">ChatGPTなどのAIに「この地域のおすすめのお店は？」といった質問を計60回行い、あなたのお店が出てくるか・代わりにどの競合が出ているか・AIが何を引用しているかを実測し、改善策と一緒にレポートでお渡しするサービスです（10,000円）。AIでお店を探す人はまだ少数ですが伸びており、無料でできる備えから優先度順にご提案します。AIへの表示を保証するものではありません。</div></details>
